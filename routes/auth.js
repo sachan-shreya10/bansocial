@@ -1,0 +1,11 @@
+const express = require("express");
+const authController = require('../controllers/LogReg/authr');
+const authController2 = require('../controllers/LogReg/authl');
+const authController3 = require('../controllers/profile/authp');
+const authController4 = require('../controllers/announcement/autha');
+const router = express.Router();
+router.post('/register',authController.register);
+router.post('/login',authController2.login);
+router.post('/editpro',authController3.editpro);
+router.post('/ann',authController4.ann);
+module.exports = router;
