@@ -89,7 +89,7 @@ router.get('/ann', (req, res) => {
         db.query('SELECT * from announcement ORDER BY id DESC', (er, resul) => {
             if (er) console.log(er);
             return res.render('ann', {
-                resul
+                resul,userName
             });
         })
     }
