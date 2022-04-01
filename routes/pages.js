@@ -97,4 +97,15 @@ router.get('/ann', (req, res) => {
         res.redirect("/");
     }
 });
+
+router.get('/aboutus', (req, res) => {
+    if (req.session.userId) {
+        res.render('aboutus', {
+            userName
+        });
+    }
+    else {
+        res.redirect("/");
+    }
+});
 module.exports = router;
