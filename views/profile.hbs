@@ -74,7 +74,11 @@
                             {{!-- {{#each result}} --}}
                             <div class="ms-3" style="margin-top:95px;">
                                 <h5>{{this.name}}</h5>
+                                {{#if this.year}}
                                 <p>Student | {{this.department}} | {{this.year}} Year</p>
+                                {{else}}
+                                <p>Teacher | {{this.department}}</p>
+                                {{/if}}
                             </div>
                              {{/each}}
                         </div>
