@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doubts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body style="background-image: url(/images/dbg.jpg); background-repeat: no-repeat;; background-size: cover;">
+    <nav class="navbar  navbar-expand-lg navbar-light bg-light"
+        style="font-family: Georgia, 'Times New Roman', Times, serif;">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="#">
+                            <img src="/images/logo.jpeg" alt="" width="30" height="24"><span
+                                style="color:rgb(187, 187, 7);font-size: 18pt;">बन</span><span
+                                style="color:rgb(196, 8, 8);font-size: 16pt;">Social</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mx-2">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <!-- <a class="nav-link" href="#">Log Out</a> -->
+                        <button type="button" class="btn btn-dark">Log Out</button>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div class="container my-3 content">
+        <h2 style="color:rgb(27, 26, 26);text-align:center;">DOUBTS !</h2>
+    
+        <div id="tasks" class="announ row container-fluid" style="padding: 0;">
+            {{#each result}}
+            <div class="noteCard my-2 mx-2 card">
+                {{!-- style="width: 18rem;" --}}
+                <div class="card-body">
+                    {{#if this.img_url}}
+                    <div>
+                        <img src="/{{this.img_url}}" class="card-img-top" alt="..." height="180">
+                    </div>
+                    {{/if}}
+                    {{!-- <div class="col-md-8"> --}}
+                        <h5 class="card-title" style=" display: inline;">{{this.name}} {{this.date}} {{this.tag}}
+                        </h5>
+                        <div style="float:right">
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal{{this.id}}" style=" display: inline; ">
+                                Reply
+                            </button>
+                            <form action="/auth/commrsenior" method="post" enctype="multipart/form-data"
+                                style="display: inline;">
+                                <input type="hidden" name="pidd" value="{{this.id}}" />
+                                <button type="submit" class="btn btn-primary my-2 btn-sm" id="addBtnr">View
+                                    Discussion</button>
+
+
+                            </form>
+                        </div>
+                        <div style="margin-top:0.5rem">
+                            <h6 class="card-title">{{this.title}}</h6>
+                            <p class="card-text">{{this.des}}</p>
+                        </div>
+                        <div class="modal fade" id="exampleModal{{this.id}}" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Add Reply</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/auth/comm1senior" method="post" enctype="multipart/form-data">
+                                            <input type="hidden" name="pid" value="{{this.id}}" />
+                                            <textarea class="form-control inputt" name="contentr" id="addTask"
+                                                rows="1"></textarea>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Post</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{!--
+                        <hr>
+                        </hr> --}}
+
+
+                        {{!--
+                    </div> --}}
+                </div>
+            </div>
+            {{else}}
+            <h4>No Doubts!</h4>
+            {{/each}}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

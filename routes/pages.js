@@ -108,4 +108,59 @@ router.get('/aboutus', (req, res) => {
         res.redirect("/");
     }
 });
+
+/*************************************DOUBT PAGE********************************** */
+router.get('/doubtini',(req,res)=>{
+    res.render('doubtini');
+});
+router.get('/doubtpeer',(req,res)=>{
+   //  res.render('ann');
+   db.query('SELECT * from postspeer ORDER BY id DESC', (er, resul) => {
+       if (er) console.log(er);
+       return res.render('doubtpeer', {
+           resul
+       });
+   })
+});
+router.get('/repliespeer',(req,res)=>{
+   res.render('repliespeer');
+}); 
+router.get('/sortpeer',(req,res)=>{
+   res.render('sortpeer');
+});
+
+
+
+router.get('/doubtsenior',(req,res)=>{
+   //  res.render('ann');
+   db.query('SELECT * from postssenior ORDER BY id DESC', (er, resul) => {
+       if (er) console.log(er);
+       return res.render('doubtsenior', {
+           resul
+       });
+   })
+});
+router.get('/repliessenior',(req,res)=>{
+   res.render('repliessenior');
+}); 
+router.get('/sortsenior',(req,res)=>{
+   res.render('sortsenior');
+});
+
+
+
+router.get('/doubtteacher',(req,res)=>{
+   db.query('SELECT * from poststeacher ORDER BY id DESC', (er, resul) => {
+       if (er) console.log(er);
+       return res.render('doubtteacher', {
+           resul
+       });
+   })
+});
+router.get('/repliesteacher',(req,res)=>{
+   res.render('repliesteacher');
+}); 
+router.get('/sortteacher',(req,res)=>{
+   res.render('sortteacher');
+});
 module.exports = router;
