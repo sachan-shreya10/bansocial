@@ -10,11 +10,10 @@ const db = mysql.createConnection({
 
 exports.rr = (req, res) => {
     console.log(req.body);
-    const name="Tanu2";
+    // const name="Tanu2";
     const {did, pid,contentr} = req.body;
     console.log(pid)
-    if (name != "") {
-        db.query('INSERT INTO commentpeer SET ?', { did:did,content:contentr,pid:pid, name: name}, (err, resul) => {
+        db.query('INSERT INTO commentpeer SET ?', { did:did,content:contentr,pid:pid, name: userName,email:userEmail}, (err, resul) => {
             if (err) {
                 console.log(err);
             }
@@ -29,5 +28,4 @@ exports.rr = (req, res) => {
             });
             }
         });
-    }
 }

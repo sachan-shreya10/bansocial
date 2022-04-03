@@ -35,6 +35,9 @@
             </div>
             <div class="mx-2">
                 <ul class="navbar-nav mb-2 mb-lg-0">
+                     <li class="nav-item">
+                        <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
+                    </li>
                     <li class="nav-item">
                         <!-- <a class="nav-link" href="#">Log Out</a> -->
                         {{!-- <button type="button" class="btn btn-dark">Log Out</button> --}}
@@ -102,15 +105,16 @@
             <div class="noteCard my-2 mx-2 card">
                 {{!-- style="width: 18rem;" --}}
                 <h5>{{resul.id}}</h5>
-                <div class="card-body">
+                <div class="card-body row">
                     {{#if this.img}}
-                    <div>
+                    <div class="col-md-4">
                         <img src="/{{this.img}}" class="card-img-top" alt="..." height="180">
                     </div>
-                    {{/if}}
+                    <div class="col-md-8">
+                        {{else}}
+                        <div>
+                            {{/if}}
                     {{!-- <div class="col-md-8"> --}}
-                        <h5 class="card-title" style=" display: inline;">{{this.name}} {{this.date}} 
-                        </h5>
                         <div style="float:right">
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{this.id}}" style=" display: inline; ">
@@ -126,8 +130,11 @@
                             </form>
                         </div>
                         <div style="margin-top:0.5rem">
-                            <h6 class="card-title">{{this.title}}</h6>
+                            <h5 class="card-title">{{this.title}}</h5>
                             <p class="card-text">{{this.des}}<span style="color: blue;">#{{this.tag}}</span> </p>
+                        </div>
+                        <div style="float: right;">
+                            <h6 style="color: gray;">{{this.name}} {{this.date}}</h6>
                         </div>
                         <div class="modal fade" id="exampleModal{{this.id}}" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -160,8 +167,8 @@
                         </hr> --}}
 
 
-                        {{!--
-                    </div> --}}
+                        
+                    </div>
                 </div>
             </div>
             {{else}}

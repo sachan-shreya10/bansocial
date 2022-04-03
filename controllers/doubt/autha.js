@@ -17,7 +17,8 @@ exports.annpeer = (req, res) => {
     else{
     pics= req.files.pic;
     console.log(pics);
-    upPath= "C:/Users/Shivangi/Desktop/webD/log_reg/bansocial/doubt_uploads/"+pics.name;
+    // upPath= "C:/Users/Shivangi/Desktop/webD/log_reg/bansocial/doubt_uploads/"+pics.name;
+    upPath= "C:/Users/tsach/Desktop/log_reg/doubt_uploads/"+pics.name;
     imn=pics.name;
     pics.mv(upPath, function(err){
         if(err){
@@ -27,20 +28,15 @@ exports.annpeer = (req, res) => {
 }
     // console.log(req.body);
     // console.log(imn)
-    const name = "shreya";
+    // const name = "shreya";
     const { title,tag,textt} = req.body;
     if (textt != "") {
-        db.query('INSERT INTO postspeer SET ?', { name: name, title: title ,tag:tag,des: textt, img:imn}, (err, result) => {
+        db.query('INSERT INTO postspeer SET ?', { name: userName, title: title ,tag:tag,des: textt, img:imn, email:userEmail}, (err, result) => {
             if (err) {
                 console.log(err);
             }
             else{
-                db.query('SELECT * from postspeer ORDER BY id DESC', (er, resul) => {
-                    if (er) console.log(er);
-                    return res.render('doubtpeer', {
-                        resul
-                    });
-                })
+                res.redirect('/doubtpeer');
             }
         });
     }

@@ -75,9 +75,9 @@
             <div class="noteCard my-2 mx-2 card" >
                 {{!-- style="width: 18rem;" --}}
                 <div class="card-body row">
-                    {{#if this.img_url}}
+                    {{#if this.img}}
                     <div class="col-md-4">
-                        <img src="/{{this.img_url}}" class="card-img-top" alt="..." height="180">
+                        <img src="/{{this.img}}" class="card-img-top" alt="..." height="180">
                     </div>
                     <div class="col-md-8">
                     {{else}}
@@ -87,7 +87,7 @@
                             <h6 style="color: gray;">{{this.name}}</h6>
                         </div>
                         <h5 class="card-title">{{this.title}}</h5>
-                        <p class="card-text">{{this.content}}</p>
+                        <p class="card-text">{{this.des}}</p>
                         <div>
                             <h6 style="color: gray;">{{this.date}}</h6>
                         </div>

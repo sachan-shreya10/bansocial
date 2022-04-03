@@ -9,15 +9,13 @@ const db = mysql.createConnection({
 })
 exports.comm1 = (req, res) => {
     console.log(req.body);
-    const name="Tanu";
+    // const name="Tanu";
     const {pid,contentr} = req.body;
     console.log(pid)
-    if (name != "") {
-        db.query('INSERT INTO commentpeer SET ?', { content:contentr,did:pid, name: name}, (err, resul) => {
+        db.query('INSERT INTO commentpeer SET ?', { content:contentr,did:pid, name: userName,email:userEmail}, (err, resul) => {
             if (err) {
                 console.log(err);
             }
             res.redirect('/doubtpeer');
         });
-    }
 }

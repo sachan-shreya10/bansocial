@@ -36,9 +36,14 @@
             <div class="mx-2">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
+                        <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
+                    </li>
+                    <li class="nav-item">
                         <!-- <a class="nav-link" href="#">Log Out</a> -->
                         {{!-- <button type="button" class="btn btn-dark">Log Out</button> --}}
-                         <a class="nav-link" href="/logout" style="text-decoration: none;color:rgb(218, 212, 212);background-color:rgb(23, 29, 29);border-radius: 5px">Log Out</a> 
+                        <a class="nav-link" href="/logout"
+                            style="text-decoration: none;color:rgb(218, 212, 212);background-color:rgb(23, 29, 29);border-radius: 5px">Log
+                            Out</a>
                     </li>
                 </ul>
 
@@ -46,8 +51,8 @@
         </div>
     </nav>
     <div>
-         <form name="theForm" action="/auth/sortsenior" method="post" enctype="multipart/form-data" >
-            <div class="form-group" >
+        <form name="theForm" action="/auth/sortsenior" method="post" enctype="multipart/form-data">
+            <div class="form-group">
                 <label for="tags">Sort by:</label>
                 <select id="tags" name="tag" onchange="theForm.submit()">
                     <option value="null"></option>
@@ -61,7 +66,7 @@
                 </select>
             </div>
         </form>
-        </div>
+    </div>
     <div class="container my-3 content">
         <h2 style="color:rgb(27, 26, 26);text-align:center;">DOUBTS !</h2>
         <form action="/auth/annsenior" method="post" enctype="multipart/form-data">
@@ -101,77 +106,87 @@
             {{#each resul}}
             <div class="noteCard my-2 mx-2 card">
                 {{!-- style="width: 18rem;" --}}
-                <h5>{{resul.id}}</h5>
-                <div class="card-body">
-                    {{#if this.img}}
+                <div class="card-body row">
+                    {{!-- {{#if this.img}}
                     <div>
                         <img src="/{{this.img}}" class="card-img-top" alt="..." height="180">
                     </div>
-                    {{/if}}
-                    {{!-- <div class="col-md-8"> --}}
-                        <h5 class="card-title" style=" display: inline;">{{this.name}} {{this.date}} 
-                        </h5>
-                        <div style="float:right">
-                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal{{this.id}}" style=" display: inline; ">
-                                Comment
-                            </button>
-                            <form action="/auth/commrsenior" method="post" enctype="multipart/form-data"
-                                style="display: inline;">
-                                <input type="hidden" name="pidd" value="{{this.id}}" />
-                                <button type="submit" class="btn btn-primary my-2 btn-sm" id="addBtnr">View
-                                    Discussion</button>
+                    {{/if}} --}}
+                    {{#if this.img}}
+                    <div class="col-md-4">
+                        <img src="/{{this.img}}" class="card-img-top" alt="..." height="180">
+                    </div>
+                    <div class="col-md-8">
+                        {{else}}
+                        <div>
+                            {{/if}}
+                            {{!-- <div class="col-md-8"> --}}
+                                <div style="float:right">
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal{{this.id}}" style=" display: inline; ">
+                                        Comment
+                                    </button>
+                                    <form action="/auth/commrsenior" method="post" enctype="multipart/form-data"
+                                        style="display: inline;">
+                                        <input type="hidden" name="pidd" value="{{this.id}}" />
+                                        <button type="submit" class="btn btn-primary my-2 btn-sm" id="addBtnr">View
+                                            Discussion</button>
 
 
-                            </form>
-                        </div>
-                        <div style="margin-top:0.5rem">
-                            <h6 class="card-title">{{this.title}}</h6>
-                            <p class="card-text">{{this.des}}<span style="color: blue;">#{{this.tag}}</span> </p>
-                        </div>
-                        <div class="modal fade" id="exampleModal{{this.id}}" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Add Reply</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="/auth/comm1senior" method="post" enctype="multipart/form-data">
-                                            <input type="hidden" name="pid" value="{{this.id}}" />
-                                            <textarea class="form-control inputt" name="contentr" id="addTask"
-                                                rows="1"></textarea>
+                                    </form>
+                                </div>
+                                <div style="margin-top:0.5rem">
+                                    <h5 class="card-title">{{this.title}}</h5>
+                                    <p class="card-text">{{this.des}}<span style="color: blue;">#{{this.tag}}</span>
+                                    </p>
+                                </div>
+                                <div style="float: right;">
+                                    <h6 style="color: gray;">{{this.name}} {{this.date}}</h6>
+                                </div>
+                                <div class="modal fade" id="exampleModal{{this.id}}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Add Reply</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/auth/comm1senior" method="post"
+                                                    enctype="multipart/form-data">
+                                                    <input type="hidden" name="pid" value="{{this.id}}" />
+                                                    <textarea class="form-control inputt" name="contentr" id="addTask"
+                                                        rows="1"></textarea>
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Post</button>
-                                        </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Post</button>
+                                                </form>
 
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                {{!--
+                                <hr>
+                                </hr> --}}
+
+
+                                
                             </div>
                         </div>
-                        {{!--
-                        <hr>
-                        </hr> --}}
-
-
-                        {{!--
-                    </div> --}}
+                    </div>
+                    {{else}}
+                    <h4>No Doubts!</h4>
+                    {{/each}}
                 </div>
             </div>
-            {{else}}
-            <h4>No Doubts!</h4>
-            {{/each}}
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
 </body>
 
 </html>

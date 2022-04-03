@@ -22,12 +22,14 @@ exports.login = (req, res) => {
                 if (resul.length > 0 ) {
                     userName=resul[0].name;
                     userEmail=resul[0].email;
+                    role="teacher";
                     req.session.userId=userName;
                     res.redirect('/home');
                 }
                 else if (result.length > 0) {
                     userName=result[0].name;
                     userEmail=result[0].email;
+                    role="student";
                     req.session.userId=userName;
                     res.redirect('/home');
                 }

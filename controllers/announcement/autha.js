@@ -31,7 +31,7 @@ exports.ann = (req, res) => {
     const name = userName;
     const { title,textt} = req.body;
     if (textt != "") {
-        db.query('INSERT INTO announcement SET ?', { email: email, name:name, title: title ,content: textt, img_url:imn}, (err, result) => {
+        db.query('INSERT INTO announcement SET ?', { email: email, name:name, title: title ,des: textt, img:imn}, (err, result) => {
             if (err) {
                 console.log(err);
             }

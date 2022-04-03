@@ -103,17 +103,19 @@
             {{#each resul}}
             <div class="noteCard my-2 mx-2 card" >
                 <div class="card-body row">
-                    {{#if this.img_url}}
+                     {{#if this.img}}
                     <div class="col-md-4">
-                        <img src="/{{this.img_url}}" class="card-img-top" alt="..." height="180">
+                        <img src="/{{this.img}}" class="card-img-top" alt="..." height="180">
                     </div>
-                    {{/if}}
                     <div class="col-md-8">
+                    {{else}}
+                    <div>
+                    {{/if}}    
                          {{!-- <h5 class="card-title" style=" display: inline;"><span style="font-size: small;color:grey">{{this.date}} </span>
                         </h5> --}}
                         <div style="margin-top:0.5rem">
                             <h5 class="card-title">{{this.title}} <span style="font-size: small;color:grey">{{this.date}}</h5>
-                            <p class="card-text">{{this.content}} </p>
+                            <p class="card-text">{{this.des}} </p>
                             {{!-- <span style="color: blue;">#{{this.tag}}</span> --}}
                         </div>
                     </div>
