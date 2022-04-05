@@ -54,8 +54,14 @@ router.get('/profile', (req, res) => {
             if (result.length > 0) {
                 db.query('SELECT * FROM postspeer WHERE email = ? ORDER BY id DESC', [userEmail], (er, resul) => {
                     if (er) console.log(er);
-                    return res.render('profile', {
-                        userName, result, resul, topic: "Doubts"
+                    db.query('SELECT * FROM postssenior WHERE email = ? ORDER BY id DESC', [userEmail], (er, resul2) => {
+                        if (er) console.log(er);
+                        db.query('SELECT * FROM poststeacher WHERE email = ? ORDER BY id DESC', [userEmail], (er, resul3) => {
+                            if (er) console.log(er);
+                            return res.render('profile', {
+                                userName, result, resul,resul2,resul3, topic: "Doubts",student:"student"
+                            });
+                        });
                     });
                 });
 
@@ -127,7 +133,7 @@ router.get('/doubtpeer', (req, res) => {
         db.query('SELECT * from postspeer ORDER BY id DESC', (er, resul) => {
             if (er) console.log(er);
             return res.render('doubtpeer', {
-                resul,userName
+                resul, userName
             });
         })
     }
@@ -150,7 +156,7 @@ router.get('/doubtsenior', (req, res) => {
         db.query('SELECT * from postssenior ORDER BY id DESC', (er, resul) => {
             if (er) console.log(er);
             return res.render('doubtsenior', {
-                resul,userName
+                resul, userName
             });
         })
     }
@@ -168,7 +174,7 @@ router.get('/doubtteacher', (req, res) => {
     db.query('SELECT * from poststeacher ORDER BY id DESC', (er, resul) => {
         if (er) console.log(er);
         return res.render('doubtteacher', {
-            resul,userName
+            resul, userName
         });
     })
 });
