@@ -122,7 +122,9 @@ router.get('/aboutus', (req, res) => {
 
 /*************************************DOUBT PAGE********************************** */
 router.get('/doubtini', (req, res) => {
-    res.render('doubtini');
+    res.render('doubtini',{
+        userName
+    });
 });
 router.get('/doubtpeer', (req, res) => {
     //  res.render('ann');
