@@ -59,7 +59,7 @@ router.get('/profile', (req, res) => {
                         db.query('SELECT * FROM poststeacher WHERE email = ? ORDER BY id DESC', [userEmail], (er, resul3) => {
                             if (er) console.log(er);
                             return res.render('profile', {
-                                userName, result, resul,resul2,resul3, topic: "Doubts",student:"student"
+                                userName, result, resul, resul2, resul3, topic: "Doubts", student: "student"
                             });
                         });
                     });
@@ -122,7 +122,7 @@ router.get('/aboutus', (req, res) => {
 
 /*************************************DOUBT PAGE********************************** */
 router.get('/doubtini', (req, res) => {
-    res.render('doubtini',{
+    res.render('doubtini', {
         userName
     });
 });
@@ -132,19 +132,29 @@ router.get('/doubtpeer', (req, res) => {
         res.render('msg');
     }
     else {
-        db.query('SELECT * from postspeer ORDER BY id DESC', (er, resul) => {
-            if (er) console.log(er);
-            return res.render('doubtpeer', {
-                resul, userName
-            });
-        })
+        if (tags == "ALL") {
+            db.query('SELECT * from postspeer ORDER BY id DESC', (er, resul) => {
+                if (er) console.log(er);
+                return res.render('doubtpeer', {
+                    resul, userName
+                });
+            })
+        }
+        else {
+            db.query('SELECT * from postspeer WHERE tag = ? ORDER BY id DESC', [tags], (er, resul) => {
+                if (er) console.log(er);
+                return res.render('doubtpeer', {
+                    resul, userName
+                });
+            })
+        }
     }
 });
 router.get('/repliespeer', (req, res) => {
     res.render('repliespeer');
 });
 router.get('/sortpeer', (req, res) => {
-    res.render('sortpeer',{
+    res.render('sortpeer', {
         userName
     });
 });
@@ -157,19 +167,29 @@ router.get('/doubtsenior', (req, res) => {
         res.render('msg');
     }
     else {
-        db.query('SELECT * from postssenior ORDER BY id DESC', (er, resul) => {
-            if (er) console.log(er);
-            return res.render('doubtsenior', {
-                resul, userName
-            });
-        })
+        if (tagsS == "ALL") {
+            db.query('SELECT * from postssenior ORDER BY id DESC', (er, resul) => {
+                if (er) console.log(er);
+                return res.render('doubtsenior', {
+                    resul, userName
+                });
+            })
+        }
+        else {
+            db.query('SELECT * from postssenior WHERE tag = ? ORDER BY id DESC', [tagsS], (er, resul) => {
+                if (er) console.log(er);
+                return res.render('doubtsenior', {
+                    resul, userName
+                });
+            })
+        }
     }
 });
 router.get('/repliessenior', (req, res) => {
     res.render('repliessenior');
 });
 router.get('/sortsenior', (req, res) => {
-    res.render('sortsenior',{
+    res.render('sortsenior', {
         userName
     });
 });
@@ -177,18 +197,28 @@ router.get('/sortsenior', (req, res) => {
 
 
 router.get('/doubtteacher', (req, res) => {
-    db.query('SELECT * from poststeacher ORDER BY id DESC', (er, resul) => {
-        if (er) console.log(er);
-        return res.render('doubtteacher', {
-            resul, userName
-        });
-    })
-});
+    if (tagT == "ALL") {
+        db.query('SELECT * from poststeacher ORDER BY id DESC', (er, resul) => {
+            if (er) console.log(er);
+            return res.render('doubtteacher', {
+                resul, userName
+            });
+        })
+    }
+    else {
+        db.query('SELECT * from poststeacher WHERE tag = ? ORDER BY id DESC', [tagT], (er, resul) => {
+            if (er) console.log(er);
+            return res.render('doubtteacher', {
+                resul, userName
+            });
+        })
+    }
+})
 router.get('/repliesteacher', (req, res) => {
     res.render('repliesteacher');
 });
 router.get('/sortteacher', (req, res) => {
-    res.render('sortteacher',{
+    res.render('sortteacher', {
         userName
     });
 });

@@ -36,6 +36,7 @@ exports.annteacher = (req, res) => {
                 console.log(err);
             }
             else{
+                tagsT="ALL";
                 res.redirect('/doubtteacher');
             }
         });

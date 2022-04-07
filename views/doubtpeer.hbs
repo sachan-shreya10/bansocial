@@ -41,7 +41,7 @@
                     <li class="nav-item">
                         <!-- <a class="nav-link" href="#">Log Out</a> -->
                         {{!-- <button type="button" class="btn btn-dark">Log Out</button> --}}
-                         <a href="/logout" class="btn btn-dark">Log Out</a>
+                        <a href="/logout" class="btn btn-dark">Log Out</a>
                     </li>
                 </ul>
 
@@ -54,6 +54,7 @@
                 <label for="tags"><span style="color:white">Sort by:</span></label>
                 <select id="tags" name="tag" onchange="theForm.submit()">
                     <option value="null"></option>
+                    <option value="ALL">ALL</option>
                     <option value="CS">CS</option>
                     <option value="IT">IT</option>
                     <option value="EC">EC</option>
@@ -68,7 +69,7 @@
     <div class="container my-3 content">
         {{!-- rgb(27, 26, 26) --}}
         <h2 style="color:white;text-align:center;">DOUBTS !</h2>
-        <form action="/auth/annpeer" method="post" enctype="multipart/form-data">
+        <form action="/auth/annpeer" method="post" enctype="multipart/form-data" autocomplete="off">
             <div class="card">
                 <div class="card-body">
                     {{!-- <h5 class="card-title">ADD DOUBT</h5> --}}

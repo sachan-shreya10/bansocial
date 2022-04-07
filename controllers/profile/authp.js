@@ -32,9 +32,6 @@ exports.editpro = (req, res) => {
         if (err) {
             console.log(err);
         }
-        console.log(imn);
-        console.log(password);
-        console.log(userEmail);
         if (result.length > 0) {
             if (imn!="" && password!="") {
                 db.query('UPDATE student SET pro_pic = ? , password = ? WHERE email = ?', [imn, password, userEmail], (err, resul) => {

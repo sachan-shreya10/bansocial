@@ -36,6 +36,7 @@ exports.annpeer = (req, res) => {
                 console.log(err);
             }
             else{
+                tags="ALL";
                 res.redirect('/doubtpeer');
             }
         });

@@ -36,6 +36,7 @@ exports.annsenior = (req, res) => {
                 console.log(err);
             }
             else{
+                tagsS="ALL";
                 res.redirect('/doubtsenior');
             }
         });

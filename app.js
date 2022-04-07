@@ -39,6 +39,9 @@ db.connect( (err)=>{
 global.userName="";
 global.userEmail="";
 global.role="";
+global.tags="ALL";
+global.tagsS="ALL";
+global.tagsT="ALL";
 app.use(function (req, res, next) {
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
     res.header('Expires', '-1');
