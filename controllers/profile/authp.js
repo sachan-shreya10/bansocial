@@ -12,7 +12,7 @@ exports.editpro = (req, res) => {
     console.log(req.body);
     let pics;
     let upPath;
-    var imn="";
+    var imn = "";
     if (!req.files || Object.keys(req.files).length === 0) {
         console.log("no files uploaded")
     }
@@ -27,64 +27,72 @@ exports.editpro = (req, res) => {
             }
         })
     }
-    const { nam, password, pic } = req.body;
-    db.query('SELECT name FROM student WHERE email = ?', [userEmail], (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        if (result.length > 0) {
-            if (imn!="" && password!="") {
-                db.query('UPDATE student SET pro_pic = ? , password = ? WHERE email = ?', [imn, password, userEmail], (err, resul) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                    res.redirect('/profile');
-                })
+    const { cpassword, password, pic } = req.body;
+    if (cpassword != password) {
+        return res.render('editpro', {
+            message: 'passwords do not match'
+        });
+    }
+    else {
+
+        db.query('SELECT name FROM student WHERE email = ?', [userEmail], (err, result) => {
+            if (err) {
+                console.log(err);
             }
-            else if (password!="") {
-                db.query('UPDATE student SET password = ? WHERE email = ?', [password, userEmail], (err, resul) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                    res.redirect('/profile');
-                })
+            if (result.length > 0) {
+                if (imn != "" && password != "") {
+                    db.query('UPDATE student SET pro_pic = ? , password = ? WHERE email = ?', [imn, password, userEmail], (err, resul) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        res.redirect('/profile');
+                    })
+                }
+                else if (password != "") {
+                    db.query('UPDATE student SET password = ? WHERE email = ?', [password, userEmail], (err, resul) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        res.redirect('/profile');
+                    })
+                }
+                else {
+                    db.query('UPDATE student SET pro_pic = ?  WHERE email = ?', [imn, userEmail], (err, resul) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        res.redirect('/profile');
+                    })
+                }
+
             }
             else {
-                db.query('UPDATE student SET pro_pic = ?  WHERE email = ?', [imn, userEmail], (err, resul) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                    res.redirect('/profile');
-                })
-            }
+                if (pic && password) {
+                    db.query('UPDATE teacher SET pro_pic = ? , password = ? WHERE name = ?', [imn, password, nam], (err, resul) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        res.redirect('/profile');
+                    })
+                }
+                else if (password) {
+                    db.query('UPDATE teacher SET password = ? WHERE name = ?', [password, nam], (err, resul) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        res.redirect('/profile');
+                    })
+                }
+                else {
+                    db.query('UPDATE teacher SET pro_pic = ?  WHERE name = ?', [imn, nam], (err, resul) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        res.redirect('/profile');
+                    })
+                }
 
-        }
-        else {
-            if (pic && password) {
-                db.query('UPDATE teacher SET pro_pic = ? , password = ? WHERE name = ?', [imn, password, nam], (err, resul) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                    res.redirect('/profile');
-                })
             }
-            else if (password) {
-                db.query('UPDATE teacher SET password = ? WHERE name = ?', [password, nam], (err, resul) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                    res.redirect('/profile');
-                })
-            }
-            else {
-                db.query('UPDATE teacher SET pro_pic = ?  WHERE name = ?', [imn, nam], (err, resul) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                    res.redirect('/profile');
-                })
-            }
-
-        }
-    })
+        })
+    }
 }

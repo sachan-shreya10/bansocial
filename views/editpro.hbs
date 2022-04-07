@@ -49,6 +49,9 @@
             </div>
         </div>
     </nav>
+       {{#if message}}
+    <h4 class="alert alert-danger mt-4">{{message}}</h4>
+    {{/if}}
     <div class="container my-3 content">
         <form  action="/auth/editpro" method="post" enctype="multipart/form-data" autocomplete="off">
             <div class="card">
@@ -58,7 +61,7 @@
                         {{!-- <input type="hidden" id="name" name="nam" value="{{userName}}"> --}}
                         <input type="password" placeholder="********" name="password">
                         <h6 class="card-title">Confirm Password</h6>
-                        <input type="password" placeholder="********" name="confirm_Password">
+                        <input type="password" placeholder="********" name="cpassword">
                         {{!-- <textarea class="form-control inputt" name="title" id="addTask" rows="1"></textarea> --}}
                     </div>
                     <h6 class="card-title">Change Profile Pic</h6>
