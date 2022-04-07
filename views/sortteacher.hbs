@@ -29,15 +29,17 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" aria-current="page" href="/home">Home</a>
                     </li>
                 </ul>
             </div>
             <div class="mx-2">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <!-- <a class="nav-link" href="#">Log Out</a> -->
-                        <button type="button" class="btn btn-dark">Log Out</button>
+                        <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="btn btn-dark">Log Out</a>
                     </li>
                 </ul>
 
@@ -46,81 +48,77 @@
     </nav>
     <div class="container my-3 content">
         <h2 style="color:rgb(27, 26, 26);text-align:center;">DOUBTS !</h2>
-    
         <div id="tasks" class="announ row container-fluid" style="padding: 0;">
             {{#each result}}
             <div class="noteCard my-2 mx-2 card">
-                {{!-- style="width: 18rem;" --}}
-                <div class="card-body">
-                    {{#if this.img_url}}
-                    <div>
-                        <img src="/{{this.img_url}}" class="card-img-top" alt="..." height="180">
+                <div class="card-body row">
+                    {{#if this.img}}
+                    <div class="col-md-4">
+                        <img src="/{{this.img}}" class="card-img-top" alt="..." height="180">
                     </div>
-                    {{/if}}
-                    {{!-- <div class="col-md-8"> --}}
-                        <h5 class="card-title" style=" display: inline;">{{this.name}} {{this.date}} {{this.tag}}
-                        </h5>
-                        <div style="float:right">
-                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal{{this.id}}" style=" display: inline; ">
-                                Reply
-                            </button>
-                            <form action="/auth/commrteacher" method="post" enctype="multipart/form-data"
-                                style="display: inline;">
-                                <input type="hidden" name="pidd" value="{{this.id}}" />
-                                <button type="submit" class="btn btn-primary my-2 btn-sm" id="addBtnr">View
-                                    Discussion</button>
+                    <div class="col-md-8">
+                        {{else}}
+                        <div>
+                            {{/if}}
+                            <div style="float:right">
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal{{this.id}}" style=" display: inline; ">
+                                    Reply
+                                </button>
+                                <form action="/auth/commr" method="post" enctype="multipart/form-data"
+                                    style="display: inline;">
+                                    <input type="hidden" name="pidd" value="{{this.id}}" />
+                                    <button type="submit" class="btn btn-primary my-2 btn-sm" id="addBtnr">View
+                                        Discussion</button>
 
 
-                            </form>
-                        </div>
-                        <div style="margin-top:0.5rem">
-                            <h6 class="card-title">{{this.title}}</h6>
-                            <p class="card-text">{{this.des}}</p>
-                        </div>
-                        <div class="modal fade" id="exampleModal{{this.id}}" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Add Reply</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="/auth/comm1teacher" method="post" enctype="multipart/form-data">
-                                            <input type="hidden" name="pid" value="{{this.id}}" />
-                                            <textarea class="form-control inputt" name="contentr" id="addTask"
-                                                rows="1"></textarea>
+                                </form>
+                            </div>
+                            <div style="margin-top:0.5rem">
+                                <h5 class="card-title">{{this.title}}</h5>
+                                <p class="card-text">{{this.des}}<span style="color: blue;">#{{this.tag}}</span>
+                                </p>
+                            </div>
+                            <div style="float: right;">
+                                <h6 style="color: gray;">{{this.name}} {{this.date}}</h6>
+                            </div>
+                            <div class="modal fade" id="exampleModal{{this.id}}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Add Reply</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/auth/comm1" method="post" enctype="multipart/form-data">
+                                                <input type="hidden" name="pid" value="{{this.id}}" />
+                                                <textarea class="form-control inputt" name="contentr" id="addTask"
+                                                    rows="1"></textarea>
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Post</button>
-                                        </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Post</button>
+                                            </form>
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {{!--
-                        <hr>
-                        </hr> --}}
-
-
-                        {{!--
-                    </div> --}}
+                    </div>
                 </div>
+                {{else}}
+                <h4>No Doubts!</h4>
+                {{/each}}
             </div>
-            {{else}}
-            <h4>No Doubts!</h4>
-            {{/each}}
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>

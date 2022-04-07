@@ -16,7 +16,7 @@ exports.sorttsenior = (req, res) => {
     db.query('SELECT * from postssenior WHERE tag = ? ORDER BY id DESC',[tag], (er, result) => {
         if (er) console.log(er);
         return res.render('sortsenior', {
-            result
+            result,userName
         });
     })
 }

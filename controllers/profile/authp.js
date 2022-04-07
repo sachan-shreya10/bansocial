@@ -12,7 +12,7 @@ exports.editpro = (req, res) => {
     console.log(req.body);
     let pics;
     let upPath;
-    var imn;
+    var imn="";
     if (!req.files || Object.keys(req.files).length === 0) {
         console.log("no files uploaded")
     }
@@ -28,21 +28,24 @@ exports.editpro = (req, res) => {
         })
     }
     const { nam, password, pic } = req.body;
-    db.query('SELECT name FROM student WHERE email = ?', [nam], (err, result) => {
+    db.query('SELECT name FROM student WHERE email = ?', [userEmail], (err, result) => {
         if (err) {
             console.log(err);
         }
+        console.log(imn);
+        console.log(password);
+        console.log(userEmail);
         if (result.length > 0) {
-            if (pic && password) {
-                db.query('UPDATE student SET pro_pic = ? , password = ? WHERE email = ?', [imn, password, nam], (err, resul) => {
+            if (imn!="" && password!="") {
+                db.query('UPDATE student SET pro_pic = ? , password = ? WHERE email = ?', [imn, password, userEmail], (err, resul) => {
                     if (err) {
                         console.log(err);
                     }
                     res.redirect('/profile');
                 })
             }
-            else if (password) {
-                db.query('UPDATE student SET password = ? WHERE email = ?', [password, nam], (err, resul) => {
+            else if (password!="") {
+                db.query('UPDATE student SET password = ? WHERE email = ?', [password, userEmail], (err, resul) => {
                     if (err) {
                         console.log(err);
                     }
@@ -50,7 +53,7 @@ exports.editpro = (req, res) => {
                 })
             }
             else {
-                db.query('UPDATE student SET pro_pic = ?  WHERE email = ?', [imn, nam], (err, resul) => {
+                db.query('UPDATE student SET pro_pic = ?  WHERE email = ?', [imn, userEmail], (err, resul) => {
                     if (err) {
                         console.log(err);
                     }

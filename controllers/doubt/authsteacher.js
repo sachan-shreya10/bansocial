@@ -16,7 +16,7 @@ exports.sorttteacher = (req, res) => {
     db.query('SELECT * from poststeacher WHERE tag = ? ORDER BY id DESC',[tag], (er, result) => {
         if (er) console.log(er);
         return res.render('sortteacher', {
-            result
+            result,userName
         });
     })
 }

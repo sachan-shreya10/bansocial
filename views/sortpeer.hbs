@@ -29,15 +29,17 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" aria-current="page" href="/home">Home</a>
                     </li>
                 </ul>
             </div>
             <div class="mx-2">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <!-- <a class="nav-link" href="#">Log Out</a> -->
-                        <button type="button" class="btn btn-dark">Log Out</button>
+                        <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="btn btn-dark">Log Out</a>
                     </li>
                 </ul>
 
@@ -46,20 +48,18 @@
     </nav>
     <div class="container my-3 content">
         <h2 style="color:rgb(27, 26, 26);text-align:center;">DOUBTS !</h2>
-    
         <div id="tasks" class="announ row container-fluid" style="padding: 0;">
-            {{#each result}}
-            <div class="noteCard my-2 mx-2 card">
-                {{!-- style="width: 18rem;" --}}
-                <div class="card-body">
-                    {{#if this.img_url}}
+        {{#each result}}
+        <div class="noteCard my-2 mx-2 card">
+            <div class="card-body row">
+                {{#if this.img}}
+                <div class="col-md-4">
+                    <img src="/{{this.img}}" class="card-img-top" alt="..." height="180">
+                </div>
+                <div class="col-md-8">
+                    {{else}}
                     <div>
-                        <img src="/{{this.img_url}}" class="card-img-top" alt="..." height="180">
-                    </div>
-                    {{/if}}
-                    {{!-- <div class="col-md-8"> --}}
-                        <h5 class="card-title" style=" display: inline;">{{this.name}} {{this.date}} {{this.tag}}
-                        </h5>
+                        {{/if}}
                         <div style="float:right">
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{this.id}}" style=" display: inline; ">
@@ -75,8 +75,12 @@
                             </form>
                         </div>
                         <div style="margin-top:0.5rem">
-                            <h6 class="card-title">{{this.title}}</h6>
-                            <p class="card-text">{{this.des}}</p>
+                            <h5 class="card-title">{{this.title}}</h5>
+                            <p class="card-text">{{this.des}}<span style="color: blue;">#{{this.tag}}</span>
+                            </p>
+                        </div>
+                        <div style="float: right;">
+                            <h6 style="color: gray;">{{this.name}} {{this.date}}</h6>
                         </div>
                         <div class="modal fade" id="exampleModal{{this.id}}" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -104,13 +108,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{!--
-                        <hr>
-                        </hr> --}}
-
-
-                        {{!--
-                    </div> --}}
+                    </div>
                 </div>
             </div>
             {{else}}

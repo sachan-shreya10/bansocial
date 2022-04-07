@@ -42,7 +42,7 @@
                     </li>
                     <li class="nav-item">
                         <!-- <a class="nav-link" href="#">Log Out</a> -->
-                        <a class="nav-link" href="/logout" style="text-decoration: none;color:rgb(218, 212, 212);background-color:rgb(23, 29, 29);border-radius: 5px">Log Out</a> 
+                         <a href="/logout" class="btn btn-dark">Log Out</a>
                     </li>
                 </ul>
 
@@ -55,8 +55,10 @@
                 <div class="card-body">
                     <h6 class="card-title">Change Password</h6>
                     <div class="form-group">
-                        <input type="hidden" id="name" name="nam" value="{{userName}}">
-                        <input type="text" id="pass" name="password">
+                        {{!-- <input type="hidden" id="name" name="nam" value="{{userName}}"> --}}
+                        <input type="password" placeholder="********" name="password">
+                        <h6 class="card-title">Confirm Password</h6>
+                        <input type="password" placeholder="********" name="confirm_Password">
                         {{!-- <textarea class="form-control inputt" name="title" id="addTask" rows="1"></textarea> --}}
                     </div>
                     <h6 class="card-title">Change Profile Pic</h6>

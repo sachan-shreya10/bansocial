@@ -144,7 +144,9 @@ router.get('/repliespeer', (req, res) => {
     res.render('repliespeer');
 });
 router.get('/sortpeer', (req, res) => {
-    res.render('sortpeer');
+    res.render('sortpeer',{
+        userName
+    });
 });
 
 
@@ -167,7 +169,9 @@ router.get('/repliessenior', (req, res) => {
     res.render('repliessenior');
 });
 router.get('/sortsenior', (req, res) => {
-    res.render('sortsenior');
+    res.render('sortsenior',{
+        userName
+    });
 });
 
 
@@ -184,7 +188,9 @@ router.get('/repliesteacher', (req, res) => {
     res.render('repliesteacher');
 });
 router.get('/sortteacher', (req, res) => {
-    res.render('sortteacher');
+    res.render('sortteacher',{
+        userName
+    });
 });
 
 router.get('/msg', (req, res) => {

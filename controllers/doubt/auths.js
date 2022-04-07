@@ -16,7 +16,7 @@ exports.sortt = (req, res) => {
     db.query('SELECT * from postspeer WHERE tag = ? ORDER BY id DESC',[tag], (er, result) => {
         if (er) console.log(er);
         return res.render('sortpeer', {
-            result
+            result,userName
         });
     })
 }
