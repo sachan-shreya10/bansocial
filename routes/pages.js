@@ -97,10 +97,10 @@ router.get('/editpro', (req, res) => {
 /*************************************ANNOUNCEMENT PAGE********************************** */
 router.get('/ann', (req, res) => {
     if (req.session.userId) {
-        db.query('SELECT * from announcement ORDER BY id DESC', (er, resul) => {
+        db.query('SELECT * from announcement where reports =? ORDER BY id DESC',[0] ,(er, resul) => {
             if (er) console.log(er);
             return res.render('ann', {
-                resul, userName
+                resul, userName , userEmail
             });
         })
     }
@@ -133,18 +133,18 @@ router.get('/doubtpeer', (req, res) => {
     }
     else {
         if (tags == "ALL") {
-            db.query('SELECT * from postspeer ORDER BY id DESC', (er, resul) => {
+            db.query('SELECT * from postspeer WHERE reports=? ORDER BY id DESC',[0], (er, resul) => {
                 if (er) console.log(er);
                 return res.render('doubtpeer', {
-                    resul, userName
+                    resul, userName , userEmail
                 });
             })
         }
         else {
-            db.query('SELECT * from postspeer WHERE tag = ? ORDER BY id DESC', [tags], (er, resul) => {
+            db.query('SELECT * from postspeer WHERE tag = ? AND reports=?  ORDER BY id DESC', [tags,0], (er, resul) => {
                 if (er) console.log(er);
                 return res.render('doubtpeer', {
-                    resul, userName
+                    resul, userName , userEmail
                 });
             })
         }
@@ -168,18 +168,18 @@ router.get('/doubtsenior', (req, res) => {
     }
     else {
         if (tagsS == "ALL") {
-            db.query('SELECT * from postssenior ORDER BY id DESC', (er, resul) => {
+            db.query('SELECT * from postssenior WHERE reports =? ORDER BY id DESC',[0], (er, resul) => {
                 if (er) console.log(er);
                 return res.render('doubtsenior', {
-                    resul, userName
+                    resul, userName , userEmail
                 });
             })
         }
         else {
-            db.query('SELECT * from postssenior WHERE tag = ? ORDER BY id DESC', [tagsS], (er, resul) => {
+            db.query('SELECT * from postssenior WHERE tag = ? AND reports=? ORDER BY id DESC', [tagsS,0], (er, resul) => {
                 if (er) console.log(er);
                 return res.render('doubtsenior', {
-                    resul, userName
+                    resul, userName , userEmail
                 });
             })
         }
@@ -197,19 +197,19 @@ router.get('/sortsenior', (req, res) => {
 
 
 router.get('/doubtteacher', (req, res) => {
-    if (tagT == "ALL") {
-        db.query('SELECT * from poststeacher ORDER BY id DESC', (er, resul) => {
+    if (tagsT == "ALL") {
+        db.query('SELECT * from poststeacher WHERE reports=? ORDER BY id DESC',[0], (er, resul) => {
             if (er) console.log(er);
             return res.render('doubtteacher', {
-                resul, userName
+                resul, userName , userEmail
             });
         })
     }
     else {
-        db.query('SELECT * from poststeacher WHERE tag = ? ORDER BY id DESC', [tagT], (er, resul) => {
+        db.query('SELECT * from poststeacher WHERE tag = ? AND reports=? ORDER BY id DESC', [tagsT,0], (er, resul) => {
             if (er) console.log(er);
             return res.render('doubtteacher', {
-                resul, userName
+                resul, userName , userEmail
             });
         })
     }

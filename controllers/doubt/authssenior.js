@@ -9,6 +9,7 @@ const db = mysql.createConnection({
 })
 
 exports.sorttsenior = (req, res) => {
+    const { tag } = req.body;
     // console.log("hello1")
     // console.log(req.body);
     // const {tag}=req.body;

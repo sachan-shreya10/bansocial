@@ -3,7 +3,7 @@ const authController = require('../controllers/LogReg/authr');
 const authController2 = require('../controllers/LogReg/authl');
 const authController3 = require('../controllers/profile/authp');
 const authController4 = require('../controllers/announcement/autha');
-
+const authController20 = require('../controllers/announcement/autha2');
 const router = express.Router();
 
 
@@ -14,6 +14,8 @@ const authController6 = require('../controllers/doubt/authc1');
 const authController7 = require('../controllers/doubt/authr');
 const authController8 = require('../controllers/doubt/auths');
 const authController9 = require('../controllers/doubt/authrr');
+const authController21 = require('../controllers/doubt/authdpr');
+
 
 
 //senior
@@ -22,6 +24,7 @@ const authController11 = require('../controllers/doubt/authc1senior');
 const authController12 = require('../controllers/doubt/authrsenior');
 const authController13= require('../controllers/doubt/authssenior');
 const authController14 = require('../controllers/doubt/authrrsenior');
+const authController22 = require('../controllers/doubt/authdsr');
 
 
 //teacher
@@ -30,6 +33,7 @@ const authController16= require('../controllers/doubt/authc1teacher');
 const authController17 = require('../controllers/doubt/authrteacher');
 const authController18 = require('../controllers/doubt/authsteacher');
 const authController19 = require('../controllers/doubt/authrrteacher');
+const authController23 = require('../controllers/doubt/authdtr');
 
 
 
@@ -38,6 +42,7 @@ router.post('/register',authController.register);
 router.post('/login',authController2.login);
 router.post('/editpro',authController3.editpro);
 router.post('/ann',authController4.ann);
+router.post('/autha2',authController20.autha2);
 
 
 /******************************************DOUBT PAGE************************************ */
@@ -48,6 +53,7 @@ router.post('/comm1',authController6.comm1);
 router.post('/commr',authController7.commr);
 router.post('/sort',authController8.sortt);
 router.post('/rr',authController9.rr);
+router.post('/dpr',authController21.dpr);
 
 
 //senior
@@ -56,6 +62,7 @@ router.post('/comm1senior',authController11.comm1senior);
 router.post('/commrsenior',authController12.commrsenior);
 router.post('/sortsenior',authController13.sorttsenior);
 router.post('/rrsenior',authController14.rrsenior);
+router.post('/dsr',authController22.dsr);
 
 
 //teacher
@@ -64,6 +71,7 @@ router.post('/comm1teacher',authController16.comm1teacher);
 router.post('/commrteacher',authController17.commrteacher);
 router.post('/sortteacher',authController18.sorttteacher);
 router.post('/rrteacher',authController19.rrteacher);
+router.post('/dtr',authController23.dtr);
 
 
 module.exports = router;

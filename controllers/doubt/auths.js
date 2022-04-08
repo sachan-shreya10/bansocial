@@ -8,8 +8,6 @@ const db = mysql.createConnection({
 })
 
 exports.sortt = (req, res) => {
-    console.log("hello1")
-    console.log(req.body);
     const { tag } = req.body;
     // if (tag == "ALL") {
     //     // db.query('SELECT * from postspeer ORDER BY id DESC', (er, resul) => {
