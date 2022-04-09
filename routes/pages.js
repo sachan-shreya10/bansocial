@@ -129,7 +129,7 @@ router.get('/doubtini', (req, res) => {
         });
     }
     else {
-        res, redirect("/");
+        res.redirect("/");
     }
 });
 router.get('/doubtpeer', (req, res) => {
