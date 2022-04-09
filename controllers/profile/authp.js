@@ -19,7 +19,8 @@ exports.editpro = (req, res) => {
     else {
         pics = req.files.pic;
         console.log(pics)
-        upPath = "C:/Users/tsach/Desktop/log_reg/pro_pic_uploads/" + pics.name;
+        //upPath = "C:/Users/tsach/Desktop/log_reg/pro_pic_uploads/" + pics.name;
+        upPath= "C:/Users/Shivangi/Desktop/webD/log_reg/bansocial/pro_pic_uploads/"+pics.name;
         imn = pics.name;
         pics.mv(upPath, function (err) {
             if (err) {

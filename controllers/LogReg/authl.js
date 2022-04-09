@@ -19,14 +19,15 @@ exports.login = (req, res) => {
                 console.log(err);
             }
             else {
-                if (resul.length > 0 ) {
+
+                if (resul.length > 0 && resul[0].isVerified==1) {
                     userName=resul[0].name;
                     userEmail=resul[0].email;
                     role="teacher";
                     req.session.userId=userName;
                     res.redirect('/home');
                 }
-                else if (result.length > 0) {
+                else if (result.length > 0  && result[0].isVerified==1) {
                     userName=result[0].name;
                     userEmail=result[0].email;
                     role="student";

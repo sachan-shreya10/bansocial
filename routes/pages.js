@@ -280,4 +280,50 @@ router.get('/msg', (req, res) => {
         res.redirect("/");
     }
 });
+
+router.get('/verify-email',(req,res)=>{
+    const token=req.query.token;
+    db.query('SELECT email FROM teacher WHERE emailToken=?',[token], (error, results) =>{
+        if(error){
+            console.log(error);
+            console.log("Email is not verified");
+        }
+        else if(results.length>0){
+            const email=results[0].email;
+            console.log(email);
+            console.log(email);
+            db.query('UPDATE teacher SET emailToken=? , isVerified=? where email=?',[null,1,email],(err,ress)=>{
+               if(err){
+                   console.log(err);
+               }
+                return res.render('login',{
+                    message: 'successfully registered'
+                });
+                
+            }
+            )
+        }
+        else{
+            db.query('SELECT email FROM student WHERE emailToken=?', [token], (error, resultss) =>{
+                if(error){
+                    console.log(error);
+                    console.log("Email is not verified");
+                }
+                else{
+                    const email=resultss[0].email;
+                    console.log(email);
+                    db.query('UPDATE student SET emailToken=? , isVerified=? where email=?',[null,1,email],(err,ress)=>{
+                       if(err){
+                           console.log(err);
+                       }
+                        return res.render('login',{
+                            message: 'successfully registered'
+                        });
+                        
+                    }) 
+                }
+            })
+        }
+    })
+})
 module.exports = router;
