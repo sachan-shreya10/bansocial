@@ -109,6 +109,20 @@ router.get('/ann', (req, res) => {
         res.redirect("/");
     }
 });
+/*************************************JOURNEY PAGE********************************** */
+router.get('/journey', (req, res) => {
+    if (req.session.userId) {
+        db.query('SELECT * from journey where reports =? ORDER BY id DESC', [0], (er, resul) => {
+            if (er) console.log(er);
+            return res.render('journey', {
+                resul, userName, userEmail
+            });
+        })
+    }
+    else {
+        res.redirect("/");
+    }
+});
 /*************************************ABOUT US PAGE********************************** */
 router.get('/aboutus', (req, res) => {
     if (req.session.userId) {

@@ -4,6 +4,8 @@ const authController2 = require('../controllers/LogReg/authl');
 const authController3 = require('../controllers/profile/authp');
 const authController4 = require('../controllers/announcement/autha');
 const authController20 = require('../controllers/announcement/autha2');
+const authController24 = require('../controllers/journey/journey');
+const authController25 = require('../controllers/journey/authjj');
 const router = express.Router();
 
 
@@ -43,6 +45,8 @@ router.post('/login',authController2.login);
 router.post('/editpro',authController3.editpro);
 router.post('/ann',authController4.ann);
 router.post('/autha2',authController20.autha2);
+router.post('/journey',authController24.journey);
+router.post('/authjj',authController25.authjj);
 
 
 /******************************************DOUBT PAGE************************************ */
