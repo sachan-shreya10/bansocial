@@ -56,7 +56,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="/auth/rrteacher" method="post" enctype="multipart/form-data">
+                                <form action="/auth/rrteacher" method="post" enctype="multipart/form-data" autocomplete="off">
                                     <input type="hidden" name="pid" value="{{this.id}}" />
                                     <input type="hidden" name="did" value="{{this.did}}" />
                                     <textarea class="form-control inputt" name="contentr" id="addTask"

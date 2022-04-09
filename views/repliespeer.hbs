@@ -11,93 +11,95 @@
 </head>
 
 <body>
-    {{!-- <div class="noteCard my-2 mx-1 card" style="margin:0;padding:0"> --}}
-        {{!-- <div id="tasks" class="announ row container-fluid" style="padding: 0;">
-            < --}} {{#each result}} <div class="noteCard my-2 mx-1 card">
-                <div class="card-body">
+    {{#each result}}
+    <div class="noteCard my-2 mx-1 card" style="background:rgb(234, 230, 230)">
+        <div class="card-body">
 
-                    <div style="padding-left: 1%;">
-                        <h5 class="card-title" style="display: inline; ">{{this.name}}</h5>
-                        <div style="float:right">
-                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal{{this.id}}" style=" display: inline; ">
-                                Reply
-                            </button>
-                            {{!-- onclick="disRep({{this.id}}) --}}
-                            {{!-- <form action="/auth/neww" method="post">
-                            <input type="hidden" name="cid" value="{{this.id}}">
-                             <input type="hidden" name="didd" value="{{this.did}}"> --}}
-                             <button type="submit" class="btn btn-primary my-2 btn-sm" id="addBtnr" onclick="disRep({{this.id}})">View
-                                Replies</button>
-                            {{!-- </form> --}}
-                            
-                        </div>
-                        <div style="margin-top:0.5rem">
-                            <p class="card-text">{{this.content}}</p>
-                        </div>
-                          {{#each ../resul}}
-                        {{#ifEquals this.pid ../this.id}}
-                        <div style="padding-left: 1%;display:none" class="reply{{this.pid}}">
-                            <hr>
-                            </hr>
-                            <h5 class="card-title">{{this.name}}</h5>
-                            <p class="card-text">{{this.content}}</p>
-                        </div>
-                        {{/ifEquals}}
-                        {{/each}}
-                        <div class="modal fade" id="exampleModal{{this.id}}" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Add Reply</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="/auth/rr" method="post" enctype="multipart/form-data">
-                                            <input type="hidden" name="pid" value="{{this.id}}" />
-                                            <input type="hidden" name="did" value="{{this.did}}" />
-                                            <textarea class="form-control inputt" name="contentr" id="addTask"
-                                                rows="1"></textarea>
+            <div style="padding-left: 1%;">
+                <h5 class="card-title" style="display: inline; ">{{this.name}}</h5>
+                <div style="float:right">
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal{{this.id}}" style=" display: inline; ">
+                        Reply
+                    </button>
+                    {{!-- onclick="disRep({{this.id}}) --}}
+                    {{!-- <form action="/auth/neww" method="post">
+                        <input type="hidden" name="cid" value="{{this.id}}">
+                        <input type="hidden" name="didd" value="{{this.did}}"> --}}
+                        <button type="submit" class="btn btn-primary my-2 btn-sm" id="addBtnr"
+                            onclick="disRep({{this.id}})">View
+                            Replies</button>
+                        {{!--
+                    </form> --}}
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Post</button>
-                                        </form>
+                </div>
+                <div style="margin-top:0.5rem">
+                    <p class="card-text">{{this.content}}</p>
+                </div>
+                {{#each ../resul}}
+                {{#ifEquals this.pid ../this.id}}
+                <div style="padding-left: 1%;display:none" class="reply{{this.pid}}">
+                    <hr>
+                    </hr>
+                    <h5 class="card-title">{{this.name}}</h5>
+                    <p class="card-text">{{this.content}}</p>
+                </div>
+                {{/ifEquals}}
+                {{/each}}
+                <div class="modal fade" id="exampleModal{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add Reply</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/auth/rr" method="post" enctype="multipart/form-data" autocomplete="off">
+                                    <input type="hidden" name="pid" value="{{this.id}}" />
+                                    <input type="hidden" name="did" value="{{this.did}}" />
+                                    <textarea class="form-control inputt" name="contentr" id="addTask"
+                                        rows="1"></textarea>
 
-                                    </div>
-                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Post</button>
+                                </form>
+
                             </div>
                         </div>
                     </div>
-                    {{!-- {{else}}
-                    <h5>No replies !!</h5> --}}
                 </div>
+            </div>
+            {{!-- {{else}}
+            <h5>No replies !!</h5> --}}
         </div>
+    </div>
 
-        {{/each}}
+    {{/each}}
 
 
 
-        {{!-- </div> --}}
+    {{!-- </div> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
 
         </script>
     <script>
+        //if (window.history.replaceState) {
+        // window.history.replaceState(null, null, window.location.href);
+        //}
         function disRep(id) {
 
             str = 'reply' + id
-            
+
             var rep = document.getElementsByClassName(str);
 
             for (var i = 0; i < rep.length; i++) {
                 rep[i].style.display = '';
             }
-            //alert("chal jaa be");
 
         }    
     </script>

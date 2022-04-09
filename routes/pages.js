@@ -4,6 +4,7 @@ const mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 var session = require("express-session");
+const { redirect } = require("express/lib/response");
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -97,10 +98,10 @@ router.get('/editpro', (req, res) => {
 /*************************************ANNOUNCEMENT PAGE********************************** */
 router.get('/ann', (req, res) => {
     if (req.session.userId) {
-        db.query('SELECT * from announcement where reports =? ORDER BY id DESC',[0] ,(er, resul) => {
+        db.query('SELECT * from announcement where reports =? ORDER BY id DESC', [0], (er, resul) => {
             if (er) console.log(er);
             return res.render('ann', {
-                resul, userName , userEmail
+                resul, userName, userEmail
             });
         })
     }
@@ -122,108 +123,161 @@ router.get('/aboutus', (req, res) => {
 
 /*************************************DOUBT PAGE********************************** */
 router.get('/doubtini', (req, res) => {
-    res.render('doubtini', {
-        userName
-    });
-});
-router.get('/doubtpeer', (req, res) => {
-    //  res.render('ann');
-    if (role == "teacher") {
-        res.render('msg');
+    if (req.session.userId) {
+        res.render('doubtini', {
+            userName
+        });
     }
     else {
-        if (tags == "ALL") {
-            db.query('SELECT * from postspeer WHERE reports=? ORDER BY id DESC',[0], (er, resul) => {
-                if (er) console.log(er);
-                return res.render('doubtpeer', {
-                    resul, userName , userEmail
-                });
-            })
+        res, redirect("/");
+    }
+});
+router.get('/doubtpeer', (req, res) => {
+    if (req.session.userId) {
+        if (role == "teacher") {
+            res.render('msg');
         }
         else {
-            db.query('SELECT * from postspeer WHERE tag = ? AND reports=?  ORDER BY id DESC', [tags,0], (er, resul) => {
-                if (er) console.log(er);
-                return res.render('doubtpeer', {
-                    resul, userName , userEmail
-                });
-            })
+            if (tags == "ALL") {
+                db.query('SELECT * from postspeer WHERE reports=? ORDER BY id DESC', [0], (er, resul) => {
+                    if (er) console.log(er);
+                    return res.render('doubtpeer', {
+                        resul, userName, userEmail
+                    });
+                })
+            }
+            else {
+                db.query('SELECT * from postspeer WHERE tag = ? AND reports=?  ORDER BY id DESC', [tags, 0], (er, resul) => {
+                    if (er) console.log(er);
+                    return res.render('doubtpeer', {
+                        resul, userName, userEmail
+                    });
+                })
+            }
         }
+    }
+    else {
+        res.redirect("/");
     }
 });
 router.get('/repliespeer', (req, res) => {
-    res.render('repliespeer');
+    if (req.session.userId) {
+        res.render('repliespeer');
+    }
+    else {
+        res.redirect("/");
+    }
 });
 router.get('/sortpeer', (req, res) => {
-    res.render('sortpeer', {
-        userName
-    });
+    if (req.session.userId) {
+        res.render('sortpeer', {
+            userName
+        });
+    }
+    else {
+        res.redirect("/");
+    }
 });
 
 
 
 router.get('/doubtsenior', (req, res) => {
-    //  res.render('ann');
-    if (role == "teacher") {
-        res.render('msg');
-    }
-    else {
-        if (tagsS == "ALL") {
-            db.query('SELECT * from postssenior WHERE reports =? ORDER BY id DESC',[0], (er, resul) => {
-                if (er) console.log(er);
-                return res.render('doubtsenior', {
-                    resul, userName , userEmail
-                });
-            })
+    if (req.session.userId) {
+        if (role == "teacher") {
+            res.render('msg');
         }
         else {
-            db.query('SELECT * from postssenior WHERE tag = ? AND reports=? ORDER BY id DESC', [tagsS,0], (er, resul) => {
-                if (er) console.log(er);
-                return res.render('doubtsenior', {
-                    resul, userName , userEmail
-                });
-            })
+            if (tagsS == "ALL") {
+                db.query('SELECT * from postssenior WHERE reports =? ORDER BY id DESC', [0], (er, resul) => {
+                    if (er) console.log(er);
+                    return res.render('doubtsenior', {
+                        resul, userName, userEmail
+                    });
+                })
+            }
+            else {
+                db.query('SELECT * from postssenior WHERE tag = ? AND reports=? ORDER BY id DESC', [tagsS, 0], (er, resul) => {
+                    if (er) console.log(er);
+                    return res.render('doubtsenior', {
+                        resul, userName, userEmail
+                    });
+                })
+            }
         }
+    }
+    else {
+        res.redirect('/');
     }
 });
 router.get('/repliessenior', (req, res) => {
-    res.render('repliessenior');
+    if (req.session.userId) {
+        res.render('repliessenior');
+    }
+    else {
+        res.redirect("/");
+    }
 });
 router.get('/sortsenior', (req, res) => {
-    res.render('sortsenior', {
-        userName
-    });
+    if (req.session.userId) {
+        res.render('sortsenior', {
+            userName
+        });
+    }
+    else {
+        res.redirect("/");
+    }
 });
 
 
 
 router.get('/doubtteacher', (req, res) => {
-    if (tagsT == "ALL") {
-        db.query('SELECT * from poststeacher WHERE reports=? ORDER BY id DESC',[0], (er, resul) => {
-            if (er) console.log(er);
-            return res.render('doubtteacher', {
-                resul, userName , userEmail
-            });
-        })
+    if (req.session.userId) {
+        if (tagsT == "ALL") {
+            db.query('SELECT * from poststeacher WHERE reports=? ORDER BY id DESC', [0], (er, resul) => {
+                if (er) console.log(er);
+                return res.render('doubtteacher', {
+                    resul, userName, userEmail
+                });
+            })
+        }
+        else {
+            db.query('SELECT * from poststeacher WHERE tag = ? AND reports=? ORDER BY id DESC', [tagsT, 0], (er, resul) => {
+                if (er) console.log(er);
+                return res.render('doubtteacher', {
+                    resul, userName, userEmail
+                });
+            })
+        }
     }
     else {
-        db.query('SELECT * from poststeacher WHERE tag = ? AND reports=? ORDER BY id DESC', [tagsT,0], (er, resul) => {
-            if (er) console.log(er);
-            return res.render('doubtteacher', {
-                resul, userName , userEmail
-            });
-        })
+        res.redirect("/");
     }
 })
 router.get('/repliesteacher', (req, res) => {
-    res.render('repliesteacher');
+    if (req.session.userId) {
+        res.render('repliesteacher');
+    }
+    else {
+        res.redirect("/");
+    }
 });
 router.get('/sortteacher', (req, res) => {
-    res.render('sortteacher', {
-        userName
-    });
+    if (req.session.userId) {
+        res.render('sortteacher', {
+            userName
+        });
+    }
+    else {
+        res.redirect("/");
+    }
 });
 
 router.get('/msg', (req, res) => {
-    res.render('msg');
+    if (req.session.userId) {
+        res.render('msg');
+    }
+    else {
+        res.redirect("/");
+    }
 });
 module.exports = router;

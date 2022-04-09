@@ -11,21 +11,21 @@ const db = mysql.createConnection({
 exports.rr = (req, res) => {
     console.log(req.body);
     // const name="Tanu2";
-    const {did, pid,contentr} = req.body;
+    const { did, pid, contentr } = req.body;
     console.log(pid)
-        db.query('INSERT INTO commentpeer SET ?', { did:did,content:contentr,pid:pid, name: userName,email:userEmail}, (err, resul) => {
-            if (err) {
-                console.log(err);
-            }
-            else{
-                db.query('SELECT * from commentpeer where did=? and pid is NULL ORDER BY id DESC', [did],(er, result) => {
-                    if (er) console.log(er);
-                    db.query('SELECT * from commentpeer where pid and did=? ORDER BY id DESC', [did],(er, resul) => {
+    db.query('INSERT INTO commentpeer SET ?', { did: did, content: contentr, pid: pid, name: userName, email: userEmail }, (err, resul) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            db.query('SELECT * from commentpeer where did=? and pid is NULL ORDER BY id DESC', [did], (er, result) => {
+                if (er) console.log(er);
+                db.query('SELECT * from commentpeer where pid and did=? ORDER BY id DESC', [did], (er, resul) => {
                     return res.render('repliespeer', {
-                        result,resul
+                        result, resul
                     });
                 })
             });
-            }
-        });
+        }
+    });
 }
