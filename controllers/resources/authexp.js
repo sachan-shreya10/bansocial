@@ -14,7 +14,7 @@ exports.experiences = (req,res) => {
     db.query('SELECT * from exp WHERE ename =? and cname=? ORDER BY eid DESC',[expname,company], (er, resul) => {
         if (er) console.log(er);
         return res.render('viewexp', {
-            resul, expname,company
+            resul, expname,company,userName
         });
     })
 }
@@ -51,7 +51,7 @@ exports.viewexp = (req, res) => {
                     if (er)
                         console.log(er);
                     return res.render('viewexp', {
-                        resul,expname,company
+                        resul,expname,company,userName
                     });
                 });
             }

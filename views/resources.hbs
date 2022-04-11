@@ -72,51 +72,50 @@
 
 <body>
   <nav class="navbar  navbar-expand-lg navbar-light bg-light"
-    style="font-family: Georgia, 'Times New Roman', Times, serif;">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="navbar-brand" href="#">
-              <img src="/images/logo1.svg" alt="" width="30" height="24"><span style="color:rgb(187, 187, 7);font-size: 18pt;">
-                बन</span><span style="color:rgb(196, 8, 8);font-size: 16pt;">Social</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Home</a>
-          </li>
-        </ul>
-      </div>
-      <div class="mx-2">
-        <ul class="navbar-nav mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
-          </li>
-          <li class="nav-item">
-            <button type="button" class="btn btn-dark">Log Out</button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <!-- <div class="container-fluid">
-    <img src="C:\Users\Shreya\Desktop\project images\background-1.jpg" class="img-fluid">
-    <div class="fixed-top">
-      <h1>Header</h1>
-    </div>
-  
-    background-color: #000;
-    color: #fff;
-    opacity: .5;
+        style="font-family: Georgia, 'Times New Roman', Times, serif;">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="#">
+                            <img src="/images/logo.jpeg" alt="" width="30" height="24"><span
+                                style="color:rgb(187, 187, 7);font-size: 18pt;">बन</span><span style="color:rgb(196, 8, 8);font-size: 16pt;">Social</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="/aboutus">About Us</a>
+                  </li>
+              <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Explore</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li> -->
+                </ul>
+            </div>
+            <div class="mx-2">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                   <li class="nav-item">
+                        <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="btn btn-dark">Log Out</a>
+                    </li>
+                </ul>
 
-    background-color: #000;
-    color: #fff;
-    opacity: 0.4;
-  -->
+            </div>
+        </div>
+    </nav>
 
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -143,41 +142,6 @@
                     <div class="btn-group">
                       <a href="/notes"><button type="button" class="btn btn-sm btn-outline-secondary"
                           style="color:white; background-color:black">View</button></a>
-
-
-                      <!--     <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter1"
-                        style="color:white; background-color:black">Upload</button>  -->
-
-                      <!-- Button trigger modal -->
-                      <!--    <button type="button" class="btn btn-primary" data-toggle="modal"
-                        data-target="#exampleModalCenter">
-                        Launch demo modal
-                      </button> -->
-
-                      <!-- Modal -->
-
-
-                      <!--          <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h4 class="modal-title" id="exampleModalLongTitle">Upload your notes</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              Make sure that your filename is in the following format :: <br>
-                              <b>SubjectName_TopicName</b>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary">Upload</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div> -->
                     </div>
                     <small class="text-muted">Subject-wise</small>
                   </div>

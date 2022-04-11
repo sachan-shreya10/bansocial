@@ -30,7 +30,7 @@
 </head>
 
 <body style="background-image:url(https://cdn.pixabay.com/photo/2021/10/31/13/03/background-6757333_960_720.jpg);">
-    <nav class="navbar  navbar-expand-lg navbar-light bg-light"
+     <nav class="navbar  navbar-expand-lg navbar-light bg-light"
         style="font-family: Georgia, 'Times New Roman', Times, serif;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -42,24 +42,33 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="navbar-brand" href="#">
-                            <img src="/images/logo1.svg" alt="" width="30" height="24"><span
-                                style="color:rgb(187, 187, 7);font-size: 18pt;">
-                                बन</span><span style="color:rgb(196, 8, 8);font-size: 16pt;">Social</span>
+                            <img src="/images/logo.jpeg" alt="" width="30" height="24"><span
+                                style="color:rgb(187, 187, 7);font-size: 18pt;">बन</span><span style="color:rgb(196, 8, 8);font-size: 16pt;">Social</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" aria-current="page" href="/home">Home</a>
                     </li>
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="/aboutus">About Us</a>
+                  </li>
+              <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Explore</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li> -->
                 </ul>
             </div>
             <div class="mx-2">
                 <ul class="navbar-nav mb-2 mb-lg-0">
+                   <li class="nav-item">
+                        <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
+                    </li>
                     <li class="nav-item">
-                        <li class="nav-item">
-            <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
-          </li>
-                        <!-- <a class="nav-link" href="#">Log Out</a> -->
-                        <button type="button" class="btn btn-dark">Log Out</button>
+                        <a href="/logout" class="btn btn-dark">Log Out</a>
                     </li>
                 </ul>
 

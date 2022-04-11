@@ -14,7 +14,7 @@ exports.notes = (req,res) => {
     db.query('SELECT * from notes WHERE subname=? ORDER BY nid DESC',[subject], (er, resul) => {
         if (er) console.log(er);
         return res.render('viewnotes', {
-            resul, subject
+            resul, subject,userName
         });
     })
 }
@@ -51,7 +51,7 @@ exports.viewnotes = (req, res) => {
                     if (er)
                         console.log(er);
                     return res.render('viewnotes', {
-                        resul,subject
+                        resul,subject,userName
                     });
                 });
             }

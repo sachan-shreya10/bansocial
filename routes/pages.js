@@ -295,46 +295,46 @@ router.get('/msg', (req, res) => {
     }
 });
 
-router.get('/verify-email',(req,res)=>{
-    const token=req.query.token;
-    db.query('SELECT email FROM teacher WHERE emailToken=?',[token], (error, results) =>{
-        if(error){
+router.get('/verify-email', (req, res) => {
+    const token = req.query.token;
+    db.query('SELECT email FROM teacher WHERE emailToken=?', [token], (error, results) => {
+        if (error) {
             console.log(error);
             console.log("Email is not verified");
         }
-        else if(results.length>0){
-            const email=results[0].email;
+        else if (results.length > 0) {
+            const email = results[0].email;
             console.log(email);
             console.log(email);
-            db.query('UPDATE teacher SET emailToken=? , isVerified=? where email=?',[null,1,email],(err,ress)=>{
-               if(err){
-                   console.log(err);
-               }
-                return res.render('login',{
+            db.query('UPDATE teacher SET emailToken=? , isVerified=? where email=?', [null, 1, email], (err, ress) => {
+                if (err) {
+                    console.log(err);
+                }
+                return res.render('login', {
                     message: 'successfully registered'
                 });
-                
+
             }
             )
         }
-        else{
-            db.query('SELECT email FROM student WHERE emailToken=?', [token], (error, resultss) =>{
-                if(error){
+        else {
+            db.query('SELECT email FROM student WHERE emailToken=?', [token], (error, resultss) => {
+                if (error) {
                     console.log(error);
                     console.log("Email is not verified");
                 }
-                else{
-                    const email=resultss[0].email;
+                else {
+                    const email = resultss[0].email;
                     console.log(email);
-                    db.query('UPDATE student SET emailToken=? , isVerified=? where email=?',[null,1,email],(err,ress)=>{
-                       if(err){
-                           console.log(err);
-                       }
-                        return res.render('login',{
+                    db.query('UPDATE student SET emailToken=? , isVerified=? where email=?', [null, 1, email], (err, ress) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        return res.render('login', {
                             message: 'successfully registered'
                         });
-                        
-                    }) 
+
+                    })
                 }
             })
         }
@@ -344,59 +344,94 @@ router.get('/verify-email',(req,res)=>{
 /********************************RESOURCE PAGE****************************************** */
 
 router.get('/resources', (req, res) => {
-    res.render('resources', {
-        userName
-    });
+    if (req.session.userId) {
+        res.render('resources', {
+            userName
+        });
+    }
+    else {
+        res.redirect('/');
+    }
 });
 
 router.get('/notes', (req, res) => {
-    res.render('notes', {
-        userName
-    });
+    if (req.session.userId) {
+        res.render('notes', {
+            userName
+        });
+    }
+    else {
+        res.redirect("/");
+    }
 });
 
 router.get('/experiences', (req, res) => {
-    res.render('experiences', {
-        userName
-    });
+    if (req.session.userId) {
+        res.render('experiences', {
+            userName
+        });
+    }
+    else {
+        res.redirect("/");
+    }
 });
 
 router.get('/papers', (req, res) => {
-    res.render('papers', {
-        userName
-    });
+    if (req.session.userId) {
+        res.render('papers', {
+            userName
+        });
+    }
+    else {
+        res.redirect("/");
+    }
 });
 
 //*****************************************FOR NOTES****************************** */
-router.get('/viewnotes',(req,res)=>{
-    const { subject } = req.body;
-    db.query('SELECT * from notes WHERE subname =? ORDER BY nid DESC',[subject], (er, resul ) => {
-        if (er) console.log(er);
-        return res.render('viewnotes', {
-            resul,subject,userName
+router.get('/viewnotes', (req, res) => {
+    if (req.session.userId) {
+        const { subject } = req.body;
+        db.query('SELECT * from notes WHERE subname =? ORDER BY nid DESC', [subject], (er, resul) => {
+            if (er) console.log(er);
+            return res.render('viewnotes', {
+                resul, subject, userName
+            });
         });
-    });
+    }
+    else {
+        res.redirect("/");
+    }
 });
 //*****************************************FOR EXPERIENCES****************************** */
-router.get('/viewexp',(req,res)=>{
-    const { expname,company } = req.body;
-    db.query('SELECT * from exp WHERE ename =? and cname=? ORDER BY eid DESC',[expname,company], (er, resul ) => {
-        if (er) console.log(er);
-        return res.render('viewexp', {
-            resul,expname,company,userName
+router.get('/viewexp', (req, res) => {
+    if (req.session.userId) {
+        const { expname, company } = req.body;
+        db.query('SELECT * from exp WHERE ename =? and cname=? ORDER BY eid DESC', [expname, company], (er, resul) => {
+            if (er) console.log(er);
+            return res.render('viewexp', {
+                resul, expname, company, userName
+            });
         });
-    });
+    }
+    else {
+        res.redirect("/");
+    }
 });
 
 //*****************************************PAPERS****************************** */
-router.get('/viewpapers',(req,res)=>{
-    const { expname,company } = req.body;
-    db.query('SELECT * from papers WHERE bname =? and yname=? ORDER BY pid DESC',[branch,year], (er, resul ) => {
-        if (er) console.log(er);
-        return res.render('viewexp', {
-            resul,branch,year,userName
+router.get('/viewpapers', (req, res) => {
+    if (req.session.userId) {
+        const { expname, company } = req.body;
+        db.query('SELECT * from papers WHERE bname =? and yname=? ORDER BY pid DESC', [branch, year], (er, resul) => {
+            if (er) console.log(er);
+            return res.render('viewexp', {
+                resul, branch, year, userName
+            });
         });
-    });
-});                     
+    }
+    else {
+        res.redirect("/");
+    }
+});
 
 module.exports = router;

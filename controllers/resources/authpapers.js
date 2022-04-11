@@ -14,7 +14,7 @@ exports.papers = (req,res) => {
     db.query('SELECT * from papers WHERE bname =? and yname=? ORDER BY pid DESC',[branch,year], (er, resul) => {
         if (er) console.log(er);
         return res.render('viewpapers', {
-            resul, branch,year
+            resul, branch,year,userName
         });
     })
 }
@@ -51,7 +51,7 @@ exports.viewpapers = (req, res) => {
                     if (er)
                         console.log(er);
                     return res.render('viewpapers', {
-                        resul,branch,year
+                        resul,branch,year,userName
                     });
                 });
             }
