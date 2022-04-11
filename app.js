@@ -65,6 +65,6 @@ exphbs.registerHelper('ifEquals', function(v1,v2,options) {
 });
 app.use('/',require('./routes/pages'));
 app.use('/auth',require('./routes/auth'));
-app.listen(8000, ()=>{
+app.listen(3002, ()=>{
     console.log("started")
 });

@@ -25,7 +25,7 @@
                         style="width:640px;height:760px;border-top-left-radius:30px;border-bottom-left-radius:30px;">
                 </div>
                 <div class="col-md-7 px-5 pt-5">
-                    
+
                     <img src="/images/logosvg1.svg" alt="" width="50" height="60">
                     <span style="color:rgb(187, 187, 7);font-size: 32pt;">बन</span>
                     <span style="color:rgb(196, 8, 8);font-size: 32pt;">Social</span>
@@ -68,8 +68,8 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-7">
-                                <input type="password" placeholder="********" name="password"
-                                    class="form-control my-3 p-2" required />
+                                <input type="password" placeholder="********" name="password" id="password"
+                                    class="form-control my-3 p-2" onblur="pvalidation();" required />
                             </div>
                         </div>
                         <div class="form-row">
@@ -111,7 +111,7 @@
                                 <button type="submit" class="btn1 mt-3 mb-5">Sign up</button>
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>
@@ -125,7 +125,7 @@
         crossorigin="anonymous"></script>
     <script>
         function validation() {
-           
+
             const role = document.getElementById('flexRadioDefault1').checked;
             if (role) {
                 const form = document.getElementById('form');
@@ -137,8 +137,22 @@
                 else {
                     document.getElementById("email").value = "";
                     document.getElementById("email").style.borderColor = "red";
-                 }
+                }
             }
+
+        }
+        function pvalidation() {
+
+            const pw = document.getElementById('password').value;
+            if (pw.length < 8) {
+                alert("Password length must be atleast 8 characters");
+                document.getElementById("password").value = "";
+            }
+             if (pw.length > 15) {
+                alert("Password length must not exceed 15 characters")
+                document.getElementById("password").value = "";
+                }
+
         }
     </script>
 </body>
