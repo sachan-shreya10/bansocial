@@ -340,4 +340,63 @@ router.get('/verify-email',(req,res)=>{
         }
     })
 })
+
+/********************************RESOURCE PAGE****************************************** */
+
+router.get('/resources', (req, res) => {
+    res.render('resources', {
+        userName
+    });
+});
+
+router.get('/notes', (req, res) => {
+    res.render('notes', {
+        userName
+    });
+});
+
+router.get('/experiences', (req, res) => {
+    res.render('experiences', {
+        userName
+    });
+});
+
+router.get('/papers', (req, res) => {
+    res.render('papers', {
+        userName
+    });
+});
+
+//*****************************************FOR NOTES****************************** */
+router.get('/viewnotes',(req,res)=>{
+    const { subject } = req.body;
+    db.query('SELECT * from notes WHERE subname =? ORDER BY nid DESC',[subject], (er, resul ) => {
+        if (er) console.log(er);
+        return res.render('viewnotes', {
+            resul,subject,userName
+        });
+    });
+});
+//*****************************************FOR EXPERIENCES****************************** */
+router.get('/viewexp',(req,res)=>{
+    const { expname,company } = req.body;
+    db.query('SELECT * from exp WHERE ename =? and cname=? ORDER BY eid DESC',[expname,company], (er, resul ) => {
+        if (er) console.log(er);
+        return res.render('viewexp', {
+            resul,expname,company,userName
+        });
+    });
+});
+
+//*****************************************PAPERS****************************** */
+router.get('/viewpapers',(req,res)=>{
+    const { expname,company } = req.body;
+    db.query('SELECT * from papers WHERE bname =? and yname=? ORDER BY pid DESC',[branch,year], (er, resul ) => {
+        if (er) console.log(er);
+        return res.render('viewexp', {
+            resul,branch,year,userName
+        });
+    });
+});                     
+
 module.exports = router;

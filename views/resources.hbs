@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>resources</title>
+  <style>
+    .jumbotron {
+      margin-top: 8px;
+      background-image: url("https://cdn.pixabay.com/photo/2021/10/31/13/03/background-6757333_960_720.jpg");
+      background-size: cover;
+      color: aliceblue;
+      box-shadow: 0 0 5px 2px #282a2d;
+    }
+
+    h1 {
+      text-align: center;
+      color: black;
+      font-weight: 500;
+      font-size: 3.5em;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      border: 2px solid white;
+      border-radius: 25px;
+      background-color: white;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+      font-weight: bold
+    }
+
+    .cardcontainer {
+      padding-bottom: 10%;
+      padding-top: 5%;
+    }
+
+    .card-body {
+      color: black;
+      background-color: bisque;
+    }
+
+    .footer-top {
+      padding-top: 5%;
+      background-color: bisque;
+    }
+
+    #footer {
+      background-color: black;
+    }
+
+    .cont {
+      background-color: bisque;
+    }
+
+    .navi {
+      background-color: bisque;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar  navbar-expand-lg navbar-light bg-light"
+    style="font-family: Georgia, 'Times New Roman', Times, serif;">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="navbar-brand" href="#">
+              <img src="/images/logo1.svg" alt="" width="30" height="24"><span style="color:rgb(187, 187, 7);font-size: 18pt;">
+                बन</span><span style="color:rgb(196, 8, 8);font-size: 16pt;">Social</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Home</a>
+          </li>
+        </ul>
+      </div>
+      <div class="mx-2">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
+          </li>
+          <li class="nav-item">
+            <button type="button" class="btn btn-dark">Log Out</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- <div class="container-fluid">
+    <img src="C:\Users\Shreya\Desktop\project images\background-1.jpg" class="img-fluid">
+    <div class="fixed-top">
+      <h1>Header</h1>
+    </div>
+  
+    background-color: #000;
+    color: #fff;
+    opacity: .5;
+
+    background-color: #000;
+    color: #fff;
+    opacity: 0.4;
+  -->
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1>RESOURCES</h1>
+    </div>
+    <div class="container cardcontainer">
+      <div class="album py-5 bg-light ">
+        <div class="container ">
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col ">
+              <div class="card shadow-sm percard">
+                <img class="bd-placeholder-img card-img-top" width="100%" height="225"
+                  src="https://images.pexels.com/photos/159497/school-notebook-binders-notepad-159497.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                  alt="">
+
+                <div class="card-body">
+                  <h2>NOTES</h2>
+                  <p class="card-text">Get structured notes of various subjects in your curriculum by your seniors and
+                    fellows.
+                  </p>
+                  <br>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="/notes"><button type="button" class="btn btn-sm btn-outline-secondary"
+                          style="color:white; background-color:black">View</button></a>
+
+
+                      <!--     <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter1"
+                        style="color:white; background-color:black">Upload</button>  -->
+
+                      <!-- Button trigger modal -->
+                      <!--    <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#exampleModalCenter">
+                        Launch demo modal
+                      </button> -->
+
+                      <!-- Modal -->
+
+
+                      <!--          <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="exampleModalLongTitle">Upload your notes</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              Make sure that your filename is in the following format :: <br>
+                              <b>SubjectName_TopicName</b>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Upload</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div> -->
+                    </div>
+                    <small class="text-muted">Subject-wise</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col ">
+              <div class="card shadow-sm percard">
+                <img class="bd-placeholder-img card-img-top" width="100%" height="225"
+                  src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+                  alt="">
+
+                <div class="card-body">
+                  <h2>EXPERICENCES</h2>
+                  <p class="card-text">Get all the resources and tips for your placement or internship season by your
+                    experienced seniors and fellows.</p> <br>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="/experiences"><button type="button" class="btn btn-sm btn-outline-secondary"
+                          style="color:white; background-color:black">View</button></a>
+                      <!-- <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter2"
+                        style="color:white; background-color:black">Upload</button> -->
+
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Upload your experiences</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              Make sure that your filename is in the following format :: <br>
+                              <b>CompanyName_Internship/Fulltime_year</b>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Upload</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <small class="text-muted">Company-wise</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col ">
+              <div class="card shadow-sm percard">
+                <img class="bd-placeholder-img card-img-top" width="100%" height="225"
+                  src="https://cdn.pixabay.com/photo/2021/03/16/11/47/question-6099556_960_720.png" alt="">
+
+                <div class="card-body">
+                  <h2>QUESTION PAPERS</h2>
+                  <p class="card-text">Get previous years question papers of various subjects in your curriculum to
+                    practice before examination.
+                  </p><br>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="/papers"><button type="button" class="btn btn-sm btn-outline-secondary"
+                          style="color:white; background-color:black">View</button></a>
+                      <!-- <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter3"
+                        style="color:white; background-color:black">Upload</button> -->
+
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Upload question/sample papers</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              Make sure that your filename is in the following format :: <br>
+                              SubjectName_Sem/Periodical_year
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Upload</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <small class="text-muted">Subject-wise</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <footer>
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-lg-3 footer-about wow fadeInUp animated"
+            style="visibility: visible; animation-name: fadeInUp;">
+            <img class="logo-footer" src="logo.svg" alt="logo-footer" data-at2x="assets/img/logo.png" width="74"
+              height="85">
+            <span style="color:rgb(187, 187, 7);font-size: 18pt;">बन</span><span
+              style="color:rgb(196, 8, 8);font-size: 16pt;">Social</span>
+            <p>
+              We are a young platform motivating college students of BV to become more social and
+              interact with their peers, seniors and teachers throught us.
+            </p>
+            <p><a href="#">Our Team</a></p>
+          </div>
+          <div class="col-md-4 col-lg-4 offset-lg-1 footer-contact wow fadeInDown animated"
+            style="visibility: visible; animation-name: fadeInDown;">
+            <h3>Contact</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Banasthali Vidyapith, Jaipur, India</p>
+            <p><i class="fas fa-phone"></i> Phone: (0039) 333 12 68 347</p>
+            <p><i class="fas fa-envelope"></i> Email: <a href="bansocial@gmail.com">hello@domain.com</a></p>
+            <p><i class="fab fa-skype"></i> Skype: you_online</p>
+          </div>
+          <div class="col-md-4 col-lg-4 footer-links wow fadeInUp animated"
+            style="visibility: visible; animation-name: fadeInUp;">
+            <div class="row">
+              <div class="col">
+                <h3>Links</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <p><a class="scroll-link" href="#top-content">Top</a></p>
+                <p><a class="scroll-link" href="#section-1">Home</a></p>
+                <!--  <p><a class="scroll-link" href="#section-2">Section 2</a></p>
+                <p><a class="scroll-link" href="#section-3">Section 3</a></p>-->
+              </div>
+              <!-- <div class="col-md-6">
+                <p><a class="scroll-link" href="#section-4">Section 4</a></p>
+                <p><a href="#">Affiliates</a></p>
+                <p><a href="#">Terms</a></p>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="zrow">
+          <div class="text-center text-white p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2022 Copyright:
+            <a class="text-white" href="#">BanSocial.com</a>
+          </div>
+          <div class="col-md-6 footer-social">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="E:/resources/public/res.css">
+    <style>
+        h1 {
+            text-align: center;
+            font-weight: 500;
+            font-size: 4em;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            color: black;
+            border: 2px solid rgb(247, 244, 244);
+            border-radius: 25px;
+            background-color: white;
+        }
+
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body style="background-image:url(https://cdn.pixabay.com/photo/2021/10/31/13/03/background-6757333_960_720.jpg);">
+    <nav class="navbar  navbar-expand-lg navbar-light bg-light"
+        style="font-family: Georgia, 'Times New Roman', Times, serif;">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="#">
+                            <img src="/images/logo1.svg" alt="" width="30" height="24"><span
+                                style="color:rgb(187, 187, 7);font-size: 18pt;">
+                                बन</span><span style="color:rgb(196, 8, 8);font-size: 16pt;">Social</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mx-2">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <li class="nav-item">
+            <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
+          </li>
+                        <!-- <a class="nav-link" href="#">Log Out</a> -->
+                        <button type="button" class="btn btn-dark">Log Out</button>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div class="center">
+        <br>
+        <h1>NOTES</h1>
+        <br>
+    </div>
+    <div class="dropdown py-4">
+        <form action="/auth/notes" method="post">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;">
+            COMPUTER SCIENCE (CS)
+        </button>
+       
+        <ul class="dropdown-menu ds text-center" aria-labelledby="dropdownMenuButton1" style="width: 100%;">
+            <li><button class="btn bg-transparent" type="submit" name="subject" value="PROB & STATS">PROB & STATS</button></li>
+            <li><button class="btn bg-transparent" type="submit" name="subject" value="THEORY OF COMPUTATION">THEORY OF COMPUTATION</button></li>
+            <li><button class="btn bg-transparent" type="submit" name="subject" value="AIML">AIML</button></li>
+            <li><button class="btn bg-transparent" type="submit" name="subject" value="M & M">M&M</button></li>
+        </ul>
+        </form>
+    </div>
+    <div class="dropdown py-4">
+        <form action="/auth/notes" method="post">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;">
+            INFORMATION TECHNOLOGY (IT)
+        </button>
+        <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1" style="width: 100%;">
+            <li><button class="btn bg-transparent" type="submit" name="subject" value="PROB & STATS">PROB & STATS</button></li>
+            <li><button class="btn bg-transparent" type="submit" name="subject" value="THEORY OF COMPUTATION">THEORY OF COMPUTATION</button></li>
+            <li><button class="btn bg-transparent" type="submit" name="subject" value="AIML">AIML</button></li>
+            <li><button class="btn bg-transparent" type="submit" name="subject" value="IWT">IWT</button></li>
+        </ul>
+        </form>
+    </div>
+    <div class="dropdown py-4">
+        <form action="/auth/notes" method="post">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;">
+            ELECTRONICS AND COMMUNICATION (EC)
+        </button>
+        <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1" style="width: 100%;">
+            <li><button class="btn bg-transparent" type="submit" name="subject" value="DIGITAL COMMUNICATION">DIGITAL COMMUNICATION</button></li>
+            <li><button class="btn bg-transparent" type="submit" name="subject" value="MICROWAVE ENGINEERING">MICROWAVE ENGINEERING</button></li>
+        </ul>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

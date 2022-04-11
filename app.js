@@ -27,7 +27,9 @@ app.use(express.static(publicDirectory2));
 const publicDirectory3 = path.join(__dirname, './doubt_uploads');
 app.use(express.static(publicDirectory2));
 const publicDirectory4 = path.join(__dirname, './journey_uploads');
-app.use(express.static(publicDirectory4));
+
+const publicDirectory5 = path.join(__dirname, './resources_uploads');
+app.use(express.static(publicDirectory5));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 db.connect( (err)=>{
@@ -63,6 +65,6 @@ exphbs.registerHelper('ifEquals', function(v1,v2,options) {
 });
 app.use('/',require('./routes/pages'));
 app.use('/auth',require('./routes/auth'));
-app.listen(3002, ()=>{
+app.listen(8000, ()=>{
     console.log("started")
 });

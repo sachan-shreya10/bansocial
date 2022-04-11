@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+    </script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+    </script>
+    <style>
+        h1 {
+            text-align: center;
+            font-weight: 500;
+            font-size: 3em;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            border: 2px solid white;
+            border-radius: 25px;
+            background-color: white;
+            color: black;
+        }
+
+        h3 {
+            color: aliceblue;
+        }
+
+        hr {
+            height: 4px;
+            background-color: rgb(252, 157, 236);
+            border: none;
+        }
+
+        .btn-custom {
+            position: static width: fit-content;
+            margin-top: 15px;
+
+        }
+    </style>
+</head>
+
+
+<body
+    style="background-image:url(https://cdn.pixabay.com/photo/2021/10/31/13/03/background-6757333_960_720.jpg); background-repeat: no-repeat;; background-size: cover;">
+    <nav class="navbar  navbar-expand-lg navbar-light bg-light"
+        style="font-family: Georgia, 'Times New Roman', Times, serif;">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="#">
+                            <img src="/images/logo1.svg" alt="" width="30" height="24"><span
+                                style="color:rgb(187, 187, 7);font-size: 18pt;"> बन</span><span
+                                style="color:rgb(196, 8, 8);font-size: 16pt;">Social</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mx-2">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item">
+            <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
+          </li>
+                    <li class="nav-item">
+                        <!-- <a class="nav-link" href="#">Log Out</a> -->
+                        <button type="button" class="btn btn-dark">Log Out</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-3 content">
+
+        <h1>{{branch}} QUESTION PAPERS OF YEAR {{year}}</h1>
+        <br>
+        <form action="/auth/viewpapers" method="post" enctype="multipart/form-data">
+            <div class="card">
+                <div class="card-body">
+                    {{!-- <h5 class="card-title">ADD ANNOUNCEMENT</h5> --}}
+                    {{!-- <form action="/auth/register" method="post"> --}}
+                        <h4 class="card-title">Want to share {{branch}} question papers of {{year}}? </h4>
+                        <p>Make sure that the document to be uploaded has the name (in capital letter) as :
+                            <b>subjectname.pdf</b> <br>(eg : Economics.pdf)
+                        </p>
+                        {{!<div class="form-group">
+                            <textarea class="form-control inputt" name="name" id="addTask" rows="1"></textarea>
+                        </div>}}
+                        {{!-- <h6 class="card-title">DESCRIPTION</h6>
+                        <div class="form-group">
+                            <textarea class="form-control inputt" name="textt" id="addTask" rows="2"></textarea>
+                        </div> --}}
+                        <hr>
+                        <div class="form-group">
+                            <input type="file" name="doc" id="adddoc">
+                        </div>
+                        <input type="hidden" name="branch" value="{{branch}}"></input>
+                        <input type="hidden" name="year" value="{{year}}"></input>
+                        <button type="submit" class="btn btn-primary my-2" id="addBtn">Upload</button>
+                </div>
+            </div>
+        </form>
+        <div id="tasks" class="announ row container-fluid">
+            {{#each resul}}
+            <div class="noteCard my-2 mx-2 card" style="width: 100%;">
+                <div class="card-body">
+                    <h7>{{this.fname}}</h7>
+                    <a href="/{{this.link}}"><button type="button"
+                            class="btn btn-success btn-sm float-right">Download</button></a>
+                </div>
+            </div>
+            {{else}}
+            <h3>No Resources Yet!</h3>
+            {{/each}}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

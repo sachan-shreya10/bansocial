@@ -37,6 +37,10 @@ const authController18 = require('../controllers/doubt/authsteacher');
 const authController19 = require('../controllers/doubt/authrrteacher');
 const authController23 = require('../controllers/doubt/authdtr');
 
+/************************************RESOURCE PAGE CONTROLLERS******************************************************* */
+const authController26 = require('../controllers/resources/authnotes');
+const authController27 = require('../controllers/resources/authexp');
+const authController28 = require('../controllers/resources/authpapers');
 
 
 /************************************LOGIN AND SIGNUP******************************************************* */
@@ -76,6 +80,15 @@ router.post('/commrteacher',authController17.commrteacher);
 router.post('/sortteacher',authController18.sorttteacher);
 router.post('/rrteacher',authController19.rrteacher);
 router.post('/dtr',authController23.dtr);
+
+/******************************************RESOURCES PAGE************************************ */
+
+router.post('/notes',authController26.notes);
+router.post('/viewnotes',authController26.viewnotes);
+router.post('/experiences',authController27.experiences);
+router.post('/viewexp',authController27.viewexp);
+router.post('/papers',authController28.papers);
+router.post('/viewpapers',authController28.viewpapers);
 
 
 module.exports = router;
