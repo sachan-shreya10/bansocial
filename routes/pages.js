@@ -391,7 +391,7 @@ router.get('/papers', (req, res) => {
 router.get('/viewnotes', (req, res) => {
     if (req.session.userId) {
         const { subject } = req.body;
-        db.query('SELECT * from notes WHERE subname =? ORDER BY nid DESC', [subject], (er, resul) => {
+        db.query('SELECT * from notes WHERE subname =? AND reports=? ORDER BY nid DESC', [subject,0], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewnotes', {
                 resul, subject, userName
@@ -406,7 +406,7 @@ router.get('/viewnotes', (req, res) => {
 router.get('/viewexp', (req, res) => {
     if (req.session.userId) {
         const { expname, company } = req.body;
-        db.query('SELECT * from exp WHERE ename =? and cname=? ORDER BY eid DESC', [expname, company], (er, resul) => {
+        db.query('SELECT * from exp WHERE ename =? and cname=? AND reports=? ORDER BY eid DESC', [expname, company,0], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewexp', {
                 resul, expname, company, userName
@@ -422,7 +422,7 @@ router.get('/viewexp', (req, res) => {
 router.get('/viewpapers', (req, res) => {
     if (req.session.userId) {
         const { expname, company } = req.body;
-        db.query('SELECT * from papers WHERE bname =? and yname=? ORDER BY pid DESC', [branch, year], (er, resul) => {
+        db.query('SELECT * from papers WHERE bname =? and yname=? AND reports=? ORDER BY pid DESC', [branch, year,0], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewexp', {
                 resul, branch, year, userName
