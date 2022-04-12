@@ -22,7 +22,7 @@ exports.login = (req, res) => {
                     console.log(err);
                 }
                 console.log(resul);
-                if (result) {
+                if (resul) {
                     userName = result[0].name;
                     userEmail = result[0].email;
                     role = "teacher";
