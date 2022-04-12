@@ -434,4 +434,27 @@ router.get('/viewpapers', (req, res) => {
     }
 });
 
+/*************************************HANGOUT PAGE********************************** */
+
+router.get('/hangout', (req, res) => {
+    if (req.session.userId) {
+        db.query('SELECT * from hangout WHERE pid is NULL ORDER BY cid DESC', (er, comm) => {
+            db.query('SELECT * from hangout WHERE pid ORDER BY cid DESC', (er, replyy) => {
+                if (er) console.log(er);
+                // console.log(result)
+                return res.render('hangout', {
+                    comm, replyy,userName
+                });
+
+            });
+        });
+    }
+    else {
+        res.redirect("/");
+    }
+});
+
+
+
+
 module.exports = router;

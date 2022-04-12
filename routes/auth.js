@@ -90,5 +90,15 @@ router.post('/viewexp',authController27.viewexp);
 router.post('/papers',authController28.papers);
 router.post('/viewpapers',authController28.viewpapers);
 
+/******************************************HANGOUT PAGE************************************ */
+
+const authController101 = require('../controllers/hangout/com');
+const authController102 = require('../controllers/hangout/reply');
+const authController103 = require('../controllers/hangout/authlikes');
+// const router = express.Router();
+router.post('/hangout',authController101.hangout);
+router.post('/reply',authController102.reply);
+router.post('/likes',authController103.likes);
+
 
 module.exports = router;

@@ -27,9 +27,11 @@ app.use(express.static(publicDirectory2));
 const publicDirectory3 = path.join(__dirname, './doubt_uploads');
 app.use(express.static(publicDirectory2));
 const publicDirectory4 = path.join(__dirname, './journey_uploads');
-
+app.use(express.static(publicDirectory4));
 const publicDirectory5 = path.join(__dirname, './resources_uploads');
 app.use(express.static(publicDirectory5));
+const publicDirectory6 = path.join(__dirname, './hangout_uploads');
+app.use(express.static(publicDirectory6));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 db.connect( (err)=>{
