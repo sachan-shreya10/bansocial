@@ -26,7 +26,7 @@
             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
             border: 2px solid white;
             border-radius: 25px;
-            background-color: white;
+            background-color: rgba(238, 249, 250, 0.8);
             color: black;
         }
 
@@ -45,12 +45,16 @@
             margin-top: 15px;
 
         }
+        .card{
+            background-color: rgba(238, 249, 250, 0.8);
+            color: black;
+        }
     </style>
 </head>
 
 
 <body
-    style="background-image:url(https://cdn.pixabay.com/photo/2021/10/31/13/03/background-6757333_960_720.jpg); background-repeat: no-repeat;; background-size: cover;">
+    style="background-image:url(https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?cs=srgb&dl=pexels-pixabay-531880.jpg&fm=jpg); background-repeat: no-repeat;; background-size: cover;">
       <nav class="navbar  navbar-expand-lg navbar-light bg-light"
         style="font-family: Georgia, 'Times New Roman', Times, serif;">
         <div class="container-fluid">
@@ -131,6 +135,26 @@
             <div class="noteCard my-2 mx-2 card" style="width: 100%;">
                 <div class="card-body">
                     <h7>{{this.fname}}</h7>
+                    <form action="/auth/exp_reports" method="post">
+                        <input type="hidden" name="id" value="{{this.eid}}">
+                        <input type="hidden" name="expname" value="{{../expname}}">
+                        <input type="hidden" name="company" value="{{../company}}">
+                        <div class="dropdown" style="display:inline;float:right">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                id="dropdownMenuButton{{this.eid}}" data-bs-toggle="dropdown" aria-expanded="false">
+                            </button>
+                            <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton{{this.eid}}"
+                                name="option">
+                                {{#ifEquals this.email ../userEmail}}
+                                <li><button class="btn bg-transparent" type="submit" name="deletebtn"
+                                        value="{{this.eid}}">Delete</button></li>
+                                {{else}}
+                                <li><button class="btn bg-transparent" type="submit" name="reportbtn"
+                                        value="{{this.eid}}">Report</button></li>
+                                {{/ifEquals}}
+                            </ul>
+                        </div>
+                    </form>
                     <a href="/{{this.link}}"><button type="button"
                             class="btn btn-success btn-sm float-right">Download</button></a>
                 </div>

@@ -409,7 +409,7 @@ router.get('/viewexp', (req, res) => {
         db.query('SELECT * from exp WHERE ename =? and cname=? AND reports=? ORDER BY eid DESC', [expname, company,0], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewexp', {
-                resul, expname, company, userName
+                resul, expname, company, userName,userEmail
             });
         });
     }
@@ -425,7 +425,7 @@ router.get('/viewpapers', (req, res) => {
         db.query('SELECT * from papers WHERE bname =? and yname=? AND reports=? ORDER BY pid DESC', [branch, year,0], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewexp', {
-                resul, branch, year, userName
+                resul, branch, year, userName,userEmail
             });
         });
     }

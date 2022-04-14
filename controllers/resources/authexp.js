@@ -14,7 +14,7 @@ exports.experiences = (req,res) => {
     db.query('SELECT * from exp WHERE ename =? and cname=? ORDER BY eid DESC',[expname,company], (er, resul) => {
         if (er) console.log(er);
         return res.render('viewexp', {
-            resul, expname,company,userName
+            resul, expname,company,userName,userEmail
         });
     })
 }
@@ -42,7 +42,7 @@ exports.viewexp = (req, res) => {
     console.log(imn);
     const { name, } = req.files.doc;
     if (name != "") {
-        db.query('INSERT INTO exp SET ?', { ename: expname, cname: company, fname: name, link: imn }, (err, result) => {
+        db.query('INSERT INTO exp SET ?', { ename: expname, cname: company, fname: name, link: imn, email:userEmail }, (err, result) => {
             if (err) {
                 console.log(err);
             }
@@ -51,10 +51,46 @@ exports.viewexp = (req, res) => {
                     if (er)
                         console.log(er);
                     return res.render('viewexp', {
-                        resul,expname,company,userName
+                        resul,expname,company,userName,userEmail
                     });
                 });
             }
         });
     }
 }
+
+
+exports.exp_reports = (req, res) => {
+    const {id,reportbtn,deletebtn,expname,company} = req.body;
+    if (reportbtn) {
+        db.query('UPDATE exp SET reports = reports + 1 WHERE eid=?',[id], (err, resul) => {
+            if (err) {
+                console.log(err);
+            }
+            else{
+                db.query('SELECT * from exp WHERE ename =? and cname=? AND reports=? ORDER BY eid DESC', [expname, company,0], (er, resul) => {
+                    if (er) console.log(er);
+                    return res.render('viewexp', {
+                        resul, expname, company, userName,userEmail
+                    });
+                });
+        }
+        })
+    }
+    else if(deletebtn){
+        db.query('DELETE FROM exp WHERE eid=?',[id], (err, resul) => {
+            if (err) {
+                console.log(err);
+            }
+            else{
+                db.query('SELECT * from exp WHERE ename =? and cname=? AND reports=? ORDER BY eid DESC', [expname, company,0], (er, resul) => {
+                    if (er) console.log(er);
+                    return res.render('viewexp', {
+                        resul, expname, company, userName,userEmail
+                    });
+                });
+            }
+        })
+    }
+}
+

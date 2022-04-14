@@ -14,7 +14,7 @@ exports.papers = (req,res) => {
     db.query('SELECT * from papers WHERE bname =? and yname=? ORDER BY pid DESC',[branch,year], (er, resul) => {
         if (er) console.log(er);
         return res.render('viewpapers', {
-            resul, branch,year,userName
+            resul, branch,year,userName,userEmail
         });
     })
 }
@@ -42,7 +42,7 @@ exports.viewpapers = (req, res) => {
     console.log(imn);
     const { name, } = req.files.doc;
     if (name != "") {
-        db.query('INSERT INTO papers SET ?', { bname: branch, yname: year, fname: name, link: imn }, (err, result) => {
+        db.query('INSERT INTO papers SET ?', { bname: branch, yname: year, fname: name, link: imn, email:userEmail}, (err, result) => {
             if (err) {
                 console.log(err);
             }
@@ -51,10 +51,45 @@ exports.viewpapers = (req, res) => {
                     if (er)
                         console.log(er);
                     return res.render('viewpapers', {
-                        resul,branch,year,userName
+                        resul,branch,year,userName,userEmail
                     });
                 });
             }
         });
     }
 }
+
+exports.papers_reports = (req, res) => {
+    const {id,reportbtn,deletebtn,branch,year} = req.body;
+    if (reportbtn) {
+        db.query('UPDATE papers SET reports = reports + 1 WHERE pid=?',[id], (err, resul) => {
+            if (err) {
+                console.log(err);
+            }
+            else{
+                db.query('SELECT * from papers WHERE bname =? and yname=? AND reports=? ORDER BY pid DESC', [branch, year,0], (er, resul) => {
+                    if (er) console.log(er);
+                    return res.render('viewpapers', {
+                        resul, branch, year, userName,userEmail
+                    });
+                });
+        }
+        })
+    }
+    else if(deletebtn){
+        db.query('DELETE FROM papers WHERE pid=?',[id], (err, resul) => {
+            if (err) {
+                console.log(err);
+            }
+            else{
+                db.query('SELECT * from papers WHERE bname =? and yname=? AND reports=? ORDER BY pid DESC', [branch, year,0], (er, resul) => {
+                    if (er) console.log(er);
+                    return res.render('viewpapers', {
+                        resul, branch, year, userName,userEmail
+                    });
+                });
+            }
+        })
+    }
+}
+
