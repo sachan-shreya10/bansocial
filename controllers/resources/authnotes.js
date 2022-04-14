@@ -67,9 +67,15 @@ exports.notes_reports = (req, res) => {
             if (err) {
                 console.log(err);
             }
-            res.redirect('/viewnotes',{
-                subject,userName,userEmail
-            });
+            else{
+                db.query('SELECT * from notes WHERE subname = ? AND reports=? ORDER BY nid DESC',[subject,0], (er, resul) => {
+                    if (er)
+                        console.log(er);
+                    return res.render('viewnotes', {
+                        resul,subject,userName,userEmail
+                    });
+                });
+        }
         })
     }
     else if(deletebtn){

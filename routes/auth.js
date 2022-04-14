@@ -88,8 +88,10 @@ router.post('/viewnotes',authController26.viewnotes);
 router.post('/notes_reports',authController26.notes_reports);
 router.post('/experiences',authController27.experiences);
 router.post('/viewexp',authController27.viewexp);
+router.post('/exp_reports',authController27.exp_reports);
 router.post('/papers',authController28.papers);
 router.post('/viewpapers',authController28.viewpapers);
+router.post('/papers_reports',authController28.papers_reports);
 
 /******************************************HANGOUT PAGE************************************ */
 

@@ -26,7 +26,8 @@
             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
             border: 2px solid white;
             border-radius: 25px;
-            background-color: white;
+         
+            background-color: rgba(238, 249, 250, 0.8);
             color: black;
         }
 
@@ -45,13 +46,17 @@
             margin-top: 15px;
 
         }
+        .card{
+            background-color: rgba(238, 249, 250, 0.8);
+            color: black;
+        }
     </style>
 </head>
 
 
 <body
-    style="background-image:url(https://cdn.pixabay.com/photo/2021/10/31/13/03/background-6757333_960_720.jpg); background-repeat: no-repeat;; background-size: cover;">
-      <nav class="navbar  navbar-expand-lg navbar-light bg-light"
+    style="background-image:url(https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?cs=srgb&dl=pexels-pixabay-531880.jpg&fm=jpg); background-repeat: no-repeat;; background-size: cover;">
+    <nav class="navbar  navbar-expand-lg navbar-light bg-light"
         style="font-family: Georgia, 'Times New Roman', Times, serif;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -64,16 +69,17 @@
                     <li class="nav-item">
                         <a class="navbar-brand" href="#">
                             <img src="/images/logo.jpeg" alt="" width="30" height="24"><span
-                                style="color:rgb(187, 187, 7);font-size: 18pt;">बन</span><span style="color:rgb(196, 8, 8);font-size: 16pt;">Social</span>
+                                style="color:rgb(187, 187, 7);font-size: 18pt;">बन</span><span
+                                style="color:rgb(196, 8, 8);font-size: 16pt;">Social</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" aria-current="page" href="/aboutus">About Us</a>
-                  </li>
-              <!-- <li class="nav-item dropdown">
+                        <a class="nav-link" aria-current="page" href="/aboutus">About Us</a>
+                    </li>
+                    <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Explore</a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#">Action</a></li>
@@ -85,7 +91,7 @@
             </div>
             <div class="mx-2">
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                   <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
                     </li>
                     <li class="nav-item">
@@ -131,6 +137,26 @@
             <div class="noteCard my-2 mx-2 card" style="width: 100%;">
                 <div class="card-body">
                     <h7>{{this.fname}}</h7>
+                    <form action="/auth/papers_reports" method="post">
+                        <input type="hidden" name="id" value="{{this.pid}}">
+                        <input type="hidden" name="branch" value="{{../branch}}">
+                        <input type="hidden" name="year" value="{{../year}}">
+                        <div class="dropdown" style="display:inline;float:right">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                id="dropdownMenuButton{{this.pid}}" data-bs-toggle="dropdown" aria-expanded="false">
+                            </button>
+                            <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton{{this.pid}}"
+                                name="option">
+                                {{#ifEquals this.email ../userEmail}}
+                                <li><button class="btn bg-transparent" type="submit" name="deletebtn"
+                                        value="{{this.pid}}">Delete</button></li>
+                                {{else}}
+                                <li><button class="btn bg-transparent" type="submit" name="reportbtn"
+                                        value="{{this.pid}}">Report</button></li>
+                                {{/ifEquals}}
+                            </ul>
+                        </div>
+                    </form>
                     <a href="/{{this.link}}"><button type="button"
                             class="btn btn-success btn-sm float-right">Download</button></a>
                 </div>
