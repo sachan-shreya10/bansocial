@@ -394,7 +394,7 @@ router.get('/viewnotes', (req, res) => {
         db.query('SELECT * from notes WHERE subname =? AND reports=? ORDER BY nid DESC', [subject,0], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewnotes', {
-                resul, subject, userName
+                resul, subject, userName,userEmail
             });
         });
     }

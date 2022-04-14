@@ -85,6 +85,7 @@ router.post('/dtr',authController23.dtr);
 
 router.post('/notes',authController26.notes);
 router.post('/viewnotes',authController26.viewnotes);
+router.post('/notes_reports',authController26.notes_reports);
 router.post('/experiences',authController27.experiences);
 router.post('/viewexp',authController27.viewexp);
 router.post('/papers',authController28.papers);
