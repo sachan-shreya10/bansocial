@@ -438,12 +438,12 @@ router.get('/viewpapers', (req, res) => {
 
 router.get('/hangout', (req, res) => {
     if (req.session.userId) {
-        db.query('SELECT * from hangout WHERE pid is NULL ORDER BY cid DESC', (er, comm) => {
+        db.query('SELECT * from hangout WHERE pid is NULL AND reports = 0 ORDER BY cid DESC', (er, comm) => {
             db.query('SELECT * from hangout WHERE pid ORDER BY cid DESC', (er, replyy) => {
                 if (er) console.log(er);
                 // console.log(result)
                 return res.render('hangout', {
-                    comm, replyy,userName
+                    comm, replyy,userName,userEmail
                 });
 
             });

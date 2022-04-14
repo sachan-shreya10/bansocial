@@ -30,21 +30,23 @@ exports.hangout = (req, res) => {
     const { des } = req.body;
     // const { name }="random user";
     const name = userName;
+    const email = userEmail;
 
-    db.query('INSERT into hangout SET ?', { des: des, username: name,img:imn}, (error, results) => {
+    db.query('INSERT into hangout SET ?', { des: des, username: name,img:imn,email:email}, (error, results) => {
         if (error) {
             console.log(error);
         } else {
-            db.query('SELECT * FROM hangout WHERE pid is NULL ORDER BY cid DESC', (error, comm) => {
-                if (error) {
-                    console.log(error);
-                }
-                console.log(results);
-                return res.render('hangout', {
-                   comm,userName
-                })
+            // db.query('SELECT * FROM hangout WHERE pid is NULL AND reports = 0 ORDER BY cid DESC', (error, comm) => {
+            //     if (error) {
+            //         console.log(error);
+            //     }
+            //     console.log(results);
+            //     return res.render('hangout', {
+            //        comm,userName,userEmail
+            //     })
 
-            });
+            // });
+            res.redirect('/hangout');
         }
     })
 

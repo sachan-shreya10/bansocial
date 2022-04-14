@@ -92,8 +92,9 @@
                         {{!-- <h5 class="card-title">Post {{this.cid}}</h5> --}}
                         {{!-- <div style="float: left;"> --}}
                             <h6 style="color: black;">{{this.username}}</h6>
-                             <h10 style="color: gray;display:inline; ">{{this.cdate}}</h10>    
-                        {{!-- </div> --}}
+                            <h10 style="color: gray;display:inline; ">{{this.cdate}}</h10>
+                            {{!--
+                        </div> --}}
                         <hr>
                         <p class="card-text my-2 mx-2" style="width: 50rem; padding:8%;">{{this.des}}</p>
                         {{#if this.img}}
@@ -122,6 +123,29 @@
 
                     <button class="btn btn-primary my-2" id="addBtnr" onclick="disRep({{this.cid}})">View
                         replies</button>
+                    <div>
+                        {{!-- <h6 style="color: gray;display:inline">{{this.date}}</h6> --}}
+                        <form action="/auth/repo" method="post">
+                            <input type="hidden" name="id" value="{{this.cid}}">
+                            <div class="dropdown" style="display: inline;float:right">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                    id="dropdownMenuButton{{this.cid}}" data-bs-toggle="dropdown" aria-expanded="false">
+                                </button>
+                                <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton{{this.cid}}"
+                                    name="option">
+                                    {{!-- <h2>Aaaja</h2> --}}
+                                    {{#ifEquals this.email ../userEmail}}
+                                    {{!-- <h2>Katai bekaar</h2> --}}
+                                    <li><button class="btn bg-transparent" type="submit" name="deletebtn"
+                                            value="{{this.cid}}">Delete</button></li>
+                                    {{else}}
+                                    <li><button class="btn bg-transparent" type="submit" name="reportbtn"
+                                            value="{{this.cid}}">Report</button></li>
+                                    {{/ifEquals}}
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
 
 
 
@@ -154,11 +178,7 @@
 
                     {{/each}}
 
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-                        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-                        crossorigin="anonymous">
-
-                        </script>
+                    
                     <script>
                         function rep(idcomm) {
                             //document.getElementById("repp").style.display = "block";
@@ -173,8 +193,6 @@
                         //    var element = document.getElementById("like");
                         //    element.classList.toggle("liked");
                         //}
-
-
                         function disRep(id) {
 
                             str = 'reply' + id
