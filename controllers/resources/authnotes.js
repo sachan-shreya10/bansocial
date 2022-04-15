@@ -10,13 +10,15 @@ const db = mysql.createConnection({
 
 exports.notes = (req,res) => {
     console.log(req.body);
-    const { subject } = req.body;
-    db.query('SELECT * from notes WHERE subname=? AND reports=? ORDER BY nid DESC',[subject,0], (er, resul) => {
-        if (er) console.log(er);
-        return res.render('viewnotes', {
-            resul, subject,userName,userEmail
-        });
-    })
+    // const { subject } = req.body;
+    // db.query('SELECT * from notes WHERE subname=? AND reports=? ORDER BY nid DESC',[subject,0], (er, resul) => {
+    //     if (er) console.log(er);
+    //     return res.render('viewnotes', {
+    //         resul, subject,userName,userEmail
+    //     });
+    // })
+    subject=req.body.subject;
+    res.redirect('/viewnotes');
 }
 exports.viewnotes = (req, res) => {
     let doc;
@@ -47,13 +49,15 @@ exports.viewnotes = (req, res) => {
                 console.log(err);
             }
             else {
-                db.query('SELECT * from notes WHERE subname = ? AND reports=? ORDER BY nid DESC',[subject,0], (er, resul) => {
-                    if (er)
-                        console.log(er);
-                    return res.render('viewnotes', {
-                        resul,subject,userName,userEmail
-                    });
-                });
+                // db.query('SELECT * from notes WHERE subname = ? AND reports=? ORDER BY nid DESC',[subject,0], (er, resul) => {
+                //     if (er)
+                //         console.log(er);
+                //     return res.render('viewnotes', {
+                //         resul,subject,userName,userEmail
+                //     });
+                // });
+                // subject=req.body.subject;
+                res.redirect('/viewnotes');
             }
         });
     }
@@ -68,13 +72,15 @@ exports.notes_reports = (req, res) => {
                 console.log(err);
             }
             else{
-                db.query('SELECT * from notes WHERE subname = ? AND reports=? ORDER BY nid DESC',[subject,0], (er, resul) => {
-                    if (er)
-                        console.log(er);
-                    return res.render('viewnotes', {
-                        resul,subject,userName,userEmail
-                    });
-                });
+                // db.query('SELECT * from notes WHERE subname = ? AND reports=? ORDER BY nid DESC',[subject,0], (er, resul) => {
+                //     if (er)
+                //         console.log(er);
+                //     return res.render('viewnotes', {
+                //         resul,subject,userName,userEmail
+                //     });
+                // });
+                // subject=req.body.subject;
+                res.redirect('/viewnotes');
         }
         })
     }
@@ -84,13 +90,15 @@ exports.notes_reports = (req, res) => {
                 console.log(err);
             }
             else{
-                    db.query('SELECT * from notes WHERE subname = ? AND reports=? ORDER BY nid DESC',[subject,0], (er, resul) => {
-                        if (er)
-                            console.log(er);
-                        return res.render('viewnotes', {
-                            resul,subject,userName,userEmail
-                        });
-                    });
+                    // db.query('SELECT * from notes WHERE subname = ? AND reports=? ORDER BY nid DESC',[subject,0], (er, resul) => {
+                    //     if (er)
+                    //         console.log(er);
+                    //     return res.render('viewnotes', {
+                    //         resul,subject,userName,userEmail
+                    //     });
+                    // });
+                    // subject=req.body.subject;
+                    res.redirect('/viewnotes');
             }
         })
     }

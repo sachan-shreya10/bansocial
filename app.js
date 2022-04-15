@@ -42,12 +42,20 @@ db.connect( (err)=>{
         console.log("mysql connected");
     }
 })
+//global variables 
+
 global.userName="";
 global.userEmail="";
 global.role="";
 global.tags="ALL";
 global.tagsS="ALL";
 global.tagsT="ALL";
+global.subject="";
+global.expname="";
+global.company="";
+global.branch="";
+global.year="";
+
 app.use(function (req, res, next) {
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
     res.header('Expires', '-1');

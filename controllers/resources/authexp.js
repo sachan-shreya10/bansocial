@@ -9,14 +9,17 @@ const db = mysql.createConnection({
 })
 
 exports.experiences = (req,res) => {
-    console.log(req.body);
-    const {expname,company } = req.body;
-    db.query('SELECT * from exp WHERE ename =? and cname=? ORDER BY eid DESC',[expname,company], (er, resul) => {
-        if (er) console.log(er);
-        return res.render('viewexp', {
-            resul, expname,company,userName,userEmail
-        });
-    })
+    // console.log(req.body);
+    // const {expname,company } = req.body;
+    // db.query('SELECT * from exp WHERE ename =? and cname=? ORDER BY eid DESC',[expname,company], (er, resul) => {
+    //     if (er) console.log(er);
+    //     return res.render('viewexp', {
+    //         resul, expname,company,userName,userEmail
+    //     });
+    // })
+    expname=req.body.expname;
+    company=req.body.company;
+    res.redirect("/viewexp");
 }
 exports.viewexp = (req, res) => {
     let doc;
@@ -40,20 +43,21 @@ exports.viewexp = (req, res) => {
     });
     console.log(req.files.doc);
     console.log(imn);
-    const { name, } = req.files.doc;
+    const { name } = req.files.doc;
     if (name != "") {
         db.query('INSERT INTO exp SET ?', { ename: expname, cname: company, fname: name, link: imn, email:userEmail }, (err, result) => {
             if (err) {
                 console.log(err);
             }
             else {
-                db.query('SELECT * from exp WHERE ename =? and cname=? ORDER BY eid DESC',[expname,company], (er, resul) => {
-                    if (er)
-                        console.log(er);
-                    return res.render('viewexp', {
-                        resul,expname,company,userName,userEmail
-                    });
-                });
+                // db.query('SELECT * from exp WHERE ename =? and cname=? ORDER BY eid DESC',[expname,company], (er, resul) => {
+                //     if (er)
+                //         console.log(er);
+                //     return res.render('viewexp', {
+                //         resul,expname,company,userName,userEmail
+                //     });
+                // });
+                res.redirect("/viewexp");
             }
         });
     }
@@ -68,12 +72,13 @@ exports.exp_reports = (req, res) => {
                 console.log(err);
             }
             else{
-                db.query('SELECT * from exp WHERE ename =? and cname=? AND reports=? ORDER BY eid DESC', [expname, company,0], (er, resul) => {
-                    if (er) console.log(er);
-                    return res.render('viewexp', {
-                        resul, expname, company, userName,userEmail
-                    });
-                });
+                // db.query('SELECT * from exp WHERE ename =? and cname=? AND reports=? ORDER BY eid DESC', [expname, company,0], (er, resul) => {
+                //     if (er) console.log(er);
+                //     return res.render('viewexp', {
+                //         resul, expname, company, userName,userEmail
+                //     });
+                // });
+                res.redirect("/viewexp");
         }
         })
     }
@@ -83,12 +88,13 @@ exports.exp_reports = (req, res) => {
                 console.log(err);
             }
             else{
-                db.query('SELECT * from exp WHERE ename =? and cname=? AND reports=? ORDER BY eid DESC', [expname, company,0], (er, resul) => {
-                    if (er) console.log(er);
-                    return res.render('viewexp', {
-                        resul, expname, company, userName,userEmail
-                    });
-                });
+                // db.query('SELECT * from exp WHERE ename =? and cname=? AND reports=? ORDER BY eid DESC', [expname, company,0], (er, resul) => {
+                //     if (er) console.log(er);
+                //     return res.render('viewexp', {
+                //         resul, expname, company, userName,userEmail
+                //     });
+                // });
+                res.redirect("/viewexp");
             }
         })
     }

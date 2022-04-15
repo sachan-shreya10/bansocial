@@ -9,14 +9,17 @@ const db = mysql.createConnection({
 })
 
 exports.papers = (req,res) => {
-    console.log(req.body);
-    const {branch,year } = req.body;
-    db.query('SELECT * from papers WHERE bname =? and yname=? ORDER BY pid DESC',[branch,year], (er, resul) => {
-        if (er) console.log(er);
-        return res.render('viewpapers', {
-            resul, branch,year,userName,userEmail
-        });
-    })
+    // console.log(req.body);
+    // const {branch,year } = req.body;
+    // db.query('SELECT * from papers WHERE bname =? and yname=? ORDER BY pid DESC',[branch,year], (er, resul) => {
+    //     if (er) console.log(er);
+    //     return res.render('viewpapers', {
+    //         resul, branch,year,userName,userEmail
+    //     });
+    // })
+    branch=req.body.branch;
+    year=req.body.year;
+    res.redirect("/viewpapers");
 }
 exports.viewpapers = (req, res) => {
     let doc;
@@ -47,13 +50,14 @@ exports.viewpapers = (req, res) => {
                 console.log(err);
             }
             else {
-                db.query('SELECT * from papers WHERE bname =? and yname=? ORDER BY pid DESC',[branch,year], (er, resul) => {
-                    if (er)
-                        console.log(er);
-                    return res.render('viewpapers', {
-                        resul,branch,year,userName,userEmail
-                    });
-                });
+                // db.query('SELECT * from papers WHERE bname =? and yname=? ORDER BY pid DESC',[branch,year], (er, resul) => {
+                //     if (er)
+                //         console.log(er);
+                //     return res.render('viewpapers', {
+                //         resul,branch,year,userName,userEmail
+                //     });
+                // });
+                res.redirect("/viewpapers");
             }
         });
     }
@@ -67,12 +71,13 @@ exports.papers_reports = (req, res) => {
                 console.log(err);
             }
             else{
-                db.query('SELECT * from papers WHERE bname =? and yname=? AND reports=? ORDER BY pid DESC', [branch, year,0], (er, resul) => {
-                    if (er) console.log(er);
-                    return res.render('viewpapers', {
-                        resul, branch, year, userName,userEmail
-                    });
-                });
+                // db.query('SELECT * from papers WHERE bname =? and yname=? AND reports=? ORDER BY pid DESC', [branch, year,0], (er, resul) => {
+                //     if (er) console.log(er);
+                //     return res.render('viewpapers', {
+                //         resul, branch, year, userName,userEmail
+                //     });
+                // });
+                res.redirect("/viewpapers");
         }
         })
     }
@@ -82,12 +87,13 @@ exports.papers_reports = (req, res) => {
                 console.log(err);
             }
             else{
-                db.query('SELECT * from papers WHERE bname =? and yname=? AND reports=? ORDER BY pid DESC', [branch, year,0], (er, resul) => {
-                    if (er) console.log(er);
-                    return res.render('viewpapers', {
-                        resul, branch, year, userName,userEmail
-                    });
-                });
+                // db.query('SELECT * from papers WHERE bname =? and yname=? AND reports=? ORDER BY pid DESC', [branch, year,0], (er, resul) => {
+                //     if (er) console.log(er);
+                //     return res.render('viewpapers', {
+                //         resul, branch, year, userName,userEmail
+                //     });
+                // });
+                res.redirect("/viewpapers");
             }
         })
     }

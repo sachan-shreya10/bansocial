@@ -390,7 +390,7 @@ router.get('/papers', (req, res) => {
 //*****************************************FOR NOTES****************************** */
 router.get('/viewnotes', (req, res) => {
     if (req.session.userId) {
-        const { subject } = req.body;
+        // const { subject } = req.body;
         db.query('SELECT * from notes WHERE subname =? AND reports=? ORDER BY nid DESC', [subject,0], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewnotes', {
@@ -405,8 +405,7 @@ router.get('/viewnotes', (req, res) => {
 //*****************************************FOR EXPERIENCES****************************** */
 router.get('/viewexp', (req, res) => {
     if (req.session.userId) {
-        const { expname, company } = req.body;
-        db.query('SELECT * from exp WHERE ename =? and cname=? AND reports=? ORDER BY eid DESC', [expname, company,0], (er, resul) => {
+        db.query('SELECT * from exp WHERE ename =? AND cname=? AND reports=? ORDER BY eid DESC', [expname, company,0], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewexp', {
                 resul, expname, company, userName,userEmail
@@ -421,10 +420,10 @@ router.get('/viewexp', (req, res) => {
 //*****************************************PAPERS****************************** */
 router.get('/viewpapers', (req, res) => {
     if (req.session.userId) {
-        const { expname, company } = req.body;
-        db.query('SELECT * from papers WHERE bname =? and yname=? AND reports=? ORDER BY pid DESC', [branch, year,0], (er, resul) => {
+        // const { expname, company } = req.body;
+        db.query('SELECT * from papers WHERE bname =? AND yname=? AND reports=? ORDER BY pid DESC', [branch, year,0], (er, resul) => {
             if (er) console.log(er);
-            return res.render('viewexp', {
+            return res.render('viewpapers', {
                 resul, branch, year, userName,userEmail
             });
         });
