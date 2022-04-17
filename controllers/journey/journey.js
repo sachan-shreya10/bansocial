@@ -16,9 +16,8 @@ exports.journey = (req, res) => {
     }
     else{
     pics= req.files.pic;
-    console.log(pics)
-    // upPath= "C:/Users/Shivangi/Desktop/webD/log_reg/bansocial/journey_uploads/"+pics.name;
-    upPath= "C:/Users/tsach/Desktop/log_reg/journey_uploads/"+pics.name;
+    console.log(pics);
+    upPath = './journey_uploads/'+pics.name;
     imn=pics.name;
     pics.mv(upPath, function(err){
         if(err){

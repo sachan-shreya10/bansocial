@@ -18,7 +18,8 @@ exports.hangout = (req, res) => {
     else{
     pics= req.files.pic;
     console.log(pics)
-    upPath= "D:/STUDY STUFF/6th sem/log_reg/bansocial/hangout_uploads/"+pics.name;
+    upPath = './hangout_uploads/'+pics.name;
+    pro_pic_uploads
     imn=pics.name;
     pics.mv(upPath, function(err){
         if(err){

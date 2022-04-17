@@ -18,14 +18,16 @@ exports.rrsenior = (req, res) => {
                 console.log(err);
             }
             else{
-                db.query('SELECT * from commentsenior where did=? and pid is NULL ORDER BY id DESC', [did],(er, result) => {
-                    if (er) console.log(er);
-                    db.query('SELECT * from commentsenior where pid and did=? ORDER BY id DESC', [did],(er, resul) => {
-                    return res.render('repliessenior', {
-                        result,resul
-                    });
-                })
-            });
+            //     db.query('SELECT * from commentsenior where did=? and pid is NULL ORDER BY id DESC', [did],(er, result) => {
+            //         if (er) console.log(er);
+            //         db.query('SELECT * from commentsenior where pid and did=? ORDER BY id DESC', [did],(er, resul) => {
+            //         return res.render('repliessenior', {
+            //             result,resul
+            //         });
+            //     })
+            // });
+            pidd=did;
+            res.redirect('/repliessenior');
             }
         });
     

@@ -18,14 +18,16 @@ exports.rr = (req, res) => {
             console.log(err);
         }
         else {
-            db.query('SELECT * from commentpeer where did=? and pid is NULL ORDER BY id DESC', [did], (er, result) => {
-                if (er) console.log(er);
-                db.query('SELECT * from commentpeer where pid and did=? ORDER BY id DESC', [did], (er, resul) => {
-                    return res.render('repliespeer', {
-                        result, resul
-                    });
-                })
-            });
+            // db.query('SELECT * from commentpeer where did=? and pid is NULL ORDER BY id DESC', [did], (er, result) => {
+            //     if (er) console.log(er);
+            //     db.query('SELECT * from commentpeer where pid and did=? ORDER BY id DESC', [did], (er, resul) => {
+            //         return res.render('repliespeer', {
+            //             result, resul
+            //         });
+            //     })
+            // });
+            pidd=did;
+            res.redirect('/repliespeer');
         }
     });
 }

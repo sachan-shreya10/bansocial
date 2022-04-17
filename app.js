@@ -55,6 +55,7 @@ global.expname="";
 global.company="";
 global.branch="";
 global.year="";
+global.pidd="";
 
 app.use(function (req, res, next) {
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');

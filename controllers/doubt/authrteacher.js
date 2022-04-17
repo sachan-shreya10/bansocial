@@ -10,17 +10,16 @@ const db = mysql.createConnection({
 
 
 exports.commrteacher = (req, res) => {
-    // console.log("hello1")
-    // console.log(req.body);
-    const {pidd}=req.body;
-    // console.log(pidd)
-    db.query('SELECT * from commentteacher where did=? and pid is NULL ORDER BY id DESC', [pidd],(er, result) => {
-        if (er) console.log(er);
-        db.query('SELECT * from commentteacher where did=? and pid ORDER BY id DESC', [pidd],(er, resul) => {
-            if (er) console.log(er);
-        return res.render('repliesteacher', {
-            result,resul
-        });
-    })
-});
+    // const { pidd } = req.body;
+    // db.query('SELECT * from commentteacher where did=? and pid is NULL ORDER BY id DESC', [pidd], (er, result) => {
+    //     if (er) console.log(er);
+    //     db.query('SELECT * from commentteacher where did=? and pid ORDER BY id DESC', [pidd], (er, resul) => {
+    //         if (er) console.log(er);
+    //         return res.render('repliesteacher', {
+    //             result, resul
+    //         });
+    //     })
+    // });
+    pidd=req.body.pidd;
+    res.redirect("/repliesteacher");
 }

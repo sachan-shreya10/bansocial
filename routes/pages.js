@@ -176,23 +176,21 @@ router.get('/doubtpeer', (req, res) => {
 });
 router.get('/repliespeer', (req, res) => {
     if (req.session.userId) {
-        res.render('repliespeer');
-    }
-    else {
-        res.redirect("/");
-    }
-});
-router.get('/sortpeer', (req, res) => {
-    if (req.session.userId) {
-        res.render('sortpeer', {
-            userName
+        // res.render('repliespeer');
+        db.query('SELECT * from commentpeer where did=? and pid is NULL ORDER BY id DESC', [pidd], (er, result) => {
+            if (er) console.log(er);
+            db.query('SELECT * from commentpeer where did=? and pid ORDER BY id DESC', [pidd], (er, resul) => {
+                if (er) console.log(er);
+                return res.render('repliespeer', {
+                    result, resul
+                });
+            })
         });
     }
     else {
         res.redirect("/");
     }
 });
-
 
 
 router.get('/doubtsenior', (req, res) => {
@@ -225,23 +223,21 @@ router.get('/doubtsenior', (req, res) => {
 });
 router.get('/repliessenior', (req, res) => {
     if (req.session.userId) {
-        res.render('repliessenior');
-    }
-    else {
-        res.redirect("/");
-    }
-});
-router.get('/sortsenior', (req, res) => {
-    if (req.session.userId) {
-        res.render('sortsenior', {
-            userName
+        // res.render('repliessenior');
+        db.query('SELECT * from commentsenior where did=? and pid is NULL ORDER BY id DESC', [pidd], (er, result) => {
+            if (er) console.log(er);
+            db.query('SELECT * from commentsenior where did=? and pid ORDER BY id DESC', [pidd], (er, resul) => {
+                if (er) console.log(er);
+                return res.render('repliessenior', {
+                    result, resul
+                });
+            })
         });
     }
     else {
         res.redirect("/");
     }
 });
-
 
 
 router.get('/doubtteacher', (req, res) => {
@@ -269,23 +265,21 @@ router.get('/doubtteacher', (req, res) => {
 })
 router.get('/repliesteacher', (req, res) => {
     if (req.session.userId) {
-        res.render('repliesteacher');
-    }
-    else {
-        res.redirect("/");
-    }
-});
-router.get('/sortteacher', (req, res) => {
-    if (req.session.userId) {
-        res.render('sortteacher', {
-            userName
+        // res.render('repliesteacher');
+        db.query('SELECT * from commentteacher where did=? and pid is NULL ORDER BY id DESC', [pidd], (er, result) => {
+            if (er) console.log(er);
+            db.query('SELECT * from commentteacher where did=? and pid ORDER BY id DESC', [pidd], (er, resul) => {
+                if (er) console.log(er);
+                return res.render('repliesteacher', {
+                    result, resul
+                });
+            })
         });
     }
     else {
         res.redirect("/");
     }
 });
-
 router.get('/msg', (req, res) => {
     if (req.session.userId) {
         res.render('msg');
@@ -391,10 +385,10 @@ router.get('/papers', (req, res) => {
 router.get('/viewnotes', (req, res) => {
     if (req.session.userId) {
         // const { subject } = req.body;
-        db.query('SELECT * from notes WHERE subname =? AND reports=? ORDER BY nid DESC', [subject,0], (er, resul) => {
+        db.query('SELECT * from notes WHERE subname =? AND reports=? ORDER BY nid DESC', [subject, 0], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewnotes', {
-                resul, subject, userName,userEmail
+                resul, subject, userName, userEmail
             });
         });
     }
@@ -405,10 +399,10 @@ router.get('/viewnotes', (req, res) => {
 //*****************************************FOR EXPERIENCES****************************** */
 router.get('/viewexp', (req, res) => {
     if (req.session.userId) {
-        db.query('SELECT * from exp WHERE ename =? AND cname=? AND reports=? ORDER BY eid DESC', [expname, company,0], (er, resul) => {
+        db.query('SELECT * from exp WHERE ename =? AND cname=? AND reports=? ORDER BY eid DESC', [expname, company, 0], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewexp', {
-                resul, expname, company, userName,userEmail
+                resul, expname, company, userName, userEmail
             });
         });
     }
@@ -421,10 +415,10 @@ router.get('/viewexp', (req, res) => {
 router.get('/viewpapers', (req, res) => {
     if (req.session.userId) {
         // const { expname, company } = req.body;
-        db.query('SELECT * from papers WHERE bname =? AND yname=? AND reports=? ORDER BY pid DESC', [branch, year,0], (er, resul) => {
+        db.query('SELECT * from papers WHERE bname =? AND yname=? AND reports=? ORDER BY pid DESC', [branch, year, 0], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewpapers', {
-                resul, branch, year, userName,userEmail
+                resul, branch, year, userName, userEmail
             });
         });
     }
@@ -442,7 +436,7 @@ router.get('/hangout', (req, res) => {
                 if (er) console.log(er);
                 // console.log(result)
                 return res.render('hangout', {
-                    comm, replyy,userName,userEmail
+                    comm, replyy, userName, userEmail
                 });
 
             });

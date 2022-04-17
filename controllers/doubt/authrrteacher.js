@@ -18,14 +18,16 @@ exports.rrteacher = (req, res) => {
                 console.log(err);
             }
             else{
-                db.query('SELECT * from commentteacher where did=? and pid is NULL ORDER BY id DESC', [did],(er, result) => {
-                    if (er) console.log(er);
-                    db.query('SELECT * from commentteacher where pid and did=? ORDER BY id DESC', [did],(er, resul) => {
-                    return res.render('repliesteacher', {
-                        result,resul
-                    });
-                })
-            });
+            //     db.query('SELECT * from commentteacher where did=? and pid is NULL ORDER BY id DESC', [did],(er, result) => {
+            //         if (er) console.log(er);
+            //         db.query('SELECT * from commentteacher where pid and did=? ORDER BY id DESC', [did],(er, resul) => {
+            //         return res.render('repliesteacher', {
+            //             result,resul
+            //         });
+            //     })
+            // });
+            pidd=did;
+            res.redirect('/repliesteacher');
             }
         });
 }

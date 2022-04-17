@@ -25,7 +25,7 @@ exports.login = (req, res) => {
                 if (resul) {
                     userName = result[0].name;
                     userEmail = result[0].email;
-                    role = "teacher";
+                    role = "student";
                     req.session.userId = userName;
                     res.redirect('/home');
                 } else {
@@ -49,7 +49,7 @@ exports.login = (req, res) => {
                         if (result) {
                             userName = resul[0].name;
                             userEmail = resul[0].email;
-                            role = "student";
+                            role = "teacher";
                             req.session.userId = userName;
                             res.redirect('/home');
                         } else {
