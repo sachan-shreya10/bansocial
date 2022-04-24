@@ -9,14 +9,6 @@ const db = mysql.createConnection({
 })
 
 exports.experiences = (req,res) => {
-    // console.log(req.body);
-    // const {expname,company } = req.body;
-    // db.query('SELECT * from exp WHERE ename =? and cname=? ORDER BY eid DESC',[expname,company], (er, resul) => {
-    //     if (er) console.log(er);
-    //     return res.render('viewexp', {
-    //         resul, expname,company,userName,userEmail
-    //     });
-    // })
     expname=req.body.expname;
     company=req.body.company;
     res.redirect("/viewexp");
@@ -28,7 +20,7 @@ exports.viewexp = (req, res) => {
     if (!req.files || Object.keys(req.files).length === 0) {
         console.log("no files uploaded");
     }
-    const { expname,company } = req.body;
+    const { expname,company,fname } = req.body;
     doc = req.files.doc;
     console.log(doc);
     upPath = './resources_uploads/' + doc.name;
@@ -41,22 +33,12 @@ exports.viewexp = (req, res) => {
             console.log("File Uploaded");
         }
     });
-    console.log(req.files.doc);
-    console.log(imn);
-    const { name } = req.files.doc;
-    if (name != "") {
-        db.query('INSERT INTO exp SET ?', { ename: expname, cname: company, fname: name, link: imn, email:userEmail }, (err, result) => {
+    if (doc != "") {
+        db.query('INSERT INTO exp SET ?', { ename: expname, cname: company, fname: fname, link: imn, email:userEmail }, (err, result) => {
             if (err) {
                 console.log(err);
             }
             else {
-                // db.query('SELECT * from exp WHERE ename =? and cname=? ORDER BY eid DESC',[expname,company], (er, resul) => {
-                //     if (er)
-                //         console.log(er);
-                //     return res.render('viewexp', {
-                //         resul,expname,company,userName,userEmail
-                //     });
-                // });
                 res.redirect("/viewexp");
             }
         });
@@ -65,19 +47,13 @@ exports.viewexp = (req, res) => {
 
 
 exports.exp_reports = (req, res) => {
-    const {id,reportbtn,deletebtn,expname,company} = req.body;
+    const {id,reportbtn,deletebtn} = req.body;
     if (reportbtn) {
         db.query('UPDATE exp SET reports = reports + 1 WHERE eid=?',[id], (err, resul) => {
             if (err) {
                 console.log(err);
             }
             else{
-                // db.query('SELECT * from exp WHERE ename =? and cname=? AND reports=? ORDER BY eid DESC', [expname, company,0], (er, resul) => {
-                //     if (er) console.log(er);
-                //     return res.render('viewexp', {
-                //         resul, expname, company, userName,userEmail
-                //     });
-                // });
                 res.redirect("/viewexp");
         }
         })
@@ -88,15 +64,21 @@ exports.exp_reports = (req, res) => {
                 console.log(err);
             }
             else{
-                // db.query('SELECT * from exp WHERE ename =? and cname=? AND reports=? ORDER BY eid DESC', [expname, company,0], (er, resul) => {
-                //     if (er) console.log(er);
-                //     return res.render('viewexp', {
-                //         resul, expname, company, userName,userEmail
-                //     });
-                // });
                 res.redirect("/viewexp");
             }
         })
     }
+    else{
+        db.query('UPDATE exp SET reports = ? WHERE eid=?',[0,id], (err, resul) => {
+            if (err) {
+                console.log(err);
+            }
+            res.redirect('/viewexp');
+        })
+    }
 }
 
+exports.showe = (req, res) => {
+    flage=req.body.option;
+    res.redirect('/viewexp');
+}

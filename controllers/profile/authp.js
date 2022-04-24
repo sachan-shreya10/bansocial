@@ -1,6 +1,8 @@
 const mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const crypto = require('crypto');
+const async = require("hbs/lib/async");
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -10,6 +12,7 @@ const db = mysql.createConnection({
 
 exports.editpro = (req, res) => {
     console.log(req.body);
+    var hp;
     let pics;
     let upPath;
     var imn = "";
@@ -19,7 +22,7 @@ exports.editpro = (req, res) => {
     else {
         pics = req.files.pic;
         console.log(pics)
-        upPath = './pro_pic_uploads/'+pics.name;
+        upPath = './pro_pic_uploads/' + pics.name;
         imn = pics.name;
         pics.mv(upPath, function (err) {
             if (err) {
@@ -34,14 +37,16 @@ exports.editpro = (req, res) => {
         });
     }
     else {
-
-        db.query('SELECT name FROM student WHERE email = ?', [userEmail], (err, result) => {
+        db.query('SELECT name FROM student WHERE email = ?', [userEmail], async (err, result) => {
             if (err) {
                 console.log(err);
             }
             if (result.length > 0) {
+                if (password != "") {
+                    hp= await bcrypt.hash(password, 8);
+                }
                 if (imn != "" && password != "") {
-                    db.query('UPDATE student SET pro_pic = ? , password = ? WHERE email = ?', [imn, password, userEmail], (err, resul) => {
+                    db.query('UPDATE student SET pro_pic = ? , password = ? WHERE email = ?', [imn, hp, userEmail], (err, resul) => {
                         if (err) {
                             console.log(err);
                         }
@@ -49,7 +54,7 @@ exports.editpro = (req, res) => {
                     })
                 }
                 else if (password != "") {
-                    db.query('UPDATE student SET password = ? WHERE email = ?', [password, userEmail], (err, resul) => {
+                    db.query('UPDATE student SET password = ? WHERE email = ?', [hp, userEmail], (err, resul) => {
                         if (err) {
                             console.log(err);
                         }
@@ -67,8 +72,11 @@ exports.editpro = (req, res) => {
 
             }
             else {
+                if (password != "") {
+                    hp = await bcrypt.hash(password, 8);
+                }
                 if (pic && password) {
-                    db.query('UPDATE teacher SET pro_pic = ? , password = ? WHERE name = ?', [imn, password, nam], (err, resul) => {
+                    db.query('UPDATE teacher SET pro_pic = ? , password = ?  WHERE email = ?', [imn, hp, userEmail], (err, resul) => {
                         if (err) {
                             console.log(err);
                         }
@@ -76,7 +84,7 @@ exports.editpro = (req, res) => {
                     })
                 }
                 else if (password) {
-                    db.query('UPDATE teacher SET password = ? WHERE name = ?', [password, nam], (err, resul) => {
+                    db.query('UPDATE teacher SET password = ?  WHERE email = ?', [hp, userEmail], (err, resul) => {
                         if (err) {
                             console.log(err);
                         }
@@ -84,7 +92,7 @@ exports.editpro = (req, res) => {
                     })
                 }
                 else {
-                    db.query('UPDATE teacher SET pro_pic = ?  WHERE name = ?', [imn, nam], (err, resul) => {
+                    db.query('UPDATE teacher SET pro_pic = ?   WHERE email = ?', [imn, userEmail], (err, resul) => {
                         if (err) {
                             console.log(err);
                         }

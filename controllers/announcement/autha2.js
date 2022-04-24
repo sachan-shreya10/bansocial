@@ -17,8 +17,16 @@ exports.autha2 = (req, res) => {
             res.redirect('/ann');
         })
     }
-    else{
+    else if(deletebtn){
         db.query('DELETE FROM announcement WHERE id=?',[aid], (err, resul) => {
+            if (err) {
+                console.log(err);
+            }
+            res.redirect('/ann');
+        })
+    }
+    else{
+        db.query('UPDATE announcement SET reports = ? WHERE id=?',[0,aid], (err, resul) => {
             if (err) {
                 console.log(err);
             }

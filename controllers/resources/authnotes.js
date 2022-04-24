@@ -10,13 +10,6 @@ const db = mysql.createConnection({
 
 exports.notes = (req,res) => {
     console.log(req.body);
-    // const { subject } = req.body;
-    // db.query('SELECT * from notes WHERE subname=? AND reports=? ORDER BY nid DESC',[subject,0], (er, resul) => {
-    //     if (er) console.log(er);
-    //     return res.render('viewnotes', {
-    //         resul, subject,userName,userEmail
-    //     });
-    // })
     subject=req.body.subject;
     res.redirect('/viewnotes');
 }
@@ -27,7 +20,7 @@ exports.viewnotes = (req, res) => {
     if (!req.files || Object.keys(req.files).length === 0) {
         console.log("no files uploaded");
     }
-    const { subject } = req.body;
+    const { subject,fname } = req.body;
     doc = req.files.doc;
     console.log(doc);
     upPath = './resources_uploads/' + doc.name;
@@ -40,23 +33,12 @@ exports.viewnotes = (req, res) => {
             console.log("File Uploaded");
         }
     });
-    console.log(req.files.doc);
-    console.log(imn);
-    const { name } = req.files.doc;
-    if (name != "") {
-        db.query('INSERT INTO notes SET ?', { subname: subject, name: name, link: imn, email:userEmail }, (err, result) => {
+    if (doc != "") {
+        db.query('INSERT INTO notes SET ?', { subname: subject, name: fname, link: imn, email:userEmail }, (err, result) => {
             if (err) {
                 console.log(err);
             }
             else {
-                // db.query('SELECT * from notes WHERE subname = ? AND reports=? ORDER BY nid DESC',[subject,0], (er, resul) => {
-                //     if (er)
-                //         console.log(er);
-                //     return res.render('viewnotes', {
-                //         resul,subject,userName,userEmail
-                //     });
-                // });
-                // subject=req.body.subject;
                 res.redirect('/viewnotes');
             }
         });
@@ -64,7 +46,7 @@ exports.viewnotes = (req, res) => {
 }
 
 exports.notes_reports = (req, res) => {
-    const {id,reportbtn,deletebtn,subject } = req.body;
+    const {id,reportbtn,deletebtn} = req.body;
     console.log(subject);
     if (reportbtn) {
         db.query('UPDATE notes SET reports = reports + 1 WHERE nid=?',[id], (err, resul) => {
@@ -72,14 +54,6 @@ exports.notes_reports = (req, res) => {
                 console.log(err);
             }
             else{
-                // db.query('SELECT * from notes WHERE subname = ? AND reports=? ORDER BY nid DESC',[subject,0], (er, resul) => {
-                //     if (er)
-                //         console.log(er);
-                //     return res.render('viewnotes', {
-                //         resul,subject,userName,userEmail
-                //     });
-                // });
-                // subject=req.body.subject;
                 res.redirect('/viewnotes');
         }
         })
@@ -90,17 +64,20 @@ exports.notes_reports = (req, res) => {
                 console.log(err);
             }
             else{
-                    // db.query('SELECT * from notes WHERE subname = ? AND reports=? ORDER BY nid DESC',[subject,0], (er, resul) => {
-                    //     if (er)
-                    //         console.log(er);
-                    //     return res.render('viewnotes', {
-                    //         resul,subject,userName,userEmail
-                    //     });
-                    // });
-                    // subject=req.body.subject;
                     res.redirect('/viewnotes');
             }
         })
     }
+    else{
+        db.query('UPDATE notes SET reports = ? WHERE nid=?',[0,id], (err, resul) => {
+            if (err) {
+                console.log(err);
+            }
+            res.redirect('/viewnotes');
+        })
+    }
 }
-
+exports.shown = (req, res) => {
+    flagn=req.body.option;
+    res.redirect('/viewnotes');
+}

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources</title>
+    <title>Papers</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -26,7 +26,7 @@
             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
             border: 2px solid white;
             border-radius: 25px;
-         
+
             background-color: rgba(238, 249, 250, 0.8);
             color: black;
         }
@@ -46,7 +46,8 @@
             margin-top: 15px;
 
         }
-        .card{
+
+        .card {
             background-color: rgba(238, 249, 250, 0.8);
             color: black;
         }
@@ -91,9 +92,15 @@
             </div>
             <div class="mx-2">
                 <ul class="navbar-nav mb-2 mb-lg-0">
+                  {{#ifEquals userName "Admin"}}
+                     <li class="nav-item">
+                        <a class="nav-link" href="/dashboard" style="color: black;">{{userName}}</a>
+                    </li>
+                    {{else}}
                     <li class="nav-item">
                         <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
                     </li>
+                    {{/ifEquals}}
                     <li class="nav-item">
                         <a href="/logout" class="btn btn-dark">Log Out</a>
                     </li>
@@ -102,6 +109,21 @@
             </div>
         </div>
     </nav>
+    {{#ifEquals "Admin" userName}}
+    <div>
+        <form name="formr" action="/auth/showp" method="post">
+            {{!-- <button type="submit" class="btn btn-primary btn-sm" id="rbtn">View Reported Posts</button> --}}
+            <div class="form-group" style="position: fixed;">
+                <label for="tags"><span style="color:white">Sort by:</span></label>
+                <select id="tags" name="option" onchange="formr.submit()">
+                    <option value="null"></option>
+                    <option value="0">All Posts</option>
+                    <option value="1">Reported Posts</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    {{/ifEquals}}
     <div class="container my-3 content">
 
         <h1>{{branch}} QUESTION PAPERS OF YEAR {{year}}</h1>
@@ -109,26 +131,19 @@
         <form action="/auth/viewpapers" method="post" enctype="multipart/form-data">
             <div class="card">
                 <div class="card-body">
-                    {{!-- <h5 class="card-title">ADD ANNOUNCEMENT</h5> --}}
-                    {{!-- <form action="/auth/register" method="post"> --}}
-                        <h4 class="card-title">Want to share {{branch}} question papers of {{year}}? </h4>
-                        <p>Make sure that the document to be uploaded has the name (in capital letter) as :
-                            <b>subjectname.pdf</b> <br>(eg : Economics.pdf)
-                        </p>
-                        {{!<div class="form-group">
-                            <textarea class="form-control inputt" name="name" id="addTask" rows="1"></textarea>
-                        </div>}}
-                        {{!-- <h6 class="card-title">DESCRIPTION</h6>
-                        <div class="form-group">
-                            <textarea class="form-control inputt" name="textt" id="addTask" rows="2"></textarea>
-                        </div> --}}
-                        <hr>
-                        <div class="form-group">
-                            <input type="file" name="doc" id="adddoc">
-                        </div>
-                        <input type="hidden" name="branch" value="{{branch}}"></input>
-                        <input type="hidden" name="year" value="{{year}}"></input>
-                        <button type="submit" class="btn btn-primary my-2" id="addBtn">Upload</button>
+                    <h4 class="card-title">Want to share {{branch}} question papers of {{year}}? </h4>
+                    <p>Make sure that the document to be uploaded has the name as :
+                        <b>subjectname.pdf</b> <br>(eg : Economics.pdf)
+                    </p>
+                    <hr>
+                    <div class="form-group">
+                        <input type="file" name="doc" id="adddoc">
+                    </div>
+                    <input type="hidden" name="branch" value="{{branch}}"></input>
+                    <input type="hidden" name="year" value="{{year}}"></input>
+                    <h6>Name</h6>
+                    <textarea class="form-control inputt" name="fname" id="fname" rows="1"></textarea>
+                    <button type="submit" class="btn btn-primary my-2" id="addBtn">Upload</button>
                 </div>
             </div>
         </form>
@@ -147,12 +162,21 @@
                             </button>
                             <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton{{this.pid}}"
                                 name="option">
+                                {{#ifEquals "Admin" ../userName}}
+                                <li><button class="btn bg-transparent" type="submit" name="deletebtn"
+                                        value="{{this.pid}}">Delete</button></li>
+                                {{#ifEquals this.reports 1}}
+                                <li><button class="btn bg-transparent" type="submit" name="ureportbtn"
+                                        value="{{this.pid}}">Unreport</button></li>
+                                {{/ifEquals}}
+                                {{else}}
                                 {{#ifEquals this.email ../userEmail}}
                                 <li><button class="btn bg-transparent" type="submit" name="deletebtn"
                                         value="{{this.pid}}">Delete</button></li>
                                 {{else}}
                                 <li><button class="btn bg-transparent" type="submit" name="reportbtn"
                                         value="{{this.pid}}">Report</button></li>
+                                {{/ifEquals}}
                                 {{/ifEquals}}
                             </ul>
                         </div>

@@ -17,8 +17,23 @@ exports.repo = (req, res) => {
             res.redirect('/hangout');
         })
     }
-    else{
+    else if(deletebtn ){
         db.query('DELETE FROM hangout WHERE cid=?',[id], (err, resul) => {
+            if (err) {
+                console.log(err);
+            }
+            db.query('DELETE FROM hangout WHERE pid=?',[id], (err, resul) => {
+                if (err) {
+                    console.log(err);
+                }
+                res.redirect('/hangout');
+            })
+            // res.redirect('/hangout');
+        })
+
+    }
+    else{
+        db.query('UPDATE hangout SET reports = ? WHERE cid=?',[0,id], (err, resul) => {
             if (err) {
                 console.log(err);
             }

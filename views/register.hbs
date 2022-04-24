@@ -36,12 +36,12 @@
                                 <h6>Are you a teacher or a student??</h6>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="role" id="flexRadioDefault1"
-                                        value="teacher" />
+                                        value="teacher" onclick="tvalidation()" />
                                     <label class="form-check-label" for="flexRadioDefault1">Teacher</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="role" id="flexRadioDefault2"
-                                        value="student">
+                                        value="student" onclick="svalidation()">
                                     <label class="form-check-label" for="flexRadioDefault2">
                                         Student
                                     </label>
@@ -63,7 +63,8 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-7">
-                                <input type="id" name="bid" placeholder="ID" class="form-control my-3 p-2">
+                                <input type="id" name="bid" placeholder="ID" class="form-control my-3 p-2" id="bid"
+                                    onblur="bvalidation()" style="display:none; " required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -78,22 +79,22 @@
                                     class="form-control my-3 p-2" required />
                             </div>
                         </div>
-                        <h6>Select Year</h6>
-                        <div class="form-check form-check-inline">
+                        <h6 id='year' style="display:none;">Select Year</h6>
+                        <div class="form-check form-check-inline year" id='year1' style="display:none;">
                             <input class="form-check-input" type="radio" value="1" name="year" id="flexRadioDefault3">
                             <label class="form-check-label" for="flexRadioDefault3">1st Year</label>
                         </div>
-                        <div class="form-check form-check-inline">
+                        <div class="form-check form-check-inline year" id='year2' style="display:none;">
                             <input class="form-check-input" type="radio" value="2" name="year" id="flexRadioDefault4">
                             <label class="form-check-label" for="flexRadioDefault4">
                                 2nd Year
                             </label>
                         </div>
-                        <div class="form-check form-check-inline">
+                        <div class="form-check form-check-inline year" id='year3' style="display:none;">
                             <input class="form-check-input" type="radio" value="3" name="year" id="flexRadioDefault5">
                             <label class="form-check-label" for="flexRadioDefault5">3rd Year</label>
                         </div>
-                        <div class="form-check form-check-inline">
+                        <div class="form-check form-check-inline year" id='year4' style="display:none;">
                             <input class="form-check-input" type="radio" value="4" name="year" id="flexRadioDefault6">
                             <label class="form-check-label" for="flexRadioDefault6">
                                 4th Year
@@ -126,19 +127,17 @@
     <script>
         function validation() {
 
-            const role = document.getElementById('flexRadioDefault1').checked;
-            if (role) {
-                const form = document.getElementById('form');
-                const email = document.getElementById('email').value;
-                const pattern = /^[^ ]+@banasthali.in$/;
 
-                if (email.match(pattern)) {
-                }
-                else {
-                    document.getElementById("email").value = "";
-                    document.getElementById("email").style.borderColor = "red";
-                }
+            const form = document.getElementById('form');
+            const email = document.getElementById('email').value;
+            const pattern = /^[^ ]+@banasthali.in$/;
+            if (email.match(pattern)) {
             }
+            else {
+                document.getElementById("email").value = "";
+                document.getElementById("email").style.borderColor = "red";
+            }
+
 
         }
         function pvalidation() {
@@ -148,12 +147,60 @@
                 alert("Password length must be atleast 8 characters");
                 document.getElementById("password").value = "";
             }
-             if (pw.length > 15) {
+            if (pw.length > 15) {
                 alert("Password length must not exceed 15 characters")
                 document.getElementById("password").value = "";
-                }
+            }
 
         }
+        function bvalidation() {
+
+            const pw = document.getElementById('bid').value;
+            if (pw.length < 10) {
+                alert("Incorrect Id");
+                document.getElementById("bid").value = "";
+            }
+            if (pw.length > 10) {
+                alert("Incorrect Id");
+                document.getElementById("bid").value = "";
+            }
+
+        }
+        function svalidation() {
+
+            const role = document.getElementById('flexRadioDefault2').checked;
+            if (role) {
+
+                document.getElementById('bid').style.display = '';
+                document.getElementById('year1').style.display = '';
+                document.getElementById('year2').style.display = '';
+                document.getElementById('year3').style.display = '';
+                document.getElementById('year4').style.display = '';
+                document.getElementById('year').style.display = '';
+
+
+
+            }
+
+        }
+        function tvalidation() {
+
+            const role = document.getElementById('flexRadioDefault1').checked;
+            if (role) {
+
+                document.getElementById('bid').style.display = 'none';
+                document.getElementById('year1').style.display = 'none';
+                document.getElementById('year2').style.display = 'none';
+                document.getElementById('year3').style.display = 'none';
+                document.getElementById('year4').style.display = 'none';
+                document.getElementById('year').style.display = 'none';
+
+
+
+            }
+
+        }
+
     </script>
 </body>
 

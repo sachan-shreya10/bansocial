@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -13,29 +14,31 @@
 </head>
 
 <body>
-         {{#if message}}
+    {{#if message}}
     <h4 class="alert alert-danger mt-4">{{message}}</h4>
     {{/if}}
-    <section class="Form my-3 mx-5" >
+    <section class="Form my-3 mx-5">
         <div class="container" style="width: 160vh;">
             <div class="row g-0" style="height:95vh;">
-                <div class="col-lg-4" >
+                <div class="col-lg-4">
                     <img src="/images/image6.jpg" class="img-fluid" alt=""
                         style="width:640px;height:95vh;border-top-left-radius:30px;border-bottom-left-radius:30px;">
                 </div>
-                <div class="col-md-8 px-5 pt-5" >
+                <div class="col-md-8 px-5 pt-5">
                     <span style="color:rgb(187, 187, 7);font-size: 32pt;">बन</span>
                     <span style="color:rgb(196, 8, 8);font-size: 32pt;">Social</span>
                     <h4>Sign in to your account</h4>
                     <form action="/auth/login" method="post">
                         <div class="form-row">
                             <div class="col-md-8">
-                                <input type="email" placeholder="Email-Address" class="form-control my-3 p-4" name="email">
+                                <input type="email" placeholder="Email-Address" class="form-control my-3 p-4"
+                                    name="email">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-8">
-                                <input type="password" placeholder="********" class="form-control my-3 p-4" name="password">
+                                <input type="password" placeholder="********" class="form-control my-3 p-4"
+                                    name="password">
                             </div>
                         </div>
                         <div class="form-row">
@@ -43,9 +46,39 @@
                                 <button type="submit" class="btn1 mt-3 mb-5">Login</button>
                             </div>
                         </div>
-                        {{!-- <a href="#">Forgot Password</a> --}}
-                        <p>Don't have an account? <a href="/register">Register here</a></p>
                     </form>
+                    {{!-- <form action="/auth/for" method="post">
+                        <button type="submit" class="btn btn-primary my-2 btn-sm" id="addBtn">Forgot Password</button>
+                    </form> --}}
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" >
+                        Forgot Password
+                    </button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Enter Registered Email</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/auth/for" method="post" >
+                                            <textarea class="form-control inputt" name="email" id="remail"
+                                                rows="1"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Done</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <p>Don't have an account? <a href="/register">Register here</a></p>
                 </div>
             </div>
         </div>

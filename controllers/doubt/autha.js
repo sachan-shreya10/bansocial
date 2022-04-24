@@ -41,3 +41,8 @@ exports.annpeer = (req, res) => {
         });
     }
 }
+// exports.showdp = (req, res) => {
+//     flagdp=req.body.option;
+
+//     res.redirect('/ann');
+// }

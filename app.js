@@ -56,6 +56,17 @@ global.company="";
 global.branch="";
 global.year="";
 global.pidd="";
+global.flag=0;
+global.flagdp=0;
+global.flagds=0;
+global.flagdt=0;
+global.flage=0;
+global.flagp=0;
+global.flagn=0;
+global.flagj=0;
+global.flagh=0;
+global.message="";
+
 
 app.use(function (req, res, next) {
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');

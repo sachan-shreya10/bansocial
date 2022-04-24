@@ -36,13 +36,18 @@ exports.journey = (req, res) => {
                 console.log(err);
             }
             else{
-                db.query('SELECT * from journey ORDER BY id DESC', (er, resul) => {
-                    if (er) console.log(er);
-                    return res.render('journey', {
-                        resul,userName,userEmail
-                    });
-                })
+                // db.query('SELECT * from journey ORDER BY id DESC', (er, resul) => {
+                //     if (er) console.log(er);
+                //     return res.render('journey', {
+                //         resul,userName,userEmail
+                //     });
+                // })
+                res.redirect('/journey');
             }
         });
     }
+}
+exports.showj = (req, res) => {
+    flagj=req.body.option;
+    res.redirect('/journey');
 }

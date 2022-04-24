@@ -17,8 +17,16 @@ exports.authjj = (req, res) => {
             res.redirect('/journey');
         })
     }
-    else{
+    else if(deletebtn){
         db.query('DELETE FROM journey WHERE id=?',[aid], (err, resul) => {
+            if (err) {
+                console.log(err);
+            }
+            res.redirect('/journey');
+        })
+    }
+    else{
+        db.query('UPDATE journey SET reports = ? WHERE id=?',[0,aid], (err, resul) => {
             if (err) {
                 console.log(err);
             }

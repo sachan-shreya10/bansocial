@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <title>resources</title>
+  <title>Resources</title>
   <style>
     .jumbotron {
       margin-top: 8px;
@@ -107,9 +107,15 @@
             </div>
             <div class="mx-2">
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                   <li class="nav-item">
+                   {{#ifEquals userName "Admin"}}
+                     <li class="nav-item">
+                        <a class="nav-link" href="/dashboard" style="color: black;">{{userName}}</a>
+                    </li>
+                    {{else}}
+                    <li class="nav-item">
                         <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
                     </li>
+                    {{/ifEquals}}
                     <li class="nav-item">
                         <a href="/logout" class="btn btn-dark">Log Out</a>
                     </li>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doubts</title>
+    <title>Doubts Teacher</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
@@ -17,6 +17,7 @@
         }
     }
 </style>
+
 <body style="background-image: linear-gradient( 135.9deg,  #614385 16.4%, #516395 56.1% );
     min-height: 100vh;
     overflow-x: hidden;">
@@ -45,10 +46,16 @@
             <div class="mx-2">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                         <li class="nav-item">
+                   {{#ifEquals userName "Admin"}}
+                     <li class="nav-item">
+                        <a class="nav-link" href="/dashboard" style="color: black;">{{userName}}</a>
+                    </li>
+                    {{else}}
+                    <li class="nav-item">
                         <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
                     </li>
-                          <a href="/logout" class="btn btn-dark">Log Out</a>
+                    {{/ifEquals}}
+                    <a href="/logout" class="btn btn-dark">Log Out</a>
                     </li>
                 </ul>
 
@@ -56,11 +63,15 @@
         </div>
     </nav>
     <div>
-         <form name="theForm" action="/auth/sortteacher" method="post" enctype="multipart/form-data" autocomplete="off">
-            <div class="form-group" >
+        <form name="theForm" action="/auth/sortteacher" method="post" enctype="multipart/form-data" autocomplete="off">
+            <div class="form-group" style="position: fixed;">
                 <label for="tags"><span style="color:white">Sort by:</span></label>
                 <select id="tags" name="tag" onchange="theForm.submit()">
                     <option value="null"></option>
+                    {{#ifEquals userName "Admin"}}
+                    <option value="0">ALL</option>
+                    <option value="1">Reported</option>
+                    {{else}}
                     <option value="ALL">ALL</option>
                     <option value="CS">CS</option>
                     <option value="IT">IT</option>
@@ -69,14 +80,15 @@
                     <option value="EI">EI</option>
                     <option value="MT">MT</option>
                     <option value="BT">BT</option>
+                    {{/ifEquals}}
                 </select>
             </div>
         </form>
-        </div>
+    </div>
     <div class="container my-3 content">
         {{!-- rgb(27, 26, 26) --}}
         <h2 style="color:white;text-align:center;">DOUBTS !</h2>
-        <form action="/auth/annteacher" method="post" enctype="multipart/form-data"  autocomplete="off">
+        <form action="/auth/annteacher" method="post" enctype="multipart/form-data" autocomplete="off">
             <div class="card">
                 <div class="card-body">
                     {{!-- <h5 class="card-title">ADD DOUBT</h5> --}}
@@ -124,8 +136,8 @@
                                 data-bs-target="#exampleModal{{this.id}}" style=" display: inline; ">
                                 Comment
                             </button>
-                            <form action="/auth/commrteacher" method="post" enctype="multipart/form-data"  autocomplete="off"
-                                style="display: inline;">
+                            <form action="/auth/commrteacher" method="post" enctype="multipart/form-data"
+                                autocomplete="off" style="display: inline;">
                                 <input type="hidden" name="pidd" value="{{this.id}}" />
                                 <button type="submit" class="btn btn-primary my-2 btn-sm" id="addBtnr">View
                                     Discussion</button>
@@ -140,22 +152,33 @@
                         </div>
                         <div>
                             <h6 style="color: gray;display:inline">{{this.name}} {{this.date}}</h6>
-                            <form action="/auth/dtr" method="post"  autocomplete="off" style="float:right">
-                             <input type="hidden" name="diid" value="{{this.id}}">
-                            <div class="dropdown" style="display: inline;">
-                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
-                                    id="dropdownMenuButton{{this.id}}" data-bs-toggle="dropdown" aria-expanded="false">
-                                </button>
-                                <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton{{this.id}}" name="option">
-                                    {{#ifEquals this.email ../userEmail}}
-                                    <li><button class="btn bg-transparent" type="submit" name="deletebtn"
-                                            value="{{this.id}}">Delete</button></li>
-                                    {{else}}        
-                                    <li><button class="btn bg-transparent" type="submit" name="reportbtn"
-                                            value="{{this.id}}">Report</button></li>
-                                    {{/ifEquals}}        
-                                </ul>
-                            </div>
+                            <form action="/auth/dtr" method="post" autocomplete="off" style="float:right">
+                                <input type="hidden" name="diid" value="{{this.id}}">
+                                <div class="dropdown" style="display: inline;">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                        id="dropdownMenuButton{{this.id}}" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                    </button>
+                                    <ul class="dropdown-menu text-center"
+                                        aria-labelledby="dropdownMenuButton{{this.id}}" name="option">
+                                        {{#ifEquals "Admin" ../userName}}
+                                        <li><button class="btn bg-transparent" type="submit" name="deletebtn"
+                                                value="{{this.id}}">Delete</button></li>
+                                        {{#ifEquals this.reports 1}}
+                                        <li><button class="btn bg-transparent" type="submit" name="ureportbtn"
+                                                value="{{this.id}}">Unreport</button></li>
+                                        {{/ifEquals}}
+                                        {{else}}
+                                        {{#ifEquals this.email ../userEmail}}
+                                        <li><button class="btn bg-transparent" type="submit" name="deletebtn"
+                                                value="{{this.id}}">Delete</button></li>
+                                        {{else}}
+                                        <li><button class="btn bg-transparent" type="submit" name="reportbtn"
+                                                value="{{this.id}}">Report</button></li>
+                                        {{/ifEquals}}
+                                        {{/ifEquals}}
+                                    </ul>
+                                </div>
                             </form>
                         </div>
                         <div class="modal fade" id="exampleModal{{this.id}}" tabindex="-1"
@@ -168,7 +191,8 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="/auth/comm1teacher" method="post" enctype="multipart/form-data"  autocomplete="off">
+                                        <form action="/auth/comm1teacher" method="post" enctype="multipart/form-data"
+                                            autocomplete="off">
                                             <input type="hidden" name="pid" value="{{this.id}}" />
                                             <textarea class="form-control inputt" name="contentr" id="addTask"
                                                 rows="1"></textarea>

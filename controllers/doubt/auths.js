@@ -9,24 +9,12 @@ const db = mysql.createConnection({
 
 exports.sortt = (req, res) => {
     const { tag } = req.body;
-    // if (tag == "ALL") {
-    //     // db.query('SELECT * from postspeer ORDER BY id DESC', (er, resul) => {
-    //     //     if (er) console.log(er);
-    //     //     return res.render('doubtpeer', {
-    //     //         resul, userName
-    //     //     });
-    //     // })
-    //     res.redirect('/doubtpeer');
-    // }
-    // else {
-
-    //     db.query('SELECT * from postspeer WHERE tag = ? ORDER BY id DESC', [tag], (er, resul) => {
-    //         if (er) console.log(er);
-    //         return res.render('doubtpeer', {
-    //             resul, userName
-    //         });
-    //     })
-    // }
-    tags=tag;
+    if (tag == 0 || tag == 1) {
+        console.log("hello"+tag);
+        flagdp = tag;
+    }
+    else {
+        tags = tag;
+    }
     res.redirect('/doubtpeer');
 }

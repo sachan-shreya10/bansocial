@@ -19,7 +19,6 @@ exports.hangout = (req, res) => {
     pics= req.files.pic;
     console.log(pics)
     upPath = './hangout_uploads/'+pics.name;
-    pro_pic_uploads
     imn=pics.name;
     pics.mv(upPath, function(err){
         if(err){
@@ -51,4 +50,8 @@ exports.hangout = (req, res) => {
         }
     })
 
+}
+exports.showh = (req, res) => {
+    flagh=req.body.option;
+    res.redirect('/hangout');
 }

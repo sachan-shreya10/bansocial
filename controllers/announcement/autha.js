@@ -41,3 +41,8 @@ exports.ann = (req, res) => {
         });
     }
 }
+
+exports.show = (req, res) => {
+    flag=req.body.option;
+    res.redirect('/ann');
+}

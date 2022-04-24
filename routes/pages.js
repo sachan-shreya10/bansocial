@@ -14,7 +14,9 @@ const db = mysql.createConnection({
 })
 /*************************************LOGIN PAGE********************************** */
 router.get('/', (req, res) => {
-    res.render('login');
+    res.render('login',{
+        message
+    });
 });
 
 /*************************************LOGOUT ********************************** */
@@ -35,6 +37,104 @@ router.get('/logout', function (req, res) {
 
 router.get('/register', (req, res) => {
     res.render('register');
+});
+
+router.get('/verify-email', (req, res) => {
+    const token = req.query.token;
+    db.query('SELECT email FROM teacher WHERE emailToken=?', [token], (error, results) => {
+        if (error) {
+            console.log(error);
+            console.log("Email is not verified");
+        }
+        else if (results.length > 0) {
+            const email = results[0].email;
+            console.log(email);
+            console.log(email);
+            db.query('UPDATE teacher SET emailToken=? , isVerified=? where email=?', [null, 1, email], (err, ress) => {
+                if (err) {
+                    console.log(err);
+                }
+                return res.render('login', {
+                    message: 'successfully registered'
+                });
+
+            }
+            )
+        }
+        else {
+            db.query('SELECT email FROM student WHERE emailToken=?', [token], (error, resultss) => {
+                if (error) {
+                    console.log(error);
+                    console.log("Email is not verified");
+                }
+                else {
+                    const email = resultss[0].email;
+                    console.log(email);
+                    db.query('UPDATE student SET emailToken=? , isVerified=? where email=?', [null, 1, email], (err, ress) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        return res.render('login', {
+                            message: 'successfully registered'
+                        });
+
+                    })
+                }
+            })
+        }
+    })
+})
+
+router.get('/reset-password', (req, res) => {
+    const email = req.query.email;
+    userEmail = email;
+    db.query('SELECT emailToken FROM student WHERE email=?', [email], (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+        if (results.length > 0) {
+            if(results[0].emailToken)
+            {
+                res.redirect('/reset');
+            }
+            else{
+                message = 'verification link expired';
+                res.redirect("/");
+            }
+
+        }
+        else {
+            db.query('SELECT emailToken FROM teacher WHERE email', [email], (error, results) => {
+                if (error) {
+                    console.log(error);
+                }
+                if (results.length > 0) {
+                    if(results[0].emailToken)
+                    {
+                        res.redirect('/reset');
+                    }
+                    else{
+                        message = 'verification link expired';
+                        res.redirect("/");
+                    }
+                    
+                }
+                else {
+                    message = 'verification link expired';
+                    res.redirect("/");
+                }
+            });
+        }
+    })
+})
+router.get('/reset', (req, res) => {
+    // if (userEmail=="") {
+    //     message = "verification link expired";
+    //     res.redirect("/");
+    // }
+    // else {
+        res.render('reset');
+    //}
 });
 /*************************************HOME PAGE********************************** */
 router.get('/home', (req, res) => {
@@ -98,8 +198,10 @@ router.get('/editpro', (req, res) => {
 /*************************************ANNOUNCEMENT PAGE********************************** */
 router.get('/ann', (req, res) => {
     if (req.session.userId) {
-        db.query('SELECT * from announcement where reports =? ORDER BY id DESC', [0], (er, resul) => {
+        console.log(flag);
+        db.query('SELECT * from announcement where reports =? ORDER BY id DESC', [flag], (er, resul) => {
             if (er) console.log(er);
+            // flag=0;
             return res.render('ann', {
                 resul, userName, userEmail
             });
@@ -112,7 +214,7 @@ router.get('/ann', (req, res) => {
 /*************************************JOURNEY PAGE********************************** */
 router.get('/journey', (req, res) => {
     if (req.session.userId) {
-        db.query('SELECT * from journey where reports =? ORDER BY id DESC', [0], (er, resul) => {
+        db.query('SELECT * from journey where reports =? ORDER BY id DESC', [flagj], (er, resul) => {
             if (er) console.log(er);
             return res.render('journey', {
                 resul, userName, userEmail
@@ -152,8 +254,8 @@ router.get('/doubtpeer', (req, res) => {
             res.render('msg');
         }
         else {
-            if (tags == "ALL") {
-                db.query('SELECT * from postspeer WHERE reports=? ORDER BY id DESC', [0], (er, resul) => {
+            if (role == "admin") {
+                db.query('SELECT * from postspeer WHERE reports=? ORDER BY id DESC', [flagdp], (er, resul) => {
                     if (er) console.log(er);
                     return res.render('doubtpeer', {
                         resul, userName, userEmail
@@ -161,12 +263,23 @@ router.get('/doubtpeer', (req, res) => {
                 })
             }
             else {
-                db.query('SELECT * from postspeer WHERE tag = ? AND reports=?  ORDER BY id DESC', [tags, 0], (er, resul) => {
-                    if (er) console.log(er);
-                    return res.render('doubtpeer', {
-                        resul, userName, userEmail
-                    });
-                })
+                console.log(tags);
+                if (tags != 'ALL') {
+                    db.query('SELECT * from postspeer WHERE tag = ? AND reports=?  ORDER BY id DESC', [tags, 0], (er, resul) => {
+                        if (er) console.log(er);
+                        return res.render('doubtpeer', {
+                            resul, userName, userEmail
+                        });
+                    })
+                }
+                else {
+                    db.query('SELECT * from postspeer WHERE reports=?  ORDER BY id DESC', [0], (er, resul) => {
+                        if (er) console.log(er);
+                        return res.render('doubtpeer', {
+                            resul, userName, userEmail
+                        });
+                    })
+                }
             }
         }
     }
@@ -199,8 +312,8 @@ router.get('/doubtsenior', (req, res) => {
             res.render('msg');
         }
         else {
-            if (tagsS == "ALL") {
-                db.query('SELECT * from postssenior WHERE reports =? ORDER BY id DESC', [0], (er, resul) => {
+            if (role == "admin") {
+                db.query('SELECT * from postssenior WHERE reports =? ORDER BY id DESC', [flagds], (er, resul) => {
                     if (er) console.log(er);
                     return res.render('doubtsenior', {
                         resul, userName, userEmail
@@ -208,12 +321,22 @@ router.get('/doubtsenior', (req, res) => {
                 })
             }
             else {
-                db.query('SELECT * from postssenior WHERE tag = ? AND reports=? ORDER BY id DESC', [tagsS, 0], (er, resul) => {
-                    if (er) console.log(er);
-                    return res.render('doubtsenior', {
-                        resul, userName, userEmail
-                    });
-                })
+                if (tagsS != 'ALL') {
+                    db.query('SELECT * from postssenior WHERE tag = ? AND reports=? ORDER BY id DESC', [tagsS, 0], (er, resul) => {
+                        if (er) console.log(er);
+                        return res.render('doubtsenior', {
+                            resul, userName, userEmail
+                        });
+                    })
+                }
+                else {
+                    db.query('SELECT * from postspeer WHERE reports=?  ORDER BY id DESC', [0], (er, resul) => {
+                        if (er) console.log(er);
+                        return res.render('doubtsenior', {
+                            resul, userName, userEmail
+                        });
+                    })
+                }
             }
         }
     }
@@ -242,8 +365,8 @@ router.get('/repliessenior', (req, res) => {
 
 router.get('/doubtteacher', (req, res) => {
     if (req.session.userId) {
-        if (tagsT == "ALL") {
-            db.query('SELECT * from poststeacher WHERE reports=? ORDER BY id DESC', [0], (er, resul) => {
+        if (role == "admin") {
+            db.query('SELECT * from poststeacher WHERE reports=? ORDER BY id DESC', [flagdt], (er, resul) => {
                 if (er) console.log(er);
                 return res.render('doubtteacher', {
                     resul, userName, userEmail
@@ -251,12 +374,22 @@ router.get('/doubtteacher', (req, res) => {
             })
         }
         else {
-            db.query('SELECT * from poststeacher WHERE tag = ? AND reports=? ORDER BY id DESC', [tagsT, 0], (er, resul) => {
-                if (er) console.log(er);
-                return res.render('doubtteacher', {
-                    resul, userName, userEmail
-                });
-            })
+            if (tagsT != 'ALL') {
+                db.query('SELECT * from poststeacher WHERE tag = ? AND reports=? ORDER BY id DESC', [tagsT, 0], (er, resul) => {
+                    if (er) console.log(er);
+                    return res.render('doubtteacher', {
+                        resul, userName, userEmail
+                    });
+                })
+            }
+            else {
+                db.query('SELECT * from postspeer WHERE reports=?  ORDER BY id DESC', [0], (er, resul) => {
+                    if (er) console.log(er);
+                    return res.render('doubtteacher', {
+                        resul, userName, userEmail
+                    });
+                })
+            }
         }
     }
     else {
@@ -289,51 +422,6 @@ router.get('/msg', (req, res) => {
     }
 });
 
-router.get('/verify-email', (req, res) => {
-    const token = req.query.token;
-    db.query('SELECT email FROM teacher WHERE emailToken=?', [token], (error, results) => {
-        if (error) {
-            console.log(error);
-            console.log("Email is not verified");
-        }
-        else if (results.length > 0) {
-            const email = results[0].email;
-            console.log(email);
-            console.log(email);
-            db.query('UPDATE teacher SET emailToken=? , isVerified=? where email=?', [null, 1, email], (err, ress) => {
-                if (err) {
-                    console.log(err);
-                }
-                return res.render('login', {
-                    message: 'successfully registered'
-                });
-
-            }
-            )
-        }
-        else {
-            db.query('SELECT email FROM student WHERE emailToken=?', [token], (error, resultss) => {
-                if (error) {
-                    console.log(error);
-                    console.log("Email is not verified");
-                }
-                else {
-                    const email = resultss[0].email;
-                    console.log(email);
-                    db.query('UPDATE student SET emailToken=? , isVerified=? where email=?', [null, 1, email], (err, ress) => {
-                        if (err) {
-                            console.log(err);
-                        }
-                        return res.render('login', {
-                            message: 'successfully registered'
-                        });
-
-                    })
-                }
-            })
-        }
-    })
-})
 
 /********************************RESOURCE PAGE****************************************** */
 
@@ -385,7 +473,7 @@ router.get('/papers', (req, res) => {
 router.get('/viewnotes', (req, res) => {
     if (req.session.userId) {
         // const { subject } = req.body;
-        db.query('SELECT * from notes WHERE subname =? AND reports=? ORDER BY nid DESC', [subject, 0], (er, resul) => {
+        db.query('SELECT * from notes WHERE subname =? AND reports=? ORDER BY nid DESC', [subject, flagn], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewnotes', {
                 resul, subject, userName, userEmail
@@ -399,7 +487,7 @@ router.get('/viewnotes', (req, res) => {
 //*****************************************FOR EXPERIENCES****************************** */
 router.get('/viewexp', (req, res) => {
     if (req.session.userId) {
-        db.query('SELECT * from exp WHERE ename =? AND cname=? AND reports=? ORDER BY eid DESC', [expname, company, 0], (er, resul) => {
+        db.query('SELECT * from exp WHERE ename =? AND cname=? AND reports=? ORDER BY eid DESC', [expname, company, flage], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewexp', {
                 resul, expname, company, userName, userEmail
@@ -415,7 +503,7 @@ router.get('/viewexp', (req, res) => {
 router.get('/viewpapers', (req, res) => {
     if (req.session.userId) {
         // const { expname, company } = req.body;
-        db.query('SELECT * from papers WHERE bname =? AND yname=? AND reports=? ORDER BY pid DESC', [branch, year, 0], (er, resul) => {
+        db.query('SELECT * from papers WHERE bname =? AND yname=? AND reports=? ORDER BY pid DESC', [branch, year, flagp], (er, resul) => {
             if (er) console.log(er);
             return res.render('viewpapers', {
                 resul, branch, year, userName, userEmail
@@ -431,7 +519,7 @@ router.get('/viewpapers', (req, res) => {
 
 router.get('/hangout', (req, res) => {
     if (req.session.userId) {
-        db.query('SELECT * from hangout WHERE pid is NULL AND reports = 0 ORDER BY cid DESC', (er, comm) => {
+        db.query('SELECT * from hangout WHERE pid is NULL AND reports = ? ORDER BY cid DESC', [flagh], (er, comm) => {
             db.query('SELECT * from hangout WHERE pid ORDER BY cid DESC', (er, replyy) => {
                 if (er) console.log(er);
                 // console.log(result)
@@ -447,7 +535,46 @@ router.get('/hangout', (req, res) => {
     }
 });
 
+/*************************************Dashboard********************************** */
 
-
+router.get('/dashboard', (req, res) => {
+    if (req.session.userId) {
+        user = 0;
+        like = 0;
+        postt = 0;
+        report = 0;
+        comment = 0;
+        db.query('SELECT COUNT(*) as cs  FROM student; ', (er, result) => {
+            if (er) console.log(er);
+            user = user + result[0].cs;
+        });
+        db.query('SELECT COUNT(*) as ct  FROM teacher; ', (er, result) => {
+            if (er) console.log(er);
+            user = user + result[0].ct;
+        });
+        db.query('select sum(post.posts) as postt from(select count(*) as posts from postspeer UNION ALL select count(*)  as posts from postssenior UNION ALL select count(*)  as posts from poststeacher UNION ALL select count(*)  as posts from hangout UNION ALL select count(*)  as posts from journey UNION ALL select count(*)  as posts from announcement UNION ALL select count(*)  as posts from exp UNION ALL select count(*)  as posts from notes UNION ALL select count(*)  as posts from papers)post;', (er, result) => {
+            if (er) console.log(er);
+            postt = result[0].postt;
+        });
+        db.query('select sum(post.posts) as postt from(select count(*) as posts from postspeer UNION ALL select count(*)  as posts from postssenior UNION ALL select count(*)  as posts from poststeacher UNION ALL select count(*)  as posts from hangout UNION ALL select count(*)  as posts from journey UNION ALL select count(*)  as posts from announcement UNION ALL select count(*)  as posts from exp UNION ALL select count(*)  as posts from notes UNION ALL select count(*)  as posts from papers)post;', (er, result) => {
+            if (er) console.log(er);
+            postt = result[0].postt;
+        });
+        db.query('select sum(rep.repo) as report from(select sum(reports) as repo from postspeer UNION ALL select  sum(reports) as repo from postssenior UNION ALL select sum(reports) as repo from poststeacher UNION ALL select  sum(reports) as repo from hangout UNION ALL select  sum(reports) as repo from journey UNION ALL select  sum(reports) as repo from announcement UNION ALL select  sum(reports) as repo from exp UNION ALL select  sum(reports) as repo from notes UNION ALL select  sum(reports) as repo from papers)rep;', (er, result) => {
+            if (er) console.log(er);
+            report = result[0].report;
+        });
+        db.query('SELECT SUM(likes) as liket FROM hangout; ', (er, result) => {
+            if (er) console.log(er);
+            like = result[0].liket;
+            res.render('dashboard', {
+                user, postt, comment, like, report
+            });
+        });
+    }
+    else {
+        res.redirect("/");
+    }
+});
 
 module.exports = router;

@@ -41,12 +41,15 @@ exports.register = (req, res) => {
                 });
             }
             if (cpassword != password) {
-                return res.render('register', {
-                    message: 'passwords do not match'
-                });
+                // return res.render('register', {
+                //     message: 'passwords do not match'
+                // });
+                message= 'passwords do not match';
+                res.redirect("/register");
+
             }
             var mailOptions = {
-                from: ' "Verify your email" <demo.shreya10@gmail.com>',
+                from: ' "bansocial" <demo.shreya10@gmail.com>',
                 to: email,
                 subject: 'verify your email',
                 html: `<h2> ${req.body.name}! Thanks for registering on our site </h2>
@@ -61,9 +64,6 @@ exports.register = (req, res) => {
                     console.log("Verification email is sent to your email account");
                 }
             })
-            console.log("check email");
-            console.log(email);
-
             let hashedPassword = await bcrypt.hash(password, 8);
             console.log(hashedPassword);
 
@@ -74,9 +74,8 @@ exports.register = (req, res) => {
                 else {
                     console.log("check email2");
                     console.log(email);
-                    return res.render('register', {
-                        message: "Verification code sent to your account"
-                    });
+                    message= "Verification code sent to your account";
+                    res.redirect("/register");
 
                 }
             });
@@ -89,24 +88,29 @@ exports.register = (req, res) => {
                 console.log(err);
             }
             if (result.length > 0) {
-                return res.render('register', {
-                    message: 'Already registered'
-                });
+                // return res.render('register', {
+                //     message: 'Already registered'
+                // });
+                message= 'Already registered';
+                res.redirect("/");
             }
             console.log(cpassword)
             console.log(password)
 
             if (cpassword != password) {
-                return res.render('register', {
-                    message: 'passwords do not match'
-                });
+                // return res.render('register', {
+                //     message: 'passwords do not match'
+                // });
+                message= 'passwords do not match';
+                res.redirect("/register");
+
             }
 
             var mailOptions = {
                 from: ' "Verify your email" <demo.shreya10@gmail.com>',
                 to: email,
-                subject: 'verify your email',
-                html: `<h2> ${req.body.name}! Thanks for registering on our site </h2>
+                subject: 'bansocial',
+                html: `<h2> ${req.body.name}! Thanks for registering on our site BanSocial</h2>
             <h4>Please verify your email to continue...</h4>
             <a href="http://${req.headers.host}/verify-email?token=${cp}">Verify your email</a>`
             }
@@ -127,9 +131,11 @@ exports.register = (req, res) => {
                     console.log(err);
                 }
                 else {
-                    return res.render('register', {
-                        message: "verification email is sent to your account"
-                    });
+                    // return res.render('register', {
+                    //     message: "verification email is sent to your account"
+                    // });
+                    message= "verification email is sent to your account";
+                    res.redirect('/');
 
                 }
             });

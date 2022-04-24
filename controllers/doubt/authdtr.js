@@ -17,8 +17,16 @@ exports.dtr= (req, res) => {
             res.redirect('/doubtteacher');
         })
     }
-    else{
+    else if(deletebtn){
         db.query('DELETE FROM poststeacher WHERE id=?',[diid], (err, resul) => {
+            if (err) {
+                console.log(err);
+            }
+            res.redirect('/doubtteacher');
+        })
+    }
+    else{
+        db.query('UPDATE poststeacher SET reports = ? WHERE id=?',[0,diid], (err, resul) => {
             if (err) {
                 console.log(err);
             }

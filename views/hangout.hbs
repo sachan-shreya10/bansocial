@@ -7,15 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/hangout.css">
-    <title>Hangout Page</title>
+    <title>Shareout Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <style>
     @media only screen and (min-width: 1200px) {
         .container {
-            padding-left: 12vw;
-            padding-right: 12vw;
+            padding-left: 14vw;
+            padding-right: 14vw;
         }
     }
 </style>
@@ -46,9 +46,15 @@
             </div>
             <div class="mx-2">
                 <ul class="navbar-nav mb-2 mb-lg-0">
+                    {{#ifEquals userName "Admin"}}
+                     <li class="nav-item">
+                        <a class="nav-link" href="/dashboard" style="color: black;">{{userName}}</a>
+                    </li>
+                    {{else}}
                     <li class="nav-item">
                         <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
                     </li>
+                    {{/ifEquals}}
                     <li class="nav-item">
                         <a href="/logout" class="btn btn-dark">Log Out</a>
                     </li>
@@ -57,9 +63,23 @@
             </div>
         </div>
     </nav>
-
+    {{#ifEquals "Admin" userName}}
+    <div>
+        <form name="formr" action="/auth/showh" method="post">
+            {{!-- <button type="submit" class="btn btn-primary btn-sm" id="rbtn">View Reported Posts</button> --}}
+            <div class="form-group" style="position: fixed;">
+                <label for="tags"><span style="color:white">Sort by:</span></label>
+                <select id="tags" name="option" onchange="formr.submit()">
+                    <option value="null"></option>
+                    <option value="0">All Posts</option>
+                    <option value="1">Reported Posts</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    {{/ifEquals}}
     <div class="container my-3">
-        <h2 style="color:#1a1818;text-align:center;">Post</h2>
+        <h2 style="color:#1a1818;text-align:center;font-family:Georgia">SHARE HERE</h2>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Create Post</h5>
@@ -81,166 +101,178 @@
 
 
         </div>
-        <div id="tasks" class="row container-fluid">
+        {{!-- <div id="tasks" class="row container-fluid"> --}}
+            <div id="tasks" class="announ row container-fluid" style="margin: 0;padding:0">
+                {{#each comm}}
+                {{!-- <div class="noteCard my-2 mx-7 card" style="width: 30rem; margin:30px; margin-left:12rem;"> --}}
+                    <div class="noteCard my-2 mx-1 card" style="background: rgba(255,255,255,0.8);">
+                        <div class="card-body">
+                            <div class="form-group">
+                                {{!-- <h5 class="card-title">Post {{this.cid}}</h5> --}}
+                                {{!-- <div style="float: left;"> --}}
+                                    <h6 style="color: black;">{{this.username}}</h6>
+                                    <h10 style="color: gray;display:inline; ">{{this.cdate}}</h10>
+                                    {{!--
+                                </div> --}}
+                                <hr>
+                                {{!-- <p class="card-text my-2 mx-2" style="width: 50rem; padding:8%;">{{this.des}}</p>
+                                --}}
+                                <p class="card-text">{{this.des}}</p>
+                                {{#if this.img}}
+                                <div style="border: #1a1818;s">
+                                    <img src="/{{this.img}}" class="card-img-top" alt="..." height="380"
+                                        style="padding: 3%;">
+                                </div>
+                                {{/if}}
+                                {{!-- <div class="card text-center"> --}}
 
-            {{#each comm}}
+                                    {{!-- </div> --}}
 
-            <div class="noteCard my-2 mx-7 card" style="width: 30rem; margin:30px; margin-left:12rem;">
-                <div class="card-body">
-
-                    <div class="form-group">
-                        {{!-- <h5 class="card-title">Post {{this.cid}}</h5> --}}
-                        {{!-- <div style="float: left;"> --}}
-                            <h6 style="color: black;">{{this.username}}</h6>
-                            <h10 style="color: gray;display:inline; ">{{this.cdate}}</h10>
-                            {{!--
-                        </div> --}}
-                        <hr>
-                        <p class="card-text my-2 mx-2" style="width: 50rem; padding:8%;">{{this.des}}</p>
-                        {{#if this.img}}
-                        <div style="border: #1a1818;s">
-                            <img src="/{{this.img}}" class="card-img-top" alt="..." height="180" style="padding: 3%;">
-                        </div>
-                        {{/if}}
-                        {{!-- <div class="card text-center"> --}}
-
-                            {{!-- </div> --}}
-
-                    </div>
-
-
-                    <form action="/auth/likes" method="post" target="uploader_iframe" style="display: inline;">
-                        <input type="hidden" id="btn1" name="cid" value="{{this.cid}}" style="display: inline;"></input>
-                        <button type="submit" class="btn btn-primary my-2" id="likebtn{{this.cid}}"
-                            onclick="likes({{this.cid}},{{this.likes}})" style="background-color: blue;"><span
-                                id="count{{this.cid}}">{{this.likes}}</span> Likes</button>
-                    </form>
-                    <iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
-
-                    {{!-- <p class="card-text my-2 mx-2 card" style="width: 50rem; padding:30px;"></p> --}}
-                    <button onclick="rep({{this.cid}})" class="btn btn-primary my-2" id="addBtn"
-                        style="margin-top: 20px;">Reply</button>
-
-                    <button class="btn btn-primary my-2" id="addBtnr" onclick="disRep({{this.cid}})">View
-                        replies</button>
-                    <div>
-                        {{!-- <h6 style="color: gray;display:inline">{{this.date}}</h6> --}}
-                        <form action="/auth/repo" method="post">
-                            <input type="hidden" name="id" value="{{this.cid}}">
-                            <div class="dropdown" style="display: inline;float:right">
-                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
-                                    id="dropdownMenuButton{{this.cid}}" data-bs-toggle="dropdown" aria-expanded="false">
-                                </button>
-                                <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton{{this.cid}}"
-                                    name="option">
-                                    {{!-- <h2>Aaaja</h2> --}}
-                                    {{#ifEquals this.email ../userEmail}}
-                                    {{!-- <h2>Katai bekaar</h2> --}}
-                                    <li><button class="btn bg-transparent" type="submit" name="deletebtn"
-                                            value="{{this.cid}}">Delete</button></li>
-                                    {{else}}
-                                    <li><button class="btn bg-transparent" type="submit" name="reportbtn"
-                                            value="{{this.cid}}">Report</button></li>
-                                    {{/ifEquals}}
-                                </ul>
                             </div>
-                        </form>
-                    </div>
+
+
+                            <form action="/auth/likes" method="post" target="uploader_iframe" style="display: inline;">
+                                <input type="hidden" id="btn1" name="cid" value="{{this.cid}}"
+                                    style="display: inline;"></input>
+                                <button type="submit" class="btn btn-primary my-2" id="likebtn{{this.cid}}"
+                                    onclick="likes({{this.cid}},{{this.likes}})" style="background-color: blue;"><span
+                                        id="count{{this.cid}}">{{this.likes}}</span> Likes</button>
+                            </form>
+                            <iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
+
+                            {{!-- <p class="card-text my-2 mx-2 card" style="width: 50rem; padding:30px;"></p> --}}
+                            <button onclick="rep({{this.cid}})" class="btn btn-primary my-2" id="addBtn"
+                                style="margin-top: 20px;">Reply</button>
+
+                            <button class="btn btn-primary my-2" id="addBtnr" onclick="disRep({{this.cid}})">View
+                                replies</button>
+                            <div>
+                                {{!-- <h6 style="color: gray;display:inline">{{this.date}}</h6> --}}
+                                <form action="/auth/repo" method="post">
+                                    <input type="hidden" name="id" value="{{this.cid}}">
+                                    <div class="dropdown" style="display: inline;float:right">
+                                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                            id="dropdownMenuButton{{this.cid}}" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        </button>
+                                        <ul class="dropdown-menu text-center"
+                                            aria-labelledby="dropdownMenuButton{{this.cid}}" name="option">
+                                            {{#ifEquals "Admin" ../userName}}
+                                            <li><button class="btn bg-transparent" type="submit" name="deletebtn"
+                                                    value="{{this.cid}}">Delete</button></li>
+                                            {{#ifEquals this.reports 1}}
+                                            <li><button class="btn bg-transparent" type="submit" name="ureportbtn"
+                                                    value="{{this.cid}}">Unreport</button></li>
+                                            {{/ifEquals}}
+                                            {{else}}
+                                            {{#ifEquals this.email ../userEmail}}
+                                            <li><button class="btn bg-transparent" type="submit" name="deletebtn"
+                                                    value="{{this.cid}}">Delete</button></li>
+                                            {{else}}
+                                            <li><button class="btn bg-transparent" type="submit" name="reportbtn"
+                                                    value="{{this.cid}}">Report</button></li>
+                                            {{/ifEquals}}
+                                            {{/ifEquals}}
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div>
 
 
 
 
-                    {{!-- {{#each replyy}} --}}
+                            {{!-- {{#each replyy}} --}}
 
-                    <form action="/auth/reply" id="repp" class="formc{{this.cid}}" method="post" style="display:none;">
-                        <div class="form-group">
-                            <input type="hidden" name="pid" value="{{this.cid}}" required>
-                            <textarea class="form-control" id="addTask" rows="3" name="des"></textarea>
+                            <form action="/auth/reply" id="repp" class="formc{{this.cid}}" method="post"
+                                style="display:none;">
+                                <div class="form-group">
+                                    <input type="hidden" name="pid" value="{{this.cid}}" required>
+                                    <textarea class="form-control" id="addTask" rows="1" name="des"></textarea>
+                                </div>
+                                <button class="btn btn-primary my-2" id="addBtn">DONE</button>
+
+                            </form>
+
+                            {{#each ../replyy}}
+
+                            {{#ifEquals this.pid ../this.cid}}
+                            {{!-- {{this.reply_of}} is equal to {{../this.id}} --}}
+                            <div style="display: none;" class="reply{{this.pid}}">
+                                <hr>
+                                </hr>
+                                <h6 style="color: grey;">{{this.username}}</h6>
+                                <p style="color: black;">{{this.des}}</p>
+                            </div>
+                            {{!-- {{else}} --}}
+                            {{!-- {{this.reply_of}} is not equal to {{../this.id}} --}}
+                            {{/ifEquals}}
+
+
+                            {{/each}}
+
+
+                            <script>
+                                function rep(idcomm) {
+                                    //document.getElementById("repp").style.display = "block";
+                                    //alert("chl jaa be");
+                                    var repli = document.querySelectorAll(".formc" + idcomm);
+                                    for (var i = 0; i < repli.length; i++) {
+                                        repli[i].style.display = "block";
+                                    }
+                                }
+
+                                //function liked() {
+                                //    var element = document.getElementById("like");
+                                //    element.classList.toggle("liked");
+                                //}
+                                function disRep(id) {
+
+                                    str = 'reply' + id
+
+                                    var rep = document.getElementsByClassName(str);
+
+                                    for (var i = 0; i < rep.length; i++) {
+                                        rep[i].style.display = '';
+                                    }
+
+                                }
+
+
+                                function likes(id, c) {
+
+                                    str = 'count' + id
+                                    const count = document.getElementById(str);
+
+
+                                    if (document.getElementById('likebtn' + id).style.backgroundColor == "blue") {
+                                        document.getElementById('likebtn' + id).style.backgroundColor = "#f06156"
+                                        //btn.style.background = "red";
+                                        var ct = c + 1;
+                                        count.innerHTML = `${ct}`
+                                    }
+                                    else {
+                                        document.getElementById('likebtn' + id).disabled = "true";
+                                    }
+
+
+
+                                }
+
+
+
+                            </script>
+
+
                         </div>
-                        <button class="btn btn-primary my-2" id="addBtn">DONE</button>
-
-                    </form>
-
-                    {{#each ../replyy}}
-
-                    {{#ifEquals this.pid ../this.cid}}
-                    {{!-- {{this.reply_of}} is equal to {{../this.id}} --}}
-                    <div style="display: none;" class="reply{{this.pid}}">
-                        <hr>
-                        </hr>
-                        <h5>{{this.cid}}</h5>
-                        <p>{{this.des}}</p>
                     </div>
-                    {{!-- {{else}} --}}
-                    {{!-- {{this.reply_of}} is not equal to {{../this.id}} --}}
-                    {{/ifEquals}}
-
 
                     {{/each}}
 
-                    
-                    <script>
-                        function rep(idcomm) {
-                            //document.getElementById("repp").style.display = "block";
-                            //alert("chl jaa be");
-                            var repli = document.querySelectorAll(".formc" + idcomm);
-                            for (var i = 0; i < repli.length; i++) {
-                                repli[i].style.display = "block";
-                            }
-                        }
-
-                        //function liked() {
-                        //    var element = document.getElementById("like");
-                        //    element.classList.toggle("liked");
-                        //}
-                        function disRep(id) {
-
-                            str = 'reply' + id
-
-                            var rep = document.getElementsByClassName(str);
-
-                            for (var i = 0; i < rep.length; i++) {
-                                rep[i].style.display = '';
-                            }
-
-                        }
-
-
-                        function likes(id, c) {
-
-                            str = 'count' + id
-                            const count = document.getElementById(str);
-
-
-                            if (document.getElementById('likebtn' + id).style.backgroundColor == "blue") {
-                                document.getElementById('likebtn' + id).style.backgroundColor = "red"
-                                //btn.style.background = "red";
-                                var ct = c + 1;
-                                count.innerHTML = `${ct}`
-                            }
-                            else {
-                                document.getElementById('likebtn' + id).disabled = "true";
-                            }
-
-
-
-                        }
-
-
-
-                    </script>
-
-
                 </div>
             </div>
-
-            {{/each}}
-
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
 
 </body>
 

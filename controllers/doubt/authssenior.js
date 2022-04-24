@@ -10,16 +10,12 @@ const db = mysql.createConnection({
 
 exports.sorttsenior = (req, res) => {
     const { tag } = req.body;
-    // console.log("hello1")
-    // console.log(req.body);
-    // const {tag}=req.body;
-    // // console.log(pidd)
-    // db.query('SELECT * from postssenior WHERE tag = ? ORDER BY id DESC',[tag], (er, result) => {
-    //     if (er) console.log(er);
-    //     return res.render('sortsenior', {
-    //         result,userName
-    //     });
-    // })
-    tagsS=tag;
+    if (tag == 0 || tag == 1) {
+        console.log("hello"+tag);
+        flagds = tag;
+    }
+    else {
+        tagS = tag;
+    }
     res.redirect('/doubtsenior');
 }

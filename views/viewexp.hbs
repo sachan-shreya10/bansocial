@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources</title>
+    <title>Experience</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -45,7 +45,8 @@
             margin-top: 15px;
 
         }
-        .card{
+
+        .card {
             background-color: rgba(238, 249, 250, 0.8);
             color: black;
         }
@@ -55,7 +56,7 @@
 
 <body
     style="background-image:url(https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?cs=srgb&dl=pexels-pixabay-531880.jpg&fm=jpg); background-repeat: no-repeat;; background-size: cover;">
-      <nav class="navbar  navbar-expand-lg navbar-light bg-light"
+    <nav class="navbar  navbar-expand-lg navbar-light bg-light"
         style="font-family: Georgia, 'Times New Roman', Times, serif;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -68,16 +69,17 @@
                     <li class="nav-item">
                         <a class="navbar-brand" href="#">
                             <img src="/images/logo.jpeg" alt="" width="30" height="24"><span
-                                style="color:rgb(187, 187, 7);font-size: 18pt;">बन</span><span style="color:rgb(196, 8, 8);font-size: 16pt;">Social</span>
+                                style="color:rgb(187, 187, 7);font-size: 18pt;">बन</span><span
+                                style="color:rgb(196, 8, 8);font-size: 16pt;">Social</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" aria-current="page" href="/aboutus">About Us</a>
-                  </li>
-              <!-- <li class="nav-item dropdown">
+                        <a class="nav-link" aria-current="page" href="/aboutus">About Us</a>
+                    </li>
+                    <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Explore</a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#">Action</a></li>
@@ -89,9 +91,15 @@
             </div>
             <div class="mx-2">
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                   <li class="nav-item">
+                   {{#ifEquals userName "Admin"}}
+                     <li class="nav-item">
+                        <a class="nav-link" href="/dashboard" style="color: black;">{{userName}}</a>
+                    </li>
+                    {{else}}
+                    <li class="nav-item">
                         <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
                     </li>
+                    {{/ifEquals}}
                     <li class="nav-item">
                         <a href="/logout" class="btn btn-dark">Log Out</a>
                     </li>
@@ -100,6 +108,21 @@
             </div>
         </div>
     </nav>
+    {{#ifEquals "Admin" userName}}
+    <div>
+        <form name="formr" action="/auth/showe" method="post">
+            {{!-- <button type="submit" class="btn btn-primary btn-sm" id="rbtn">View Reported Posts</button> --}}
+            <div class="form-group" style="position: fixed;">
+                <label for="tags"><span style="color:white">Sort by:</span></label>
+                <select id="tags" name="option" onchange="formr.submit()">
+                    <option value="null"></option>
+                    <option value="0">All Posts</option>
+                    <option value="1">Reported Posts</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    {{/ifEquals}}
     <div class="container my-3 content">
 
         <h1>{{expname}} EXPERIENCE OF {{company}}</h1>
@@ -107,26 +130,19 @@
         <form action="/auth/viewexp" method="post" enctype="multipart/form-data">
             <div class="card">
                 <div class="card-body">
-                    {{!-- <h5 class="card-title">ADD ANNOUNCEMENT</h5> --}}
-                    {{!-- <form action="/auth/register" method="post"> --}}
-                        <h4 class="card-title">Want to share your {{expname}} experience for {{company}}? </h4>
-                        <p>Make sure that the document to be uploaded has the name (in capital letter) as :
-                            <b>internship/placement duration.pdf</b> <br>(eg : 2020-2021.pdf)
-                        </p>
-                        {{!<div class="form-group">
-                            <textarea class="form-control inputt" name="name" id="addTask" rows="1"></textarea>
-                        </div>}}
-                        {{!-- <h6 class="card-title">DESCRIPTION</h6>
-                        <div class="form-group">
-                            <textarea class="form-control inputt" name="textt" id="addTask" rows="2"></textarea>
-                        </div> --}}
-                        <hr>
-                        <div class="form-group">
-                            <input type="file" name="doc" id="adddoc">
-                        </div>
-                        <input type="hidden" name="expname" value="{{expname}}"></input>
-                        <input type="hidden" name="company" value="{{company}}"></input>
-                        <button type="submit" class="btn btn-primary my-2" id="addBtn">Upload</button>
+                    <h4 class="card-title">Want to share your {{expname}} experience for {{company}}? </h4>
+                    <p>Make sure that the document to be uploaded has the name as :
+                        <b>internship/placement duration.pdf</b> <br>(eg : 2020.pdf)
+                    </p>
+                    <hr>
+                    <div class="form-group">
+                        <input type="file" name="doc" id="adddoc">
+                    </div>
+                    <input type="hidden" name="expname" value="{{expname}}"></input>
+                    <input type="hidden" name="company" value="{{company}}"></input>
+                    <h6>Name</h6>
+                    <textarea class="form-control inputt" name="fname" id="fname" rows="1"></textarea>
+                    <button type="submit" class="btn btn-primary my-2" id="addBtn">Upload</button>
                 </div>
             </div>
         </form>
@@ -145,12 +161,21 @@
                             </button>
                             <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton{{this.eid}}"
                                 name="option">
+                                {{#ifEquals "Admin" ../userName}}
+                                <li><button class="btn bg-transparent" type="submit" name="deletebtn"
+                                        value="{{this.eid}}">Delete</button></li>
+                                {{#ifEquals this.reports 1}}
+                                <li><button class="btn bg-transparent" type="submit" name="ureportbtn"
+                                        value="{{this.eid}}">Unreport</button></li>
+                                {{/ifEquals}}
+                                {{else}}
                                 {{#ifEquals this.email ../userEmail}}
                                 <li><button class="btn bg-transparent" type="submit" name="deletebtn"
                                         value="{{this.eid}}">Delete</button></li>
                                 {{else}}
                                 <li><button class="btn bg-transparent" type="submit" name="reportbtn"
                                         value="{{this.eid}}">Report</button></li>
+                                {{/ifEquals}}
                                 {{/ifEquals}}
                             </ul>
                         </div>

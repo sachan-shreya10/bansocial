@@ -46,9 +46,15 @@
             </div>
             <div class="mx-2">
                 <ul class="navbar-nav mb-2 mb-lg-0">
+                   {{#ifEquals userName "Admin"}}
+                     <li class="nav-item">
+                        <a class="nav-link" href="/dashboard" style="color: black;">{{userName}}</a>
+                    </li>
+                    {{else}}
                     <li class="nav-item">
                         <a class="nav-link" href="/profile" style="color: black;">{{userName}}</a>
                     </li>
+                    {{/ifEquals}}
                     <li class="nav-item">
                         <a href="/logout" class="btn btn-dark">Log Out</a>
                     </li>
@@ -57,6 +63,21 @@
             </div>
         </div>
     </nav>
+    {{#ifEquals "Admin" userName}}
+    <div>
+        <form name="formr" action="/auth/show" method="post">
+            {{!-- <button type="submit" class="btn btn-primary btn-sm" id="rbtn">View Reported Posts</button> --}}
+            <div class="form-group" style="position: fixed;">
+                <label for="tags"><span style="color:white" >Sort by:</span></label>
+                <select id="tags" name="option" onchange="formr.submit()">
+                    <option value="null"></option>
+                    <option value="0">All Posts</option>
+                    <option value="1">Reported Posts</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    {{/ifEquals}}
     <div class="container my-3 content">
         <h2 style="color:rgb(26, 24, 24);text-align:center;">ANNOUNCEMENTS !</h2>
         <form action="/auth/ann" method="post" enctype="multipart/form-data" autocomplete="off">
@@ -96,22 +117,33 @@
                         <p class="card-text">{{this.des}}</p>
                         <div>
                             <h6 style="color: gray;display:inline">{{this.date}}</h6>
-                             <form action="/auth/autha2" method="post">
-                             <input type="hidden" name="aid" value="{{this.id}}">
-                            <div class="dropdown" style="display: inline;float:right">
-                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
-                                    id="dropdownMenuButton{{this.id}}" data-bs-toggle="dropdown" aria-expanded="false">
-                                </button>
-                                <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton{{this.id}}" name="option">
-                                    {{#ifEquals this.email ../userEmail}}
+                            <form action="/auth/autha2" method="post">
+                                <input type="hidden" name="aid" value="{{this.id}}">
+                                <div class="dropdown" style="display: inline;float:right">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                        id="dropdownMenuButton{{this.id}}" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                    </button>
+                                    <ul class="dropdown-menu text-center"
+                                        aria-labelledby="dropdownMenuButton{{this.id}}" name="option">
+                                    {{#ifEquals "Admin" ../userName}}
                                     <li><button class="btn bg-transparent" type="submit" name="deletebtn"
                                             value="{{this.id}}">Delete</button></li>
-                                    {{else}}        
-                                    <li><button class="btn bg-transparent" type="submit" name="reportbtn"
-                                            value="{{this.id}}">Report</button></li>
-                                    {{/ifEquals}}        
-                                </ul>
-                            </div>
+                                        {{#ifEquals this.reports 1}}
+                                        <li><button class="btn bg-transparent" type="submit" name="ureportbtn"
+                                                value="{{this.id}}">Unreport</button></li>
+                                        {{/ifEquals}}
+                                    {{else}}
+                                        {{#ifEquals this.email ../userEmail}}
+                                        <li><button class="btn bg-transparent" type="submit" name="deletebtn"
+                                                value="{{this.id}}">Delete</button></li>
+                                        {{else}}
+                                        <li><button class="btn bg-transparent" type="submit" name="reportbtn"
+                                                value="{{this.id}}">Report</button></li>
+                                        {{/ifEquals}}
+                                    {{/ifEquals}}
+                                    </ul>
+                                </div>
                             </form>
                         </div>
                     </div>

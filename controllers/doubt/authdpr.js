@@ -17,8 +17,16 @@ exports.dpr = (req, res) => {
             res.redirect('/doubtpeer');
         })
     }
-    else{
+    else if(deletebtn){
         db.query('DELETE FROM postspeer WHERE id=?',[diid], (err, resul) => {
+            if (err) {
+                console.log(err);
+            }
+            res.redirect('/doubtpeer');
+        })
+    }
+    else{
+        db.query('UPDATE postspeer SET reports = ? WHERE id=?',[0,diid], (err, resul) => {
             if (err) {
                 console.log(err);
             }

@@ -17,8 +17,16 @@ exports.dsr = (req, res) => {
             res.redirect('/doubtsenior');
         })
     }
-    else{
+    else if(deletebtn){
         db.query('DELETE FROM postssenior WHERE id=?',[diid], (err, resul) => {
+            if (err) {
+                console.log(err);
+            }
+            res.redirect('/doubtsenior');
+        })
+    }
+    else{
+        db.query('UPDATE postssenior SET reports = ? WHERE id=?',[0,diid], (err, resul) => {
             if (err) {
                 console.log(err);
             }

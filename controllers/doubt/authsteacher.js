@@ -10,16 +10,12 @@ const db = mysql.createConnection({
 
 exports.sorttteacher = (req, res) => {
     const { tag } = req.body;
-    // console.log("hello1")
-    // console.log(req.body);
-    // const {tag}=req.body;
-    // // console.log(pidd)
-    // db.query('SELECT * from poststeacher WHERE tag = ? ORDER BY id DESC',[tag], (er, result) => {
-    //     if (er) console.log(er);
-    //     return res.render('sortteacher', {
-    //         result,userName
-    //     });
-    // })
-    tagsT=tag;
+    if (tag == 0 || tag == 1) {
+        console.log("hello"+tag);
+        flagdt = tag;
+    }
+    else {
+        tagT = tag;
+    }
     res.redirect('/doubtteacher');
 }
