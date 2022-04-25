@@ -75,7 +75,7 @@ exports.register = (req, res) => {
                     console.log("check email2");
                     console.log(email);
                     message= "Verification code sent to your account";
-                    res.redirect("/register");
+                    res.redirect("/");
 
                 }
             });

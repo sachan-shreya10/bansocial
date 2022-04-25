@@ -14,7 +14,7 @@ const db = mysql.createConnection({
 })
 /*************************************LOGIN PAGE********************************** */
 router.get('/', (req, res) => {
-    res.render('login',{
+    res.render('login', {
         message
     });
 });
@@ -24,6 +24,7 @@ router.get('/logout', function (req, res) {
 
     if (req.session.userId) {
         req.session.userId = "";
+        message="";
         req.session.destroy(function (err) {
             if (err) return console.log(err);
             return res.redirect('/');
@@ -93,11 +94,10 @@ router.get('/reset-password', (req, res) => {
             console.log(error);
         }
         if (results.length > 0) {
-            if(results[0].emailToken)
-            {
+            if (results[0].emailToken) {
                 res.redirect('/reset');
             }
-            else{
+            else {
                 message = 'verification link expired';
                 res.redirect("/");
             }
@@ -109,15 +109,14 @@ router.get('/reset-password', (req, res) => {
                     console.log(error);
                 }
                 if (results.length > 0) {
-                    if(results[0].emailToken)
-                    {
+                    if (results[0].emailToken) {
                         res.redirect('/reset');
                     }
-                    else{
+                    else {
                         message = 'verification link expired';
                         res.redirect("/");
                     }
-                    
+
                 }
                 else {
                     message = 'verification link expired';
@@ -133,7 +132,7 @@ router.get('/reset', (req, res) => {
     //     res.redirect("/");
     // }
     // else {
-        res.render('reset');
+    res.render('reset');
     //}
 });
 /*************************************HOME PAGE********************************** */
@@ -214,12 +213,17 @@ router.get('/ann', (req, res) => {
 /*************************************JOURNEY PAGE********************************** */
 router.get('/journey', (req, res) => {
     if (req.session.userId) {
-        db.query('SELECT * from journey where reports =? ORDER BY id DESC', [flagj], (er, resul) => {
-            if (er) console.log(er);
-            return res.render('journey', {
-                resul, userName, userEmail
-            });
-        })
+        if (role == "teacher") {
+            res.render('msg');
+        }
+        else {
+            db.query('SELECT * from journey where reports =? ORDER BY id DESC', [flagj], (er, resul) => {
+                if (er) console.log(er);
+                return res.render('journey', {
+                    resul, userName, userEmail
+                });
+            })
+        }
     }
     else {
         res.redirect("/");
@@ -519,16 +523,21 @@ router.get('/viewpapers', (req, res) => {
 
 router.get('/hangout', (req, res) => {
     if (req.session.userId) {
-        db.query('SELECT * from hangout WHERE pid is NULL AND reports = ? ORDER BY cid DESC', [flagh], (er, comm) => {
-            db.query('SELECT * from hangout WHERE pid ORDER BY cid DESC', (er, replyy) => {
-                if (er) console.log(er);
-                // console.log(result)
-                return res.render('hangout', {
-                    comm, replyy, userName, userEmail
-                });
+        if (role == "teacher") {
+            res.render('msg');
+        }
+        else {
+            db.query('SELECT * from hangout WHERE pid is NULL AND reports = ? ORDER BY cid DESC', [flagh], (er, comm) => {
+                db.query('SELECT * from hangout WHERE pid ORDER BY cid DESC', (er, replyy) => {
+                    if (er) console.log(er);
+                    // console.log(result)
+                    return res.render('hangout', {
+                        comm, replyy, userName, userEmail
+                    });
 
+                });
             });
-        });
+        }
     }
     else {
         res.redirect("/");
