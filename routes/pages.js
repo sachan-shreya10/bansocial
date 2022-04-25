@@ -330,7 +330,7 @@ router.get('/doubtsenior', (req, res) => {
                     })
                 }
                 else {
-                    db.query('SELECT * from postspeer WHERE reports=?  ORDER BY id DESC', [0], (er, resul) => {
+                    db.query('SELECT * from postssenior WHERE reports=?  ORDER BY id DESC', [0], (er, resul) => {
                         if (er) console.log(er);
                         return res.render('doubtsenior', {
                             resul, userName, userEmail
@@ -383,7 +383,7 @@ router.get('/doubtteacher', (req, res) => {
                 })
             }
             else {
-                db.query('SELECT * from postspeer WHERE reports=?  ORDER BY id DESC', [0], (er, resul) => {
+                db.query('SELECT * from poststeacher WHERE reports=?  ORDER BY id DESC', [0], (er, resul) => {
                     if (er) console.log(er);
                     return res.render('doubtteacher', {
                         resul, userName, userEmail

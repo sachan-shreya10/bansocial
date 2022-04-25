@@ -15,7 +15,7 @@ exports.sorttsenior = (req, res) => {
         flagds = tag;
     }
     else {
-        tagS = tag;
+        tagsS = tag;
     }
     res.redirect('/doubtsenior');
 }

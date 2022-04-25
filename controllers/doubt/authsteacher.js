@@ -15,7 +15,7 @@ exports.sorttteacher = (req, res) => {
         flagdt = tag;
     }
     else {
-        tagT = tag;
+        tagsT = tag;
     }
     res.redirect('/doubtteacher');
 }

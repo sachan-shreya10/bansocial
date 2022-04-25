@@ -17,8 +17,6 @@
         }
     }
 </style>
-{{!-- background-image: url(/images/annbg.jpg); background-repeat: no-repeat;; background-size: cover; --}}
-
 <body style="background-image: linear-gradient( 135.9deg,  #ffafbd 16.4%, #ffc3a0 56.1% );
     min-height: 100vh;
     overflow-x: hidden;">
@@ -66,7 +64,6 @@
     {{#ifEquals "Admin" userName}}
     <div>
         <form name="formr" action="/auth/show" method="post">
-            {{!-- <button type="submit" class="btn btn-primary btn-sm" id="rbtn">View Reported Posts</button> --}}
             <div class="form-group" style="position: fixed;">
                 <label for="tags"><span style="color:white" >Sort by:</span></label>
                 <select id="tags" name="option" onchange="formr.submit()">
@@ -84,7 +81,6 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">ADD ANNOUNCEMENT</h5>
-                    {{!-- <form action="/auth/register" method="post"> --}}
                         <h6 class="card-title">TITLE</h6>
                         <div class="form-group">
                             <textarea class="form-control inputt" name="title" id="addTask" rows="1"></textarea>

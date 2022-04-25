@@ -18,6 +18,7 @@ exports.annsenior = (req, res) => {
     pics= req.files.pic;
     console.log(pics)
     upPath = './doubt_uploads/'+pics.name;
+    imn=pics.name;
     pics.mv(upPath, function(err){
         if(err){
             console.log(err)
