@@ -565,9 +565,9 @@ router.get('/dashboard', (req, res) => {
             if (er) console.log(er);
             postt = result[0].postt;
         });
-        db.query('select sum(post.posts) as postt from(select count(*) as posts from postspeer UNION ALL select count(*)  as posts from postssenior UNION ALL select count(*)  as posts from poststeacher UNION ALL select count(*)  as posts from hangout UNION ALL select count(*)  as posts from journey UNION ALL select count(*)  as posts from announcement UNION ALL select count(*)  as posts from exp UNION ALL select count(*)  as posts from notes UNION ALL select count(*)  as posts from papers)post;', (er, result) => {
+        db.query('select sum(comm.c) as commen from(select count(*) as c from commentpeer UNION ALL select count(*)  as c from commentsenior UNION ALL select count(*)  as c from commentteacher UNION ALL select count(*)  as c from hangout WHERE pid)comm;', (er, result) => {
             if (er) console.log(er);
-            postt = result[0].postt;
+            comment = result[0].commen;
         });
         db.query('select sum(rep.repo) as report from(select sum(reports) as repo from postspeer UNION ALL select  sum(reports) as repo from postssenior UNION ALL select sum(reports) as repo from poststeacher UNION ALL select  sum(reports) as repo from hangout UNION ALL select  sum(reports) as repo from journey UNION ALL select  sum(reports) as repo from announcement UNION ALL select  sum(reports) as repo from exp UNION ALL select  sum(reports) as repo from notes UNION ALL select  sum(reports) as repo from papers)rep;', (er, result) => {
             if (er) console.log(er);

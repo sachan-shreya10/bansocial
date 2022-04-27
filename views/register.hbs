@@ -67,18 +67,6 @@
                                     onblur="bvalidation()" style="display:none; " >
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-7">
-                                <input type="password" placeholder="********" name="password" id="password"
-                                    class="form-control my-3 p-2" onblur="pvalidation();" required />
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-7">
-                                <input type="password" placeholder="Confirm Password" name="cpassword"
-                                    class="form-control my-3 p-2" required />
-                            </div>
-                        </div>
                         <h6 id='year' style="display:none;">Select Year</h6>
                         <div class="form-check form-check-inline year" id='year1' style="display:none;">
                             <input class="form-check-input" type="radio" value="1" name="year" id="flexRadioDefault3">
@@ -103,6 +91,18 @@
                         <div class="form-row">
                             <div class="col-md-7">
                                 <input type="department" placeholder="Department" name="dept"
+                                    class="form-control my-3 p-2" required />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-7">
+                                <input type="password" placeholder="********" name="password" id="password"
+                                    class="form-control my-3 p-2" onblur="pvalidation();" required />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-7">
+                                <input type="password" placeholder="Confirm Password" name="cpassword"
                                     class="form-control my-3 p-2" required />
                             </div>
                         </div>
@@ -155,13 +155,22 @@
         }
         function bvalidation() {
 
-            const pw = document.getElementById('bid').value;
-            if (pw.length < 10) {
+            const em = document.getElementById('email').value;
+            let s=em.substring(0, 10);
+            const bid = document.getElementById('bid').value;
+            if (bid.length < 10) {
                 alert("Incorrect Id");
                 document.getElementById("bid").value = "";
             }
-            if (pw.length > 10) {
+            if (bid.length > 10) {
                 alert("Incorrect Id");
+                document.getElementById("bid").value = "";
+            }
+            b=bid.toLowerCase();
+            console.log(b);
+             console.log(s);
+            if( b != s){
+                 alert("Incorrect Id");
                 document.getElementById("bid").value = "";
             }
 
