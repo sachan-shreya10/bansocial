@@ -17,8 +17,19 @@ exports.annsenior = (req, res) => {
     else{
     pics= req.files.pic;
     console.log(pics)
-    upPath = './doubt_uploads/'+pics.name;
-    imn=pics.name;
+
+    const dt = new Date();
+    let month= dt.getMonth()+1;
+    
+    if(month<10)
+    {
+        month='0'+month;
+    }
+    let pix= dt.getDate()+'-'+month+'-'+dt.getFullYear()+'_'+dt.getHours()+'-'+dt.getMinutes()+'-'+dt.getSeconds()+'-'+dt.getMilliseconds();
+
+    upPath = './doubt_uploads/'+pics.name+'-'+pix;
+    imn= pics.name+'-'+pix;
+    
     pics.mv(upPath, function(err){
         if(err){
             console.log(err)
