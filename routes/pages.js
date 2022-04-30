@@ -12,8 +12,15 @@ const db = mysql.createConnection({
     password: '',
     database: 'bansocial'
 })
-/*************************************LOGIN PAGE********************************** */
+
+/*************************************INITIAL PAGE********************************** */
 router.get('/', (req, res) => {
+    res.render('initialpage', {
+        message
+    });
+});
+/*************************************LOGIN PAGE********************************** */
+router.get('/login', (req, res) => {
     res.render('login', {
         message
     });
