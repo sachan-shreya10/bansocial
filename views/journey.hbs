@@ -64,7 +64,7 @@
     </nav>
     {{#ifEquals "Admin" userName}}
     <div>
-        <form name="formr" action="/auth/showj" method="post" autocomplete="off">
+        <form name="formr" action="/auth/showj" method="post">
             {{!-- <button type="submit" class="btn btn-primary btn-sm" id="rbtn">View Reported Posts</button> --}}
             <div class="form-group" style="position: fixed;">
                 <label for="tags"><span style="color:white">Sort by:</span></label>
@@ -80,7 +80,7 @@
     <div class="container my-3 content">
         {{!-- rgb(26, 24, 24) --}}
         <h2 style="color:rgb(26, 24, 24);text-align:center;font-family:Georgia">SHARE YOUR JOURNEY </h2>
-        <form action="/auth/journey" method="post" enctype="multipart/form-data">
+        <form action="/auth/journey" method="post" enctype="multipart/form-data"  autocomplete="off">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">ADD YOUR STORIES</h5>
