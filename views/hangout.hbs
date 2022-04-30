@@ -65,7 +65,7 @@
     </nav>
     {{#ifEquals "Admin" userName}}
     <div>
-        <form name="formr" action="/auth/showh" method="post">
+        <form name="formr" action="/auth/showh" method="post" autocomplete="off">
             {{!-- <button type="submit" class="btn btn-primary btn-sm" id="rbtn">View Reported Posts</button> --}}
             <div class="form-group" style="position: fixed;">
                 <label for="tags"><span style="color:white">Sort by:</span></label>
@@ -131,7 +131,7 @@
                             </div>
 
 
-                            <form action="/auth/likes" method="post" target="uploader_iframe" style="display: inline;">
+                            <form action="/auth/likes" method="post" target="uploader_iframe" style="display: inline;" autocomplete="off">
                                 <input type="hidden" id="btn1" name="cid" value="{{this.cid}}"
                                     style="display: inline;"></input>
                                 <button type="submit" class="btn btn-primary my-2" id="likebtn{{this.cid}}"
