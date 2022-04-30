@@ -75,7 +75,7 @@ exports.register = (req, res) => {
                     console.log("check email2");
                     console.log(email);
                     message= "Verification code sent to your account";
-                    res.redirect("/");
+                    res.redirect("/login");
 
                 }
             });
@@ -92,7 +92,7 @@ exports.register = (req, res) => {
                 //     message: 'Already registered'
                 // });
                 message= 'Already registered';
-                res.redirect("/");
+                res.redirect("/login");
             }
             console.log(cpassword)
             console.log(password)
@@ -135,7 +135,7 @@ exports.register = (req, res) => {
                     //     message: "verification email is sent to your account"
                     // });
                     message= "verification email is sent to your account";
-                    res.redirect('/');
+                    res.redirect('/login');
 
                 }
             });

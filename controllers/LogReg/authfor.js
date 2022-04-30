@@ -56,7 +56,7 @@ exports.for = (req, res) => {
             //     message: "Verification code sent to your account"
             // });
             message = "Verification code sent to your account";
-            res.redirect("/");
+            res.redirect("/login");
         }
         else {
             db.query('SELECT email FROM teacher WHERE email = ?', [email], async (err, result) => {
@@ -80,12 +80,12 @@ exports.for = (req, res) => {
                         // }
                     })
                     message = "Verification code sent to your account";
-                    res.redirect("/");
+                    res.redirect("/login");
 
                 }
                 else {
                     message = "Incorrect email address";
-                    res.redirect("/");
+                    res.redirect("/login");
                 }
 
             });
@@ -102,6 +102,6 @@ exports.for = (req, res) => {
             }
             userEmail="";
             message = 'password successfully changed';
-            res.redirect('/');
+            res.redirect('/login');
         })
     }

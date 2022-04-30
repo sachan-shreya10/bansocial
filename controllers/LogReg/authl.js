@@ -26,9 +26,10 @@ exports.login = (req, res) => {
                     res.redirect('/home');
                 }
                 else {
-                    return res.render('login', {
-                        message: 'Incorrect Password'
-                    });
+                   
+                        message='Incorrect email or password';
+                        res.redirect('/login');
+                   
                 }
             }
         });
@@ -52,9 +53,8 @@ exports.login = (req, res) => {
                         req.session.userId = userName;
                         res.redirect('/home');
                     } else {
-                        return res.render('login', {
-                            message: 'Incorrect Password'
-                        });
+                        message='Incorrect email or password';
+                        res.redirect('/login');
                     }
                 });
             }
@@ -76,16 +76,14 @@ exports.login = (req, res) => {
                                 req.session.userId = userName;
                                 res.redirect('/home');
                             } else {
-                                return res.render('login', {
-                                    message: 'Incorrect Password'
-                                });
+                                message='Incorrect email or password';
+                                res.redirect('/login');
                             }
                         });
                     }
                     else {
-                        return res.render('login', {
-                            message: 'Incorrect email address'
-                        });
+                        message='Incorrect email or password';
+                        res.redirect('/login');
                     }
                 });
             }
