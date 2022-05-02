@@ -1,4 +1,4 @@
-.carousel-item::before{
+/* .carousel-item::before{
     content: "";
     display:block;
     position:absolute;
@@ -24,6 +24,29 @@
     top:2rem;
 }
 /*for changing the slide time*/
+/* .carousel-inner .carousel-item {
+    transition: -webkit-transform 2s ease;
+    transition: transform 2s ease;
+    transition: transform 2s ease, -webkit-transform 2s ease;
+  } */ 
+  .carousel-item::before{
+    content: "";
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background:#000;
+    opacity:0.4;
+}
+.first::before{
+    opacity:0.2;
+}
+.carousel-caption {
+    top: 30%;
+    bottom: initial;
+    }
 .carousel-inner .carousel-item {
     transition: -webkit-transform 2s ease;
     transition: transform 2s ease;
