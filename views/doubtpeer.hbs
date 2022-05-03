@@ -66,7 +66,7 @@
     </nav>
     <div>
         <form name="theForm" action="/auth/sort" method="post" enctype="multipart/form-data">
-            <div class="form-group" style="position: fixed;">
+            <div class="form-group">
                 <label for="tags"><span style="color:white">Sort by:</span></label>
                 <select id="tags" name="tag" onchange="theForm.submit()">
                     <option value="null"></option>
@@ -129,7 +129,7 @@
                 <div class="card-body row">
                     {{#if this.img}}
                     <div>
-                        <img src="/{{this.img}}" class="card-img-top" alt="..." height="320">
+                        <img src="/{{this.img}}" class="card-img-top" alt="..." style="object-fit: contain;">
                     </div>
                     {{/if}}
                     <div>
