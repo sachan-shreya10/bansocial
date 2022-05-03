@@ -64,7 +64,7 @@
                         <div class="form-row">
                             <div class="col-md-7">
                                 <input type="id" name="bid" placeholder="ID" class="form-control my-3 p-2" id="bid"
-                                    onblur="bvalidation()" style="display:none; " >
+                                    onblur="bvalidation()" style="display:none; ">
                             </div>
                         </div>
                         <h6 id='year' style="display:none;">Select Year</h6>
@@ -126,17 +126,33 @@
         crossorigin="anonymous"></script>
     <script>
         function validation() {
-
-
             const form = document.getElementById('form');
             const email = document.getElementById('email').value;
             const pattern = /^[^ ]+@banasthali.in$/;
+            const role = document.getElementById('flexRadioDefault1').checked;
             if (email.match(pattern)) {
             }
             else {
                 document.getElementById("email").value = "";
                 document.getElementById("email").style.borderColor = "red";
             }
+            let s = email.substring(0, 4);
+            if (role) {
+                console.log('hello');
+
+                if (s === "btbt") {
+                    document.getElementById("email").value = "";
+                    document.getElementById("email").style.borderColor = "red";
+                }
+            }
+            else {
+
+
+                if (s != "btbt") {
+                    document.getElementById("email").value = "";
+                    document.getElementById("email").style.borderColor = "red";
+                }
+            }s
 
 
         }
@@ -156,7 +172,7 @@
         function bvalidation() {
 
             const em = document.getElementById('email').value;
-            let s=em.substring(0, 10);
+            let s = em.substring(0, 10);
             const bid = document.getElementById('bid').value;
             if (bid.length < 10) {
                 alert("Incorrect Id");
@@ -166,11 +182,11 @@
                 alert("Incorrect Id");
                 document.getElementById("bid").value = "";
             }
-            b=bid.toLowerCase();
+            b = bid.toLowerCase();
             console.log(b);
-             console.log(s);
-            if( b != s){
-                 alert("Incorrect Id");
+            console.log(s);
+            if (b != s) {
+                alert("Incorrect Id");
                 document.getElementById("bid").value = "";
             }
 
