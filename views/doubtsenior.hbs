@@ -64,7 +64,7 @@
     </nav>
     <div>
         <form name="theForm" action="/auth/sortsenior" method="post" enctype="multipart/form-data" autocomplete="off">
-            <div class="form-group" style="position: fixed;">
+            <div class="form-group">
                 <label for="tags"><span style="color:white">Sort by:</span></label>
                 <select id="tags" name="tag" onchange="theForm.submit()">
                     <option value="null"></option>
@@ -127,7 +127,7 @@
                 <div class="card-body row">
                     {{#if this.img}}
                     <div>
-                        <img src="/{{this.img}}" class="card-img-top" alt="..." height="320">
+                        <img src="/{{this.img}}" class="card-img-top" alt="...">
                     </div>
                     {{/if}}
                     <div>
