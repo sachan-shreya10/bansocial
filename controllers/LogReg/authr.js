@@ -36,14 +36,10 @@ exports.register = (req, res) => {
                 console.log(err);
             }
             if (result.length > 0) {
-                return res.render('register', {
-                    message: 'Already registered'
-                });
+                message= 'Already registered';
+                res.redirect("/login");
             }
             if (cpassword != password) {
-                // return res.render('register', {
-                //     message: 'passwords do not match'
-                // });
                 message= 'passwords do not match';
                 res.redirect("/register");
 
@@ -88,9 +84,6 @@ exports.register = (req, res) => {
                 console.log(err);
             }
             if (result.length > 0) {
-                // return res.render('register', {
-                //     message: 'Already registered'
-                // });
                 message= 'Already registered';
                 res.redirect("/login");
             }
