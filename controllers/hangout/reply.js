@@ -11,7 +11,7 @@ exports.reply = (req, res) => {
    
     const { pid,des } = req.body;
 
-    db.query('INSERT into hangout SET ?', { des: des, pid:pid, username: userName }, (error, results) => {
+    db.query('INSERT into hangout SET ?', { des: des, pid:pid, username: userName, email: userEmail }, (error, results) => {
         if (error) {
             console.log(error);
         } 
